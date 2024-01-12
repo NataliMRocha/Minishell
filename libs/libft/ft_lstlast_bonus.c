@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/12 15:27:18 by egeraldo         ###   ########.fr       */
+/*   Created: 2023/07/28 14:59:24 by egeraldo          #+#    #+#             */
+/*   Updated: 2023/07/28 16:29:58 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libs/libft/libft.h"
-# include "builtin.h"
-# include "exec.h"
-# include "parser.h"
-# include "read.h"
-# include "tokens.h"
-
-#endif
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}

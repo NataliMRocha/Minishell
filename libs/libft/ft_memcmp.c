@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/12 15:27:18 by egeraldo         ###   ########.fr       */
+/*   Created: 2023/07/19 11:06:38 by egeraldo          #+#    #+#             */
+/*   Updated: 2023/11/28 11:31:19 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libs/libft/libft.h"
-# include "builtin.h"
-# include "exec.h"
-# include "parser.h"
-# include "read.h"
-# include "tokens.h"
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
-#endif
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (i < n)
+	{
+		if (str1[i] == str2[i])
+			i++;
+		else
+			return (str1[i] - str2[i]);
+	}
+	return (0);
+}

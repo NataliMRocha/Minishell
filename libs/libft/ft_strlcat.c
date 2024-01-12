@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/12 15:27:18 by egeraldo         ###   ########.fr       */
+/*   Created: 2023/07/18 18:42:40 by egeraldo          #+#    #+#             */
+/*   Updated: 2023/07/21 16:20:36 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libs/libft/libft.h"
-# include "builtin.h"
-# include "exec.h"
-# include "parser.h"
-# include "read.h"
-# include "tokens.h"
+size_t	ft_strlcat(char *dest, const char *src, size_t n)
+{
+	unsigned int	dest_len;
+	unsigned int	src_len;
+	unsigned int	i;
 
-#endif
+	dest_len = ft_strlen(dest);
+	src_len = ft_strlen(src);
+	i = 0;
+	while (src[i] && dest_len + i + 1 < n)
+	{
+		dest[dest_len + i] = src[i];
+		i++;
+	}
+	dest[dest_len + i] = '\0';
+	if (n < dest_len)
+		return (src_len + n);
+	else
+		return (src_len + dest_len);
+}

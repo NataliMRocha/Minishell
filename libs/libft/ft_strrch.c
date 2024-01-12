@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strrch.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/12 15:27:18 by egeraldo         ###   ########.fr       */
+/*   Created: 2023/07/18 19:41:45 by egeraldo          #+#    #+#             */
+/*   Updated: 2023/07/26 10:55:18 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libs/libft/libft.h"
-# include "builtin.h"
-# include "exec.h"
-# include "parser.h"
-# include "read.h"
-# include "tokens.h"
+char	*ft_strrchr(const char *s, int c)
+{
+	int	n;
 
-#endif
+	n = ft_strlen(s);
+	while (n >= 0)
+	{
+		if (s[n] == (char)c)
+			return ((char *)&s[n]);
+		n--;
+	}
+	return (NULL);
+}

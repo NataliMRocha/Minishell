@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/12 15:27:18 by egeraldo         ###   ########.fr       */
+/*   Created: 2023/07/18 14:36:35 by egeraldo          #+#    #+#             */
+/*   Updated: 2023/07/18 15:20:28 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libs/libft/libft.h"
-# include "builtin.h"
-# include "exec.h"
-# include "parser.h"
-# include "read.h"
-# include "tokens.h"
+void	ft_bzero(void *src, size_t n)
+{
+	char	*ptr;
 
-#endif
+	ptr = src;
+	while (n--)
+		*ptr++ = 0;
+}

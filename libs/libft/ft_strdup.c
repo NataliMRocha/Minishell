@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/12 15:27:18 by egeraldo         ###   ########.fr       */
+/*   Created: 2023/07/19 14:22:21 by egeraldo          #+#    #+#             */
+/*   Updated: 2023/07/21 16:19:21 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libs/libft/libft.h"
-# include "builtin.h"
-# include "exec.h"
-# include "parser.h"
-# include "read.h"
-# include "tokens.h"
+char	*ft_strdup(const char *src)
+{
+	char	*new;
+	int		len;
 
-#endif
+	len = ft_strlen(src);
+	new = ft_calloc(len + 1, sizeof(char));
+	if (!new)
+		return (0);
+	len = -1;
+	while (src[++len])
+		new[len] = src[len];
+	new[len] = '\0';
+	return (new);
+}

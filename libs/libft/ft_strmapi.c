@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/12 15:27:18 by egeraldo         ###   ########.fr       */
+/*   Created: 2023/07/25 19:44:18 by egeraldo          #+#    #+#             */
+/*   Updated: 2023/07/25 19:58:26 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libs/libft/libft.h"
-# include "builtin.h"
-# include "exec.h"
-# include "parser.h"
-# include "read.h"
-# include "tokens.h"
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	char			*mapi;
+	unsigned int	i;
+	size_t			len;
 
-#endif
+	if (s == NULL)
+		return (NULL);
+	mapi = (char *)ft_calloc((len = ft_strlen(s)) + 1, sizeof(char));
+	if (mapi == NULL)
+		return (NULL);
+	i = -1;
+	while (++i < len)
+		mapi[i] = f(i, s[i]);
+	return (mapi);
+}

@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/12 15:27:18 by egeraldo         ###   ########.fr       */
+/*   Created: 2023/07/26 12:16:46 by egeraldo          #+#    #+#             */
+/*   Updated: 2023/07/26 12:34:55 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../libs/libft/libft.h"
-# include "builtin.h"
-# include "exec.h"
-# include "parser.h"
-# include "read.h"
-# include "tokens.h"
+void	ft_putnbr_fd(int n, int fd)
+{
+	long int	num;
 
-#endif
+	num = n;
+	if (num < 0)
+	{
+		num = -num;
+		ft_putchar_fd('-', fd);
+	}
+	if (num >= 10)
+		ft_putnbr_fd((num / 10), fd);
+	ft_putchar_fd((num % 10 + '0'), fd);
+}
