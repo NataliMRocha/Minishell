@@ -6,13 +6,13 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/17 10:30:26 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/17 10:57:01 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int ft_is_quote(char *str, char quote)
+int	ft_handle_quote(char *str, char quote)
 {
 	int i;
 
@@ -42,12 +42,10 @@ char	*ft_strtok(char *str)
 		i++;
 	j = 0;
 	if (res && res[i] && (res[i] == '"' || res[i] == *"'"))
-		j = ft_is_quote(&res[i], res[i]);
+		j = ft_handle_quote(&res[i], res[i]);
 	while (res && res[j + i] && !ft_is_whitespace(res[j + i]))
 		j++;
 	str = ft_substr(res, i, j);
 	res = res + i + j;
-	printf("res: %s\n", res);
-	printf("TOKEN: %s\n", str);
 	return (str);
 }
