@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.h                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:15:01 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/16 11:59:12 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/01/17 09:53:38 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_H
-# define READ_H
+#include "../includes/minishell.h"
 
-char	*ft_readline(void);
-char **tokenize_double_quoting(char *input);
-
-#endif
+int main(void)
+{
+	while (1)
+	{
+		char *test = ft_readline();
+		ft_strtok(test);
+		while (*ft_strtok(NULL) != '\0')
+			sleep(1);
+		// free(test);
+	}
+}

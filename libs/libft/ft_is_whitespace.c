@@ -1,19 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.h                                             :+:      :+:    :+:   */
+/*   ft_whitespace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:15:01 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/16 11:59:12 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/01/16 17:38:07 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/01/16 17:43:53 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_H
-# define READ_H
-
-char	*ft_readline(void);
-char **tokenize_double_quoting(char *input);
-
-#endif
+int	ft_is_whitespace(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\v'
+		|| c == '\f');
+}
