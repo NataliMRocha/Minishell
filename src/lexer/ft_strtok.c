@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/18 10:46:40 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:19:18 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,27 @@ char	*free_static(char *res, int i, int j)
 	char *temp;
 	if (res && res[0] == '\0')
 		return (NULL);
-	printf("RES: %s | I: %d | J: %d | LEN %zu\n", res, i, j, ft_strlen(res));
 	temp = ft_strdup(&res[i + j]);
+	if (temp && temp[0] == '\0')
+	{
+		free(temp);
+		temp = NULL;
+	}
 	free(res);
 	return (temp);
 }
 
-char	*ft_strtok(char *str)
+char	*ft_strtok(char *str, int call)
 {
 	static char	*res;
 	char		*token;
 	int			i;
 	int			j;
 
-	if (str)
+	if (str && call == 0)
 		res = ft_strdup(str);
+	if (!res)
+		return (NULL);
 	i = 0;
 	while (res && res[i] && ft_is_whitespace(res[i]))
 		i++;
@@ -56,7 +62,5 @@ char	*ft_strtok(char *str)
 		j++;
 	token = ft_substr(res, i, j);
 	res = free_static(res, i, j);
-	if (res && res[0] == '\0')
-		free (res);
 	return (token);
 }

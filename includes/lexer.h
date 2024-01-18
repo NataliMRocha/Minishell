@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:15:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/18 10:08:08 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/18 11:49:36 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ typedef struct	s_token
 }				t_token;
 
 int		ft_handle_quote(char *str, char quote);
-char	*ft_strtok(char *str);
+char	*ft_strtok(char *str, int call);
 
 #endif
