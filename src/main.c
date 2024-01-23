@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/18 13:35:01 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:39:19 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,11 @@
 
 int main(void)
 {
-	/* char *test = ft_readline();
-	char *toktok = ft_strtok(test, 0);
-	free(toktok);
-	toktok = ft_strtok(test, 1);
-	free(toktok);
-	free(test); */
+	t_token *token_list = NULL;
 
-	char *test;
-	char *toktok;
-	int call = 0;
-
-	test = "";
 	while (1)
 	{
-		test = ft_readline();
-		toktok = " ";
-		while (toktok && toktok[0] != '\0')
-		{
-			if (toktok && *toktok != ' ')
-				free(toktok);
-			toktok = ft_strtok(test, call++);
-			printf("%s\n", toktok);
-		}
-		if (strcmp(test, "exit") == 0)
-		{
-			free(test);
-			break;
-		}
-		else
-		{
-			call = 0;
-			free(test);
-		}
+		char *test = ft_readline();
+		list_fill(&token_list, test);
 	}
 }

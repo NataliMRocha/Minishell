@@ -23,7 +23,7 @@ SOURCES = main.c
 
 READ_SOURCES = ft_readline.c
 
-LEXER_SOURCES = ft_strtok.c
+LEXER_SOURCES = ft_strtok.c tokens.c
 
 OBJECTS = $(addprefix $(BIN_PATH), $(SOURCES:%.c=%.o))
 

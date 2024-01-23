@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:37:28 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/16 14:00:56 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:55:32 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,4 @@ char	*ft_readline(void)
 	add_history(buffer);
 
 	return (buffer);
-}
-
-char	**tokenize_double_quoting(char *input)
-{
-	return (ft_split(input, '"'));
 }

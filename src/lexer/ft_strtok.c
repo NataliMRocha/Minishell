@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/18 13:19:18 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:06:22 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ char	*free_static(char *res, int i, int j)
 	}
 	free(res);
 	return (temp);
+}
+
+int	is_symbol(char c)
+{
+	if (c == '>' || c == '<' || c == '|' || c == '&')
+		return (1);
+	return (0);
 }
 
 char	*ft_strtok(char *str, int call)
