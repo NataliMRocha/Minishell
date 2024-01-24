@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/18 16:54:58 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:06:55 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_token	*find_last_node(t_token *head)
 void	stack_fill(t_token *list)
 {
 	list->data = "";
-	list->type = -1;
+	list->type = 0;
 	list->next = NULL;
 	list->prev = NULL;
 }
@@ -57,6 +57,7 @@ void	append_node(t_token **list, char *content)
 		return ;
 	node->next = NULL;
 	node->data = content;
+	ft_write_types(node);
 	if (*list == NULL)
 	{
 		*list = node;
