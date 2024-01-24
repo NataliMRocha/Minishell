@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/24 14:46:10 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:02:52 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,20 @@
 int main(void)
 {
 	t_token *token_list = NULL;
+	t_token *temp;
 
 	while (1)
 	{
 		char *test = ft_readline();
 		list_fill(&token_list, test);
-		while(token_list)
+		temp = token_list;
+		while(temp)
 		{
-			printf("data: %s\n", token_list->data);
-			printf("type: %d\n", token_list->type);
-			token_list = token_list->next;
+			printf("data: %s  \t  type: %d\n", temp->data, temp->type);
+			temp = temp->next;
 		}
+		free(test);
+		free_list(token_list);
+		token_list = NULL;
 	}
 }

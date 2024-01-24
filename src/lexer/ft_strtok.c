@@ -6,34 +6,22 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/24 14:12:46 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:21:04 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_handle_quote_paren(char *str, char quote)
+int	ft_handle_quote(char *str, char quote)
 {
 	int	i;
 
 	i = 1;
-	if (str[0] == '"' || str[0] == *"'")
+	while (str[i])
 	{
-		while (str[i])
-		{
-			if (str[i] == quote)
-				return (i);
-			i++;
-		}
-	}
-	else if (str[0] == '(')
-	{
-		while (str[i])
-		{
-			if (str[i] == ')')
-				return (i);
-			i++;
-		}
+		if (str[i] == quote)
+			return (i);
+		i++;
 	}
 	return (0);
 }
@@ -56,7 +44,7 @@ char	*free_static(char *res, int i, int j)
 
 int	is_symbol(char c)
 {
-	if (c == '>' || c == '<' || c == '|' || c == '&')
+	if (c == '>' || c == '<' || c == '|' || c == '&' || c == '(' || c == ')')
 		return (1);
 	return (0);
 }
@@ -67,8 +55,8 @@ int	count_chars(char *res)
 	int	k;
 
 	j = 0;
-	if (res && res[j] && (res[j] == '"' || res[j] == *"'" || res[j] == '('))
-		j = ft_handle_quote_paren(&res[j], res[j]);
+	if (res && res[j] && (res[j] == '"' || res[j] == *"'"))
+		j = ft_handle_quote(&res[j], res[j]);
 	while (res && res[j] && !ft_is_whitespace(res[j]) && !is_symbol(res[j]))
 		j++;
 	k = 0;
