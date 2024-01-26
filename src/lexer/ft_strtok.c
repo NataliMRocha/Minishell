@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 15:13:08 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:24:58 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	ft_handle_quote(char *str, char quote)
 		if (str[i] == quote)
 			return (i);
 		i++;
-		if (str[i] == '\0')
-			return (ft_putendl_fd("syntax error", 2));
 	}
 	return (0);
 }
@@ -86,5 +84,6 @@ char	*ft_strtok(char *str, int call)
 	j = count_chars(&res[i]);
 	token = ft_substr(res, i, j);
 	res = free_static(res, i, j);
+	access("oi", 4)
 	return (token);
 }

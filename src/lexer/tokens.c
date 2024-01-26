@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 10:41:19 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:19:07 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,6 @@ void	list_fill(t_token **list, char *readline)
 		if (token)
 			append_node(list, token);
 	}
+	if (check_syntaxe(list))
+		ft_putendl_fd("syntax error DOIS", 2);
 }

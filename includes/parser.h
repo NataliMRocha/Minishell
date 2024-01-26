@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 17:25:58 by natali           ###   ########.fr       */
+/*   Updated: 2024/01/26 17:37:27 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+# include "lexer.h"
 
 int check_syntaxe(t_token **list);
 

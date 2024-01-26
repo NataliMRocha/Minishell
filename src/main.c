@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 17:09:07 by natali           ###   ########.fr       */
+/*   Updated: 2024/01/26 18:10:02 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int main(void)
 		temp = token_list;
 		while(temp)
 		{
+			if (temp->data == NULL)
+				break;
 			printf("data: %s  \t  type: %d\n", temp->data, temp->type);
 			temp = temp->next;
 		}
@@ -37,7 +39,7 @@ int main(void)
 {
 	char **paths = ft_split(getenv("USER"), ':');
 	 char *args[] = {"touch", "oi(oi)", NULL};
-	execve("/usr/bin/touch", args, NULL); 
+	execve("/usr/bin/touch", args, NULL);
 	printf("%s\n", *paths);
-} 
+}
 */
