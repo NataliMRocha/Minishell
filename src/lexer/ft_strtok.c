@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/24 17:21:04 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:13:08 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ int	ft_handle_quote(char *str, char quote)
 	int	i;
 
 	i = 1;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] == quote)
 			return (i);
 		i++;
+		if (str[i] == '\0')
+			return (ft_putendl_fd("syntax error", 2));
 	}
 	return (0);
 }

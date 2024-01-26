@@ -6,11 +6,11 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:38:07 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/17 12:47:17 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:16:26 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
+#include "libft.h"
 
 int	ft_is_whitespace(char c)
 {

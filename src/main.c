@@ -6,13 +6,13 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/24 19:02:52 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:07:40 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int main(void)
+/* int main(void)
 {
 	t_token *token_list = NULL;
 	t_token *temp;
@@ -31,4 +31,12 @@ int main(void)
 		free_list(token_list);
 		token_list = NULL;
 	}
+} */
+
+int main(void)
+{
+	char **paths = ft_split(getenv("USER"), ':');
+	/* char *args[] = {"touch", "oi(oi)", NULL};
+	execve("/usr/bin/touch", args, NULL); */
+	printf("%s\n", *paths);
 }
