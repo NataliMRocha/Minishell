@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/01/26 17:20:30 by natali           ###   ########.fr       */
+/*   Updated: 2024/01/26 17:33:52 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
  */
 
 #include "../../includes/minishell.h"
-
 
 int check_syntaxe(t_token **list)
 {
