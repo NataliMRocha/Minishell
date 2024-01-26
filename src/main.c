@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 16:07:40 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:33:53 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@
 
 int main(void)
 {
-	char **paths = ft_split(getenv("USER"), ':');
+	// char **paths = ft_split(getenv("PATH"), ':');
 	/* char *args[] = {"touch", "oi(oi)", NULL};
 	execve("/usr/bin/touch", args, NULL); */
-	printf("%s\n", *paths);
+
+	while (__environ && *__environ)
+		printf("%s\n", *__environ++);
 }
