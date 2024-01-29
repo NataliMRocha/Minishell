@@ -25,7 +25,7 @@ jobs:
       - name: Upgrade pip
         run: python3 -m pip install --upgrade pip setuptools
       - name: Install norminette
-        run: python3 -m pip install norminette==git st3.3.51
+        run: python3 -m pip install norminette==3.3.51
       - name: Run norminette
         run: |
           LOGS=$(mktemp)
