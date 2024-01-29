@@ -6,19 +6,31 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/01/29 15:09:46 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:22:51 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* >Parsing
-# Erros de sintaxe
-+ Terminar com | & < ou >
-+ Começar com | ou &
-+ Se houver < | ou > | juntos
-+ Se houver | | ou & & ou < < (espaço entre os 2 operadores)
- */
-
 #include "../../includes/minishell.h"
+
+int	is_redir_followed_by_pipe(t_token *tmp)
+{
+	return ((tmp->type == REDIR_IN && tmp->next->type == PIPE)
+		|| (tmp->type == REDIR_OUT && tmp->next->type == PIPE));
+}
+
+int	is_duplicated_symbol(t_token *tmp)
+{
+	char c1;
+    char c2;
+
+	c1 = tmp->data[0];
+	c2 = 0;
+	if (is_symbol(c1) && (ft_strlen(tmp->data) > 2))
+		return (1);
+	if (tmp->next)
+		c2 = tmp->next->data[0];
+    return (c1 == c2);
+}
 
 int	check_syntax_error(t_token **list)
 {
@@ -31,33 +43,29 @@ int	check_syntax_error(t_token **list)
 		return (1);
 	while (tmp->next)
 	{
-		if ((tmp->type == REDIR_IN && tmp->next->type == PIPE)
-			|| (tmp->type == REDIR_OUT && tmp->next->type == PIPE))
+		if (is_redir_followed_by_pipe(tmp))
 			return (1);
-		if ((tmp->data[0] == '|' && tmp->next->data[0] == '|')
-			|| (tmp->type == AND && tmp->next->type == AND)
-			|| (tmp->data[0] == '<' && tmp->next->data[0] == '<')
-			|| (tmp->data[0] == '>' && tmp->next->data[0] == '>'))
+		if (is_duplicated_symbol(tmp))
 			return (1);
 		tmp = tmp->next;
 	}
-	if ((tmp->type == PIPE || tmp->type == REDIR_HERE_DOC
-			|| tmp->type == REDIR_IN || tmp->type == PAREN_OPEN
-			|| tmp->type == AND || tmp->type == OR || tmp->type == REDIR_OUT
-			|| tmp->type == REDIR_APPEND) && tmp->next == NULL)
+	if (tmp->type > 3 && tmp->next == NULL)
 		return (1);
 	return (0);
 }
 
 int	check_quotes_error(t_token *list)
 {
-
-	int	i;
+	int i;
 
 	i = 0;
-	if (list->data[0] == *"'" || list->data[0] == '"')
-		i = ft_handle_quote(list->data, list->data[0]);
-	if (i == 0)
-		return (1);
+	while (list)
+	{
+		if (list->data[0] == *"'" || list->data[0] == '"')
+			i = ft_handle_quote(list->data, list->data[0]);
+		if (i == 0 && (list->data[0] == *"'" || list->data[0] == '"'))
+			return (1);
+		list = list->next;
+	}
 	return (0);
 }

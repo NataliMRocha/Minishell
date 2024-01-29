@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:15:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 17:37:22 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:48:56 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 typedef enum e_token_type
 {
 	WORD,
-	REDIR_HERE_DOC,
-	REDIR_IN,
-	PAREN_OPEN,
-	PAREN_CLOSE,
 	QUOTE,
 	DQUOTE,
+	PAREN_CLOSE,
+	PAREN_OPEN,
 	PIPE,
+	REDIR_HERE_DOC,
+	REDIR_IN,
 	REDIR_OUT,
 	REDIR_APPEND,
 	OR,
@@ -38,6 +38,7 @@ typedef struct	s_token
 }				t_token;
 
 int		ft_handle_quote(char *str, char quote);
+int		is_symbol(char c);
 char	*ft_strtok(char *str, int call);
 int		stack_len(t_token *list);
 t_token	*find_last_node(t_token *head);

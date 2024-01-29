@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/29 14:21:22 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:09:33 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	count_chars(char *res)
 {
 	int	j;
 	int	k;
-	int i;
+	int	i;
 
 	j = 0;
 	i = 0;
