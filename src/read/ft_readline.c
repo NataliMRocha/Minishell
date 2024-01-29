@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:37:28 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/29 17:51:47 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:52:06 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*ft_readline(void)
 	printf("\001\x1b[32m\002%s@minishell\001\x1b[m\002", getenv("USER"));
 	prompt = "\001\x1b[38;2;252;127;0m\002 $> \001\x1b[25;0m\002";
 	buffer = readline(prompt);
+	expand_env_var(buffer);
 	add_history(buffer);
 	return (buffer);
 }

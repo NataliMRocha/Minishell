@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/29 17:52:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:56:36 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,3 @@ int main(void)
 		token_list = NULL;
 	}
 }
-
-/* int main(void)
-{
-	char **paths = ft_split(getenv("USER"), ':');
-	 char *args[] = {"touch", "oi(oi)", NULL};
-	execve("/usr/bin/touch", args, NULL);
-	printf("%s\n", *paths);
-}
-*/

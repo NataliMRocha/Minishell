@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 14:59:36 by egeraldo          #+#    #+#             */
-/*   Updated: 2023/12/14 17:29:58 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:41:56 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*join;
-	char	*aux;
 	size_t	len;
+	int		i;
+	int		j;
 
 	if (!s1 && !s2)
 		return (NULL);
@@ -24,11 +25,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	join = (char *)ft_calloc(len, sizeof(char));
 	if (join == NULL)
 		return (NULL);
-	aux = join;
-	while (*s1 != '\0')
-		*aux++ = *s1++;
-	while (*s2 != '\0')
-		*aux++ = *s2++;
-	*aux = '\0';
+	i = -1;
+	while (s1[++i] != '\0')
+		join[i] = s1[i];
+	j = -1;
+	while (s2[++j] != '\0')
+		join[i] = s2[j];
+	join[i + j] = '\0';
+	free((void *)s1);
 	return (join);
 }
