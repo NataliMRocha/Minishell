@@ -6,13 +6,13 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 16:33:53 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:52:33 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* int main(void)
+int main(void)
 {
 	t_token *token_list = NULL;
 	t_token *temp;
@@ -21,9 +21,13 @@
 	{
 		char *test = ft_readline();
 		list_fill(&token_list, test);
+		if (check_syntax_error(&token_list) || check_quotes_error(token_list))
+			ft_putendl_fd("Syntax error", 2);
 		temp = token_list;
 		while(temp)
 		{
+			if (temp->data == NULL)
+				break;
 			printf("data: %s  \t  type: %d\n", temp->data, temp->type);
 			temp = temp->next;
 		}
@@ -31,14 +35,13 @@
 		free_list(token_list);
 		token_list = NULL;
 	}
-} */
-
-int main(void)
-{
-	// char **paths = ft_split(getenv("PATH"), ':');
-	/* char *args[] = {"touch", "oi(oi)", NULL};
-	execve("/usr/bin/touch", args, NULL); */
-
-	while (__environ && *__environ)
-		printf("%s\n", *__environ++);
 }
+
+/* int main(void)
+{
+	char **paths = ft_split(getenv("USER"), ':');
+	 char *args[] = {"touch", "oi(oi)", NULL};
+	execve("/usr/bin/touch", args, NULL);
+	printf("%s\n", *paths);
+}
+*/

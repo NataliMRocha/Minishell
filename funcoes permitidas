@@ -1,0 +1,59 @@
+minishell: funções permitidas
+
+### Funções de Leitura de Linha e Histórico:
+- `readline`: Lê uma linha da entrada padrão.
+- `rl_clear_history`: Limpa o histórico de comandos.
+- `rl_on_new_line`: Sinaliza que a próxima chamada para `rl_redisplay` deve começar em uma nova linha.
+- `rl_replace_line`: Substitui a linha atual na tela.
+- `rl_redisplay`: Redesenha a linha atual na tela.
+- `add_history`: Adiciona uma linha ao histórico.
+
+### Funções de Saída de Dados:
+- `printf`: Imprime na saída padrão com formatação.
+- `write`: Escreve dados em um descritor de arquivo.
+
+### Funções de Alocação de Memória e Liberação:
+- `malloc`: Aloca memória dinamicamente.
+- `free`: Libera a memória alocada dinamicamente.
+
+### Funções de Acesso a Arquivos:
+- `access`: Verifica a existência e permissões de um arquivo.
+- `open`: Abre um arquivo ou cria se não existir.
+- `read`: Lê dados de um arquivo.
+- `close`: Fecha um descritor de arquivo.
+
+### Funções de Processos:
+- `fork`: Cria um novo processo (filho) duplicando o processo atual (pai).
+- `wait`, `waitpid`, `wait3`, `wait4`: Espera pela conclusão de um processo filho.
+- `exit`: Termina um processo.
+- `kill`: Envia um sinal para um processo.
+
+### Funções de Diretório:
+- `opendir`: Abre um diretório para leitura.
+- `readdir`: Lê a próxima entrada de um diretório.
+- `closedir`: Fecha um diretório.
+
+### Funções de Manipulação de Arquivos:
+- `unlink`: Remove um arquivo do sistema de arquivos.
+- `execve`: Executa um programa.
+- `dup`, `dup2`: Duplica descritores de arquivo.
+- `pipe`: Cria um pipe.
+
+### Funções de Manipulação de Processo de Terminal:
+- `isatty`: Testa se um descritor de arquivo está associado a um terminal.
+- `ttyname`: Retorna o nome do terminal associado ao descritor de arquivo.
+- `ttyslot`: Retorna o índice do terminal no arquivo `utmp`.
+- `ioctl`: Manipula operações de controle do terminal.
+
+### Funções de Manipulação de Diretório e Arquivo:
+- `getcwd`: Obtém o diretório de trabalho atual.
+- `chdir`: Muda o diretório de trabalho.
+- `stat`, `lstat`, `fstat`: Obtêm informações sobre arquivos.
+
+### Funções de Manipulação de Erros:
+- `strerror`: Retorna a descrição do último erro ocorrido.
+- `perror`: Imprime uma mensagem de erro seguida pela descrição do erro.
+
+### Funções de Sinais:
+- `signal`, `sigaction`: Define manipuladores de sinal.
+- `sigemptyset`, `sigaddset`: Manipula conjuntos de sinais.

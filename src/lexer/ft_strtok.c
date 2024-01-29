@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 15:13:08 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:09:33 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	ft_handle_quote(char *str, char quote)
 		if (str[i] == quote)
 			return (i);
 		i++;
-		if (str[i] == '\0')
-			return (ft_putendl_fd("syntax error", 2));
 	}
 	return (0);
 }
@@ -55,15 +53,22 @@ int	count_chars(char *res)
 {
 	int	j;
 	int	k;
+	int	i;
 
 	j = 0;
+	i = 0;
 	if (res && res[j] && (res[j] == '"' || res[j] == *"'"))
 		j = ft_handle_quote(&res[j], res[j]);
 	while (res && res[j] && !ft_is_whitespace(res[j]) && !is_symbol(res[j]))
 		j++;
 	k = 0;
 	while (res && res[k] && is_symbol(res[k]))
+	{
+		if (is_symbol(res[k]) && is_symbol(res[k + 1]) && res[k] != res[k + 1])
+			i++;
 		k++;
+	}
+	k -= i;
 	if (k > 0)
 		j = k;
 	return (j);

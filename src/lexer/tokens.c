@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 16:57:46 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:49:40 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	list_fill(t_token **list, char *readline)
 	while (token && *token != '\0')
 	{
 		token = ft_strtok(readline, call++);
-		if (token)
+		if (token && *token != '\0')
 			append_node(list, token);
 	}
 }
