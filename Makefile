@@ -24,9 +24,9 @@ SOURCES = main.c
 
 READ_SOURCES = ft_readline.c
 
-LEXER_SOURCES = ft_strtok.c tokens.c token_types.c token_utils.c
+LEXER_SOURCES = ft_strtok.c tokens.c token_utils.c
 
-PARSER_SOURCES = parser.c
+PARSER_SOURCES = check_syntax.c
 
 OBJECTS = $(addprefix $(BIN_PATH), $(SOURCES:%.c=%.o))
 
@@ -68,7 +68,9 @@ $(NAME): $(READ_OBJECTS) $(OBJECTS) $(LEXER_OBJECTS) $(PARSER_OBJECTS)
 	@echo $(CYAN)" --------------------------------------------------"$(COLOR_LIMITER)
 	@echo $(CYAN)"| MINISHELL executable was created successfully!! |"$(COLOR_LIMITER)
 	@echo $(CYAN)"--------------------------------------------------"$(COLOR_LIMITER)
-	@$(CC) $(CFLAGS) -o $(NAME) $(READ_OBJECTS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(OBJECTS) -L $(LIB_PATH) -lft -lreadline
+	@$(CC) $(CFLAGS) -o $(NAME) \
+	$(READ_OBJECTS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) \
+	$(OBJECTS) -L $(LIB_PATH) -lft -lreadline
 	@echo " "
 
 $(BIN_PATH):

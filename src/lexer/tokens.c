@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/29 13:30:57 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:50:37 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ void	list_fill(t_token **list, char *readline)
 	while (token && *token != '\0')
 	{
 		token = ft_strtok(readline, call++);
-		if (token)
+		if (token && *token != '\0')
 			append_node(list, token);
 	}
-	if (check_syntaxe(list))
-		ft_putendl_fd("syntax error DOIS", 2);
-	
 }

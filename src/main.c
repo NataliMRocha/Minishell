@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 18:10:02 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:10:17 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int main(void)
 	{
 		char *test = ft_readline();
 		list_fill(&token_list, test);
+		if (check_syntax_error(&token_list) || check_quotes_error(token_list))
+			ft_putendl_fd("Syntax error", 2);
 		temp = token_list;
 		while(temp)
 		{
