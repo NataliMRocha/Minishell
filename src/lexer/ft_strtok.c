@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 18:24:58 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:02:16 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,5 @@ char	*ft_strtok(char *str, int call)
 	j = count_chars(&res[i]);
 	token = ft_substr(res, i, j);
 	res = free_static(res, i, j);
-	access("oi", 4)
 	return (token);
 }
