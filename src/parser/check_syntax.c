@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/01/29 17:22:51 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:42:17 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ int	check_quotes_error(t_token *list)
 	while (list)
 	{
 		if (list->data[0] == *"'" || list->data[0] == '"')
+		{
 			i = ft_handle_quote(list->data, list->data[0]);
-		if (i == 0 && (list->data[0] == *"'" || list->data[0] == '"'))
-			return (1);
+			if (i == 0)
+				return (1);
+		}
 		list = list->next;
 	}
 	return (0);
