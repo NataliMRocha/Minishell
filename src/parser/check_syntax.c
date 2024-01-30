@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/01/29 17:42:17 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:57:59 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_duplicated_symbol(t_token *tmp)
 	c2 = 0;
 	if (is_symbol(c1) && (ft_strlen(tmp->data) > 2))
 		return (1);
-	if (tmp->next)
+	if (tmp->next && is_symbol(tmp->next->data[0]))
 		c2 = tmp->next->data[0];
     return (c1 == c2);
 }

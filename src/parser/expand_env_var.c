@@ -6,46 +6,40 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/29 19:29:39 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:33:28 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*var_name(char *buf)
+void	splited_free(char **s, size_t w)
 {
-	int		i;
-	int		j;
-	char	*result;
-	char	*temp;
-
-	i = 0;
-	result = ft_calloc(1, sizeof(char));
-	while (buf[i])
-	{
-		if (buf[i] == '$')
-		{
-			j = 1;
-			while (buf[i + j] && buf[i + j] != ' ')
-				j++;
-			temp = ft_substr(buf, i + 1, j);
-			result = ft_strjoin(result, getenv(temp)); //vazamento de memoria
-			free(temp);
-			i += j;
-		}
-		else
-			result = ft_strjoin(result, ft_memcpy(temp, (void *)&buf[i], 1));
-		i++;
-	}
-	return (result);
+	while (w-- > 0)
+		free(s[w]);
+	free(s);
 }
 
 char	*expand_env_var(char *buf)
 {
+	int		i;
 	char	*result;
+	char	**splited_buf;
+	char	*tmp;
 
-	result = var_name(buf);
-	printf("%s", result);
-
+	i = 0;
+	result = ft_calloc(1, sizeof(char));
+	splited_buf = ft_split(buf, ' ');
+	while (splited_buf[i])
+	{
+		tmp = ft_strtrim(splited_buf[i], "\"");
+		if (tmp[0] == '$')
+		{
+			result = ft_strjoin(result, getenv(tmp + 1));
+			result = ft_strjoin(result, " ");
+		}
+		free(tmp);
+		i++;
+	}
+	splited_free(splited_buf, i);
 	return (result);
 }
