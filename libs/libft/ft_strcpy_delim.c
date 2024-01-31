@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_readline.c                                      :+:      :+:    :+:   */
+/*   ft_strcpy_delim.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 11:37:28 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/31 17:25:06 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/01/31 11:03:24 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/01/31 11:07:55 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-char	*ft_readline(void)
+char	*ft_strcpy_delim(const char *src, char delim)
 {
-	char *buffer;
-	char *prompt;
+	int		i;
+	char	*tmp;
 
-	prompt = malloc(2);
-	prompt[0] = '\0';
-	prompt = ft_strjoin(prompt, getenv("USER"));
-	prompt = ft_strjoin(prompt, "@minishell $>");
-	buffer = readline(prompt);
-	add_history(buffer);
-	free(prompt);
-	return (buffer);
+	i = 0;
+	tmp = (char *)src;
+	while (src && src[i] != delim)
+		i++;
+	tmp[i] = '\0';
+	return (ft_strdup(tmp));
 }

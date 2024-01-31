@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/31 10:09:22 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:15:00 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int	is_symbol(char *res)
 	symbols = "><|&()";
 	i = 0;
 	j = 0;
-	while (ft_strchr(symbols, res[j]))
+	while (res && res[j] && ft_strchr(symbols, res[j]))
 	{
-		if (ft_strchr(symbols, res[j]) && ft_strchr(symbols, res[j + 1])
-			&& res[j] != res[j + 1])
+		if (res[j] != res[j + 1] && ft_strchr(symbols, res[j])
+			&& ft_strchr(symbols, res[j + 1]))
 			i++;
 		j++;
 	}
@@ -69,11 +69,11 @@ int	count_chars(char *res)
 	i = 0;
 	if (res && res[i] && (res[i] == '"' || res[i] == *"'"))
 		return (ft_handle_quote(&res[i], res[i]));
-	while (res && res[i] && res[0] == '$' && ft_isalpha(res[i + 1]))
+	while (res && res[i] && res[0] == '$' && ft_isalnum(res[i + 1]))
 		i++;
 	if (i > 0)
 		return (i + 1);
-	while (res && res[i] && !ft_is_whitespace(res[i]) && !is_symbol(res))
+	while (res && res[i] && !ft_is_whitespace(res[i]) && !is_symbol(&res[i]))
 		i++;
 	j = is_symbol(res);
 	if (j > 0)

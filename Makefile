@@ -26,7 +26,7 @@ READ_SOURCES = ft_readline.c
 
 LEXER_SOURCES = ft_strtok.c tokens.c token_utils.c
 
-PARSER_SOURCES = check_syntax.c heredoc.c expand_env_var.c
+PARSER_SOURCES = check_syntax.c heredoc.c expand_env_var.c parser_utils.c
 
 OBJECTS = $(addprefix $(BIN_PATH), $(SOURCES:%.c=%.o))
 

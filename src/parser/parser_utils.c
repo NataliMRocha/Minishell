@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_readline.c                                      :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 11:37:28 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/31 17:25:06 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/01/31 17:04:56 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/01/31 17:06:02 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_readline(void)
+void	splited_free(char **str, int words_len)
 {
-	char *buffer;
-	char *prompt;
+	while (words_len-- > 0)
+		free(str[words_len]);
+	free(str);
+}
 
-	prompt = malloc(2);
-	prompt[0] = '\0';
-	prompt = ft_strjoin(prompt, getenv("USER"));
-	prompt = ft_strjoin(prompt, "@minishell $>");
-	buffer = readline(prompt);
-	add_history(buffer);
-	free(prompt);
-	return (buffer);
+void	free_env_list(t_envs *list)
+{
+	t_envs	*tmp;
+
+	while (list)
+	{
+		tmp = list->next;
+		free(list->key);
+		free(list->value);
+		free(list);
+		list = tmp;
+	}
 }

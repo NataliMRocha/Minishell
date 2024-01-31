@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 20:16:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/30 18:47:50 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:07:12 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int			ft_isnum(char *str);
 char		*get_next_line(int fd);
 int			ft_is_whitespace(char c);
+char		*ft_strcpy_delim(const char *src, char delim);
 
 #endif
