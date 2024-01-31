@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/01/30 11:57:59 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:06:24 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ int	is_redir_followed_by_pipe(t_token *tmp)
 
 int	is_duplicated_symbol(t_token *tmp)
 {
-	char c1;
-    char c2;
+	char	*c1;
+    char	*c2;
 
-	c1 = tmp->data[0];
-	c2 = 0;
+	c1 = tmp->data;
+	c2 = "";
 	if (is_symbol(c1) && (ft_strlen(tmp->data) > 2))
 		return (1);
-	if (tmp->next && is_symbol(tmp->next->data[0]))
-		c2 = tmp->next->data[0];
-    return (c1 == c2);
+	if (tmp->next && is_symbol(tmp->next->data))
+		c2 = tmp->next->data;
+    return (c1[0] == c2[0]);
 }
 
 int	check_syntax_error(t_token **list)

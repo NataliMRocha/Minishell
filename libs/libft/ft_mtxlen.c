@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_mtxlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/30 13:51:31 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/01/30 13:57:41 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/01/30 14:01:02 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "libft.h"
 
-# include "lexer.h"
-
-typedef struct s_envs
+size_t	ft_mtxlen(char **mtx)
 {
-	char	*key;
-	char	*value;
-}				t_envs;
+	size_t	i;
 
-int	check_syntax_error(t_token **list);
-int	check_quotes_error(t_token *list);
-char	*expand_env_var(char *buf);
-
-#endif
+	i = 0;
+	if (!mtx)
+		return (0);
+	while (mtx[i])
+		i++;
+	return (i);
+}

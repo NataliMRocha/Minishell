@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/29 18:52:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:16:44 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@
 		}
 		i++;
 	}
-}
+} */
 
-int    heredoc(t_token *list, char *delim)
+int    heredoc(char *delim)
 {
     char	*buf;
     int		fd;
+	char	*temp;
 
     fd = open(delim, O_CREAT | O_WRONLY | O_APPEND, 0000644);
     if (fd < 0)
@@ -49,9 +50,15 @@ int    heredoc(t_token *list, char *delim)
         buf = get_next_line(0);
         if (ft_strncmp(buf, delim, ft_strlen(delim)) == 0)
             break ;
-
-        ft_putstr_fd(buf, fd);
+		if (ft_strchr(buf, '$'))
+		{
+			temp = expand_env_var(buf);
+        	ft_putstr_fd(temp, fd);
+			free(temp);
+		}
+		else
+        	ft_putstr_fd(buf, fd);
 		free(buf);
     }
-    return (0);
-} */
+    return (fd);
+}

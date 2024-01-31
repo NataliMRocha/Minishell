@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/29 17:09:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:09:22 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ int	ft_handle_quote(char *str, char quote)
 	i = 1;
 	while (str && str[i])
 	{
-		if (str[i] == quote)
+		if (str[i++] == quote)
 			return (i);
-		i++;
 	}
 	return (0);
 }
@@ -42,36 +41,44 @@ char	*free_static(char *res, int i, int j)
 	return (temp);
 }
 
-int	is_symbol(char c)
+int	is_symbol(char *res)
 {
-	if (c == '>' || c == '<' || c == '|' || c == '&' || c == '(' || c == ')')
-		return (1);
-	return (0);
+	char	*symbols;
+	int		j;
+	int		i;
+
+	symbols = "><|&()";
+	i = 0;
+	j = 0;
+	while (ft_strchr(symbols, res[j]))
+	{
+		if (ft_strchr(symbols, res[j]) && ft_strchr(symbols, res[j + 1])
+			&& res[j] != res[j + 1])
+			i++;
+		j++;
+	}
+	j -= i;
+	return (j);
 }
 
 int	count_chars(char *res)
 {
-	int	j;
-	int	k;
 	int	i;
+	int	j;
 
-	j = 0;
 	i = 0;
-	if (res && res[j] && (res[j] == '"' || res[j] == *"'"))
-		j = ft_handle_quote(&res[j], res[j]);
-	while (res && res[j] && !ft_is_whitespace(res[j]) && !is_symbol(res[j]))
-		j++;
-	k = 0;
-	while (res && res[k] && is_symbol(res[k]))
-	{
-		if (is_symbol(res[k]) && is_symbol(res[k + 1]) && res[k] != res[k + 1])
-			i++;
-		k++;
-	}
-	k -= i;
-	if (k > 0)
-		j = k;
-	return (j);
+	if (res && res[i] && (res[i] == '"' || res[i] == *"'"))
+		return (ft_handle_quote(&res[i], res[i]));
+	while (res && res[i] && res[0] == '$' && ft_isalpha(res[i + 1]))
+		i++;
+	if (i > 0)
+		return (i + 1);
+	while (res && res[i] && !ft_is_whitespace(res[i]) && !is_symbol(res))
+		i++;
+	j = is_symbol(res);
+	if (j > 0)
+		i = j;
+	return (i);
 }
 
 char	*ft_strtok(char *str, int call)

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 20:16:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/26 15:14:07 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:47:50 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int c);
 size_t		ft_strlen(const char *s);
+size_t		ft_mtxlen(char **mtx);
 size_t		ft_strlcpy(char *dest, const char *src, size_t size);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
