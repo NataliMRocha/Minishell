@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/31 17:22:19 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:23:06 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_envs				**create_envs_table(void);
 char				*expand_env_var(char *buf, t_envs *envs);
 char				*ft_getenv(t_envs *envs, char *key);
 void				splited_free(char **s, int w);
-void				free_env_list(t_envs *list);
 int				    heredoc(char *name, char *delim, t_envs *var_envs);
+void				free_env_list(t_envs *list);
 
 #endif

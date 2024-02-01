@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/31 17:46:12 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:24:15 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,25 @@ char	*ft_getenv(t_envs *envs, char *key)
 
  char	*expand_env_var(char *buf, t_envs *envs)
 {
-	int		i;
 	char	*result;
-	char	**splited_buf;
-	char	*tmp;
+	char	*var_name;
+	int		i;
 
 	i = 0;
 	result = ft_calloc(1, sizeof(char));
-	splited_buf = ft_split(buf, ' ');
-	while (splited_buf[i])
+	while (buf[i])
 	{
-		tmp = ft_strtrim(splited_buf[i], "\"");
-		if (tmp[0] == '$')
+		if (buf[i] == '$')
 		{
-			result = ft_strjoin(result, " ");
-			result = ft_strjoin(result, ft_getenv(envs, tmp + 1));
+			var_name = ft_strdup("");
+			while (ft_isalnum(buf[i+1]))
+				var_name = ft_strjoin(var_name, ft_chartostr(buf[++i]));
+			result = ft_strjoin(result, ft_getenv(envs, var_name));
+			free(var_name);
 		}
 		else
-			result = ft_strjoin(result, splited_buf[i]);
-		free(tmp);
+			result = ft_strjoin(result, ft_chartostr(buf[i]));
 		i++;
 	}
-	splited_free(splited_buf, i);
 	return (result);
 }

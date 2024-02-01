@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/31 17:35:38 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:23:43 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(void)
 	while (1)
 	{
 		char *get_cmd = ft_readline();
-		heredoc("/nfs/homes/egeraldo/nave/minishell/HEREDOC", "eof", *var_envs);
+		// heredoc("/nfs/homes/egeraldo/nave/minishell/HEREDOC", "eof", *var_envs);
 		list_fill(&token_list, get_cmd);
 		if (check_syntax_error(&token_list) || check_quotes_error(token_list))
 			ft_putendl_fd("Syntax error", 2);
