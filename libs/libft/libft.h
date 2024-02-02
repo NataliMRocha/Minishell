@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 20:16:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/01 10:53:10 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:44:28 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ char		*get_next_line(int fd);
 int			ft_is_whitespace(char c);
 char		*ft_strcpy_delim(const char *src, char delim);
 char		*ft_chartostr(char c);
+char		*ft_parse_quotes(char *str);
 
 #endif

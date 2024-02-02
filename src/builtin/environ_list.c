@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/02 12:52:05 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:37:48 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,19 @@
 void	ft_unset(char *key, t_envs **var_envs)
 {
 	t_envs	*temp;
+	t_envs	*free_node;
 
 	temp = *var_envs;
+	free_node = NULL;
 	while (temp->next)
 	{
 		if (ft_strncmp(temp->next->key, key, ft_strlen(temp->next->key)) == 0)
 		{
+			free_node = temp->next;
 			free(temp->next->key);
 			free(temp->next->value);
 			temp->next = temp->next->next;
+			free(free_node);
 			break ;
 		}
 		temp = temp->next;
@@ -44,6 +48,8 @@ void	ft_export(char *variable, t_envs **var_envs)
 	{
 		key = ft_strcpy_delim(variable, '=');
 		value = ft_strchr(variable, '=') + 1;
+		value = expand_env_var(value, *var_envs);
+		value = ft_parse_quotes(value);
 		new_node = ft_getenv(*var_envs, key);
 		if (new_node)
 		{
@@ -52,5 +58,16 @@ void	ft_export(char *variable, t_envs **var_envs)
 		}
 		else
 			temp->next->next = new_envs_node(key, value);
+		free(key);
+		free(value);
+	}
+}
+
+void	print_env_list(t_envs *envs)
+{
+	while (envs)
+	{
+		printf("%s=%s\n", envs->key, envs->value);
+		envs = envs->next;
 	}
 }

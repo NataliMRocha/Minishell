@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/02 12:46:07 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:39:16 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_envs	*ft_getenv(t_envs *envs, char *key)
 {
 	while (envs)
 	{
-		if (ft_strncmp(envs->key, key, ft_strlen(key)) == 0)
+		if (ft_strncmp(envs->key, key, 125) == 0)
 			return (envs);
 		envs = envs->next;
 	}
@@ -67,21 +67,19 @@ t_envs	*ft_getenv(t_envs *envs, char *key)
 	char	*result;
 	char	*var_name;
 	int		i;
-	int		j;
 
 	i = 0;
 	result = ft_calloc(1, sizeof(char));
-	while (buf[i])
+	while (buf && buf[i])
 	{
-		if (buf[i] == '$')
+		// TODO: NÃO EXPANDIR SE A VARIAVEL ESTIVER ENTRE ASPAS SIMPLES
+		if (buf[i] == '$' && ft_handle_quote(&buf[i], '\''))
 		{
-			j = i;
 			var_name = ft_strdup("");
-			while (ft_isalnum(buf[i+1]))
-				var_name = ft_strjoin(var_name, ft_chartostr(buf[++i]));
-			if (!ft_getenv(envs, var_name))
-				i = j;
-			result = ft_strjoin(result, ft_getenv(envs, var_name)->value);
+			while (ft_isalnum(buf[i + 1]) && buf[++i])
+				var_name = ft_strjoin(var_name, ft_chartostr(buf[i]));
+			if (ft_getenv(envs, var_name))
+				result = ft_strjoin(result, ft_getenv(envs, var_name)->value);
 			free(var_name);
 		}
 		else

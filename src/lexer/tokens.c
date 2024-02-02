@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/29 17:49:40 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:34:19 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,7 @@ void	list_fill(t_token **list, char *readline)
 		if (token && *token != '\0')
 			append_node(list, token);
 	}
+	//TODO: implementar a interrupção caso ajam erros de sintaxe
+	if (check_syntax_error(list) || check_quotes_error(*list))
+			ft_putendl_fd("Syntax error", 2);
 }

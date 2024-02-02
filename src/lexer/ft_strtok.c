@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/31 16:15:00 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:43:10 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_handle_quote(char *str, char quote)
 	int	i;
 
 	i = 1;
-	while (str && str[i])
+	while (str && str[i] && str[0] == quote)
 	{
 		if (str[i++] == quote)
 			return (i);
