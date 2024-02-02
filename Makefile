@@ -6,6 +6,7 @@ LIB_PATH = ./libs/libft
 LIB_NAME = libft.a
 
 # Colors Definition
+BLUE = "\033[34;1m"
 GREEN = "\033[32;1m"
 RED = "\033[31;1m"
 CYAN = "\033[36;1;3;208m"
@@ -18,6 +19,8 @@ SOURCES_PATH = ./src/
 READ_SOURCES_PATH = ./src/read/
 LEXER_SOURCES_PATH = ./src/lexer/
 PARSER_SOURCES_PATH = ./src/parser/
+EXEC_SOURCES_PATH = ./src/exec/
+BUILTIN_SOURCES_PATH = ./src/builtin/
 INCLUDES_PATH = ./includes/
 
 SOURCES = main.c
@@ -28,6 +31,10 @@ LEXER_SOURCES = ft_strtok.c tokens.c token_utils.c
 
 PARSER_SOURCES = check_syntax.c heredoc.c expand_env_var.c parser_utils.c
 
+EXEC_SOURCES = handle_signals.c
+
+BUILTIN_SOURCES = environ_list.c
+
 OBJECTS = $(addprefix $(BIN_PATH), $(SOURCES:%.c=%.o))
 
 READ_OBJECTS = $(addprefix $(BIN_PATH), $(READ_SOURCES:%.c=%.o))
@@ -35,6 +42,10 @@ READ_OBJECTS = $(addprefix $(BIN_PATH), $(READ_SOURCES:%.c=%.o))
 LEXER_OBJECTS = $(addprefix $(BIN_PATH), $(LEXER_SOURCES:%.c=%.o))
 
 PARSER_OBJECTS = $(addprefix $(BIN_PATH), $(PARSER_SOURCES:%.c=%.o))
+
+EXEC_OBJECTS = $(addprefix $(BIN_PATH), $(EXEC_SOURCES:%.c=%.o))
+
+BUILTIN_OBJECTS = $(addprefix $(BIN_PATH), $(BUILTIN_SOURCES:%.c=%.o))
 
 
 all: libft $(BIN_PATH) $(NAME)
@@ -45,31 +56,35 @@ ifeq ($(wildcard $(LIB_PATH)/$(LIB_NAME)),)
 endif
 
 $(BIN_PATH)%.o: $(SOURCES_PATH)%.c
-	@echo $(GREEN)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
+	@echo $(BLUE)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
-	@echo " "
 
 $(BIN_PATH)%.o: $(READ_SOURCES_PATH)%.c
-	@echo $(GREEN)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
+	@echo $(BLUE)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
-	@echo " "
 
 $(BIN_PATH)%.o: $(LEXER_SOURCES_PATH)%.c
-	@echo $(GREEN)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
+	@echo $(BLUE)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
-	@echo " "
 
 $(BIN_PATH)%.o: $(PARSER_SOURCES_PATH)%.c
-	@echo $(GREEN)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
+	@echo $(BLUE)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
-	@echo " "
 
-$(NAME): $(READ_OBJECTS) $(OBJECTS) $(LEXER_OBJECTS) $(PARSER_OBJECTS)
+$(BIN_PATH)%.o: $(EXEC_SOURCES_PATH)%.c
+	@echo $(BLUE)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
+
+$(BIN_PATH)%.o: $(BUILTIN_SOURCES_PATH)%.c
+	@echo $(BLUE)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
+
+$(NAME): $(OBJECTS) $(READ_OBJECTS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXEC_OBJECTS) $(BUILTIN_OBJECTS)
 	@echo $(CYAN)" --------------------------------------------------"$(COLOR_LIMITER)
 	@echo $(CYAN)"| MINISHELL executable was created successfully!! |"$(COLOR_LIMITER)
 	@echo $(CYAN)"--------------------------------------------------"$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -o $(NAME) \
-	$(READ_OBJECTS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) \
+	$(READ_OBJECTS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXEC_OBJECTS) $(BUILTIN_OBJECTS) \
 	$(OBJECTS) -L $(LIB_PATH) -lft -lreadline
 	@echo " "
 

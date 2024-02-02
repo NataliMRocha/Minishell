@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/01 11:24:15 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:46:07 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ t_envs **create_envs_table(void)
 	return (&envs);
 }
 
-char	*ft_getenv(t_envs *envs, char *key)
+t_envs	*ft_getenv(t_envs *envs, char *key)
 {
 	while (envs)
 	{
-		if (ft_strncmp(envs->key, key, ft_strlen(envs->key)) == 0)
-			return (envs->value);
+		if (ft_strncmp(envs->key, key, ft_strlen(key)) == 0)
+			return (envs);
 		envs = envs->next;
 	}
 	return (NULL);
@@ -67,6 +67,7 @@ char	*ft_getenv(t_envs *envs, char *key)
 	char	*result;
 	char	*var_name;
 	int		i;
+	int		j;
 
 	i = 0;
 	result = ft_calloc(1, sizeof(char));
@@ -74,10 +75,13 @@ char	*ft_getenv(t_envs *envs, char *key)
 	{
 		if (buf[i] == '$')
 		{
+			j = i;
 			var_name = ft_strdup("");
 			while (ft_isalnum(buf[i+1]))
 				var_name = ft_strjoin(var_name, ft_chartostr(buf[++i]));
-			result = ft_strjoin(result, ft_getenv(envs, var_name));
+			if (!ft_getenv(envs, var_name))
+				i = j;
+			result = ft_strjoin(result, ft_getenv(envs, var_name)->value);
 			free(var_name);
 		}
 		else

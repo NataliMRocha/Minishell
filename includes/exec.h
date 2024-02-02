@@ -6,11 +6,13 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:37 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/12 15:14:45 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:31:09 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
+
+void	setup_signals(void);
 
 #endif
