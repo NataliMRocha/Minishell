@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 20:16:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/02 15:44:28 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:56:36 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ char		*get_next_line(int fd);
 int			ft_is_whitespace(char c);
 char		*ft_strcpy_delim(const char *src, char delim);
 char		*ft_chartostr(char c);
-char		*ft_parse_quotes(char *str);
+char		*ft_remove_quotes(char *str);
 
 #endif
