@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environ_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/02 19:37:48 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/05 21:28:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_export(char *variable, t_envs **var_envs)
 		key = ft_strcpy_delim(variable, '=');
 		value = ft_strchr(variable, '=') + 1;
 		value = expand_env_var(value, *var_envs);
-		value = ft_parse_quotes(value);
+		value = ft_remove_quotes(value);
 		new_node = ft_getenv(*var_envs, key);
 		if (new_node)
 		{
@@ -67,6 +67,8 @@ void	print_env_list(t_envs *envs)
 {
 	while (envs)
 	{
+		if (envs->key[0] == '?')
+			continue ;
 		printf("%s=%s\n", envs->key, envs->value);
 		envs = envs->next;
 	}

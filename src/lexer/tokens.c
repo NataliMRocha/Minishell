@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/02 19:34:19 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/05 21:35:08 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_write_types(t_token *list)
 		return ((void)(list->type = PAREN_CLOSE));
 }
 
-void	list_fill(t_token **list, char *readline)
+int	list_fill(t_token **list, char *readline)
 {
 	char	*token;
 	int		call;
@@ -52,6 +52,11 @@ void	list_fill(t_token **list, char *readline)
 			append_node(list, token);
 	}
 	//TODO: implementar a interrupção caso ajam erros de sintaxe
-	if (check_syntax_error(list) || check_quotes_error(*list))
-			ft_putendl_fd("Syntax error", 2);
+	if (!*list || check_syntax_error(list) || check_quotes_error(*list))
+	{
+			printf("Syntax Error");
+			//atualizar o numero do erro da variavel '?'
+			return(2);
+	}
+	return (0);
 }
