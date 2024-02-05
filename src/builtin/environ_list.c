@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/05 21:28:32 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/05 22:25:08 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void	print_env_list(t_envs *envs)
 	while (envs)
 	{
 		if (envs->key[0] == '?')
+		{
+			envs = envs->next;
 			continue ;
+		}
 		printf("%s=%s\n", envs->key, envs->value);
 		envs = envs->next;
 	}

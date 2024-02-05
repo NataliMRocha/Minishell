@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/05 21:06:04 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/05 22:45:04 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,15 @@ t_envs **create_envs_table(void)
 	int				i;
 
 	i = -1;
+	envs = new_envs_node("?", "0");
 	while (__environ[++i])
 	{
 		tmp = ft_split(__environ[i], '=');
-		if (envs == NULL)
-			envs = new_envs_node(tmp[0], tmp[1]);
-		else
-		{
-			head = envs;
-			while (envs->next)
-				envs = envs->next;
-			envs->next = new_envs_node(tmp[0], tmp[1]);
-			envs = head;
-		}
+		head = envs;
+		while (envs->next)
+			envs = envs->next;
+		envs->next = new_envs_node(tmp[0], tmp[1]);
+		envs = head;
 		splited_free(tmp, 2);
 	}
 	return (&envs);
@@ -62,10 +58,24 @@ t_envs	*ft_getenv(t_envs *envs, char *key)
 	return (NULL);
 }
 
+char	*result_var(char *buf, t_envs *envs, int *i, char *result)
+{
+	char *var_name;
+	t_envs *node;
+
+	var_name = ft_strdup("");
+	while ((ft_isalnum(buf[*i + 1]) || buf[*i+1] == '?') && buf[++*i])
+		var_name = ft_strjoin(var_name, ft_chartostr(buf[*i]));
+	node = ft_getenv(envs, var_name);
+	if (node)
+		result = ft_strjoin(result, ft_getenv(envs, var_name)->value);
+	free(var_name);
+	return (result);
+}
+
  char	*expand_env_var(char *buf, t_envs *envs)
 {
 	char	*result;
-	char	*var_name;
 	int		i;
 	int		single_quotes;
 
@@ -77,13 +87,7 @@ t_envs	*ft_getenv(t_envs *envs, char *key)
 		while (single_quotes-- > 0)
 			result = ft_strjoin(result, ft_chartostr(buf[i++]));
 		if (buf[i] == '$')
-		{
-			var_name = ft_strdup("");
-			while (ft_isalnum(buf[i + 1]) && buf[++i])
-				var_name = ft_strjoin(var_name, ft_chartostr(buf[i]));
-			result = ft_strjoin(result, ft_getenv(envs, var_name)->value);
-			free(var_name);
-		}
+			result = result_var(buf, envs, &i, result);
 		else
 			result = ft_strjoin(result, ft_chartostr(buf[i]));
 		i++;

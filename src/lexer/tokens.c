@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/05 21:35:08 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/05 22:22:27 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ void	ft_write_types(t_token *list)
 		return ((void)(list->type = PAREN_CLOSE));
 }
 
-int	list_fill(t_token **list, char *readline)
+int	list_fill(t_token **list, char *readline, t_envs *var_envs)
 {
 	char	*token;
 	int		call;
+	t_envs	*node;
 
 	call = 0;
 	token = " ";
@@ -51,11 +52,14 @@ int	list_fill(t_token **list, char *readline)
 		if (token && *token != '\0')
 			append_node(list, token);
 	}
-	//TODO: implementar a interrupção caso ajam erros de sintaxe
 	if (!*list || check_syntax_error(list) || check_quotes_error(*list))
 	{
-			printf("Syntax Error");
-			//atualizar o numero do erro da variavel '?'
+			printf("Syntax Error\n");
+			free(readline);
+			free_token_list(*list);
+			node = ft_getenv(var_envs, "?");
+			free(node->value);
+			node->value = ft_strdup("2");
 			return(2);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/05 21:42:03 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/05 22:16:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(void)
 	{
 		get_cmd = ft_readline();
 		// heredoc("result_heredoc", "eof", *var_envs);
-		if (list_fill(&token_list, get_cmd) != 0)
+		if (list_fill(&token_list, get_cmd, *var_envs) != 0)
 			continue;
 		temp = token_list;
 		if (token_list && ft_strncmp("export", token_list->data, ft_strlen(token_list->data)) == 0)

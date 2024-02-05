@@ -3,24 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/02 18:22:34 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/05 22:15:27 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "lexer.h"
-
-typedef struct s_envs
-{
-	char			*key;
-	char			*value;
-	struct s_envs	*next;
-}					t_envs;
+# include "structs.h"
 
 int					check_syntax_error(t_token **list);
 int					check_quotes_error(t_token *list);
