@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/05 22:22:27 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/06 11:33:04 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	list_fill(t_token **list, char *readline, t_envs *var_envs)
 			printf("Syntax Error\n");
 			free(readline);
 			free_token_list(*list);
+			free(token);
 			node = ft_getenv(var_envs, "?");
 			free(node->value);
 			node->value = ft_strdup("2");

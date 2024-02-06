@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/02 18:43:10 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:31:45 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ char	*free_static(char *res, int i, int j)
 	if (res && res[0] == '\0')
 		return (NULL);
 	temp = ft_strdup(&res[i + j]);
-	if (temp && temp[0] == '\0')
+	if ((temp && temp[0] == '\0') || ft_strncmp(res, temp, 125) == 0)
 	{
 		free(temp);
 		temp = NULL;
 	}
 	free(res);
+	res = NULL;
 	return (temp);
 }
 

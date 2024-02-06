@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environ_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/05 22:25:08 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/06 10:55:49 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_unset(char *key, t_envs **var_envs)
 	}
 }
 
+//TODO: bloquear a edição a variavel "?" pelo usuario
 void	ft_export(char *variable, t_envs **var_envs)
 {
 	t_envs	*temp;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/05 22:06:40 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/06 11:14:49 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	append_node(t_token **list, char *content)
 void	free_token_list(t_token *list)
 {
 	t_token	*tmp;
-	
+
 	while (list)
 	{
 		tmp = list->next;
