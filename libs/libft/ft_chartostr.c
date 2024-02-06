@@ -6,20 +6,18 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:51:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 11:13:53 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:15:44 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_chartostr(char c)
+char	*ft_strjoin_char(char *str, char c)
 {
-	char *str;
+	char concat[2];
 
-	str = malloc(2);
-	if (str == NULL)
-		return (NULL);
-	str[0] = c;
-	str[1] = '\0';
+	concat[0] = c;
+	concat[1] = '\0';
+	str = ft_strjoin(str, concat);
 	return (str);
 }

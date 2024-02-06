@@ -24,17 +24,17 @@ char *ft_remove_quotes(char *str)
 		if(str[i] == '\'')
 		{
 			while(str[i] && str[++i] != '\'')
-				new_str = ft_strjoin(new_str, ft_chartostr(str[i]));
+				new_str = ft_strjoin_char(new_str, str[i]);
 			i++;
 		}
 		else if(str[i] == '\"')
 		{
 			while(str[i] && str[++i] != '\"')
-				new_str = ft_strjoin(new_str, ft_chartostr(str[i]));
+				new_str = ft_strjoin_char(new_str, str[i]);
 			i++;
 		}
 		else
-			new_str = ft_strjoin(new_str, ft_chartostr(str[i++]));
+			new_str = ft_strjoin_char(new_str, str[i++]);
 	}
 	return (new_str);
 }

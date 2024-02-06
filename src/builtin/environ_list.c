@@ -6,18 +6,18 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 10:55:49 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:43:30 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_unset(char *key, t_envs **var_envs)
+void	ft_unset(char *key, t_envs **envs)
 {
 	t_envs	*temp;
 	t_envs	*free_node;
 
-	temp = *var_envs;
+	temp = *envs;
 	free_node = NULL;
 	while (temp->next)
 	{
@@ -34,24 +34,22 @@ void	ft_unset(char *key, t_envs **var_envs)
 	}
 }
 
-//TODO: bloquear a edição a variavel "?" pelo usuario
-void	ft_export(char *variable, t_envs **var_envs)
+// TODO: bloquear a edição a variavel "?" pelo usuario
+void	ft_export(char *var, t_envs **envs)
 {
 	t_envs	*temp;
 	t_envs	*new_node;
 	char	*key;
 	char	*value;
 
-	temp = *var_envs;
+	temp = *envs;
 	while (temp->next->next)
 		temp = temp->next;
-	if (strchr(variable, '='))
+	if (strchr(var, '='))
 	{
-		key = ft_strcpy_delim(variable, '=');
-		value = ft_strchr(variable, '=') + 1;
-		value = expand_env_var(value, *var_envs);
-		value = ft_remove_quotes(value);
-		new_node = ft_getenv(*var_envs, key);
+		key = ft_strcpy_delim(var, '=');
+		value = ft_remove_quotes(expand_var(ft_strchr(var, '=') + 1, *envs));
+		new_node = ft_getenv(*envs, key);
 		if (new_node)
 		{
 			free(new_node->value);

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/01 12:23:55 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:39:58 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int    heredoc(char *name, char *delim, t_envs *var_envs)
             break ;
 		if (ft_strchr(buf, '$'))
 		{
-			temp = expand_env_var(buf, var_envs);
+			temp = expand_var(buf, var_envs);
         	ft_putstr_fd(temp, fd);
 			free(temp);
 		}

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 11:16:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:22:20 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,10 @@ char	*result_var(char *buf, t_envs *envs, int *i, char *result)
 {
 	char	*var_name;
 	t_envs	*node;
-	char	*tmp;
 
 	var_name = ft_strdup("");
 	while ((ft_isalnum(buf[*i + 1]) || buf[*i+1] == '?') && buf[++*i])
-	{
-		tmp = ft_chartostr(buf[*i]);
-		var_name = ft_strjoin(var_name, tmp);
-		free(tmp);
-	}
+		var_name = ft_strjoin_char(var_name, buf[*i]);
 	node = ft_getenv(envs, var_name);
 	if (node)
 		result = ft_strjoin(result, ft_getenv(envs, var_name)->value);
@@ -78,7 +73,7 @@ char	*result_var(char *buf, t_envs *envs, int *i, char *result)
 	return (result);
 }
 
- char	*expand_env_var(char *buf, t_envs *envs)
+ char	*expand_var(char *buf, t_envs *envs)
 {
 	char	*result;
 	int		i;
@@ -90,11 +85,11 @@ char	*result_var(char *buf, t_envs *envs, int *i, char *result)
 	while (buf && i < (int)ft_strlen(buf) && buf[i])
 	{
 		while (single_quotes-- > 0)
-			result = ft_strjoin(result, ft_chartostr(buf[i++]));
+			result = ft_strjoin_char(result, buf[i++]);
 		if (buf[i] == '$')
 			result = result_var(buf, envs, &i, result);
 		else
-			result = ft_strjoin(result, ft_chartostr(buf[i]));
+			result = ft_strjoin_char(result, buf[i]);
 		i++;
 	}
 	return (result);

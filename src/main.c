@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 11:24:02 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:39:58 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(void)
 		{
 			if (temp->data == NULL)
 				break;
-			char *chatao = expand_env_var(temp->data, *var_envs);
+			char *chatao = expand_var(temp->data, *var_envs);
 			chatao = ft_remove_quotes(chatao);
 			printf("data: %s  \t  type: %d\n", chatao, temp->type);
 			temp = temp->next;
