@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_chartostr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/01 11:37:44 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/02/01 10:51:03 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/02/06 14:15:44 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "read.h"
-# include "lexer.h"
-# include "parser.h"
-# include "exec.h"
-# include "builtin.h"
-# include "fcntl.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libs/libft/libft.h"
+char	*ft_strjoin_char(char *str, char c)
+{
+	char concat[2];
 
-#endif
+	concat[0] = c;
+	concat[1] = '\0';
+	str = ft_strjoin(str, concat);
+	return (str);
+}

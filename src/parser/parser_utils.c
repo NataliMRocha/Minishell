@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/01 11:37:44 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/01/31 17:04:56 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/01/31 17:06:02 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../includes/minishell.h"
 
-# include "read.h"
-# include "lexer.h"
-# include "parser.h"
-# include "exec.h"
-# include "builtin.h"
-# include "fcntl.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libs/libft/libft.h"
+void	splited_free(char **str, int words_len)
+{
+	while (words_len-- > 0)
+		free(str[words_len]);
+	free(str);
+}
 
-#endif
+void	free_env_list(t_envs *list)
+{
+	t_envs	*tmp;
+
+	while (list)
+	{
+		tmp = list->next;
+		free(list->key);
+		free(list->value);
+		free(list);
+		list = tmp;
+	}
+}

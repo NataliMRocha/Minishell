@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_mtxlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/01 11:37:44 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/01/30 13:57:41 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/01/30 14:01:02 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "read.h"
-# include "lexer.h"
-# include "parser.h"
-# include "exec.h"
-# include "builtin.h"
-# include "fcntl.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libs/libft/libft.h"
+size_t	ft_mtxlen(char **mtx)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	if (!mtx)
+		return (0);
+	while (mtx[i])
+		i++;
+	return (i);
+}

@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/01 11:37:44 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/02/02 19:37:14 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../includes/minishell.h"
 
-# include "read.h"
-# include "lexer.h"
-# include "parser.h"
-# include "exec.h"
-# include "builtin.h"
-# include "fcntl.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libs/libft/libft.h"
-
-#endif
+void	parser(t_token *token_list, t_envs **envs, char *get_cmd)
+{
+	list_fill(&token_list, get_cmd);
+	//TODO: função para verificar se o comando é um builtin
+	//TODO: função para verificar se o comando é um executável
+	//TODO: função pra lidar com os redirects e verifica se temos acesso e permissao aos arquivos
+	//TODO: função para executar o comando
+}

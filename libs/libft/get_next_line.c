@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:47:16 by egeraldo          #+#    #+#             */
-/*   Updated: 2023/12/15 11:34:56 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:39:26 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ static char	*after_line(char *line)
 static char	*get_line(char *backup, char *buffer, int fd)
 {
 	int		read_line;
-	char	*temp;
 
 	read_line = 1;
-	temp = NULL;
 	while (read_line != 0)
 	{
 		read_line = read(fd, buffer, BUFFER_SIZE);
@@ -46,10 +44,7 @@ static char	*get_line(char *backup, char *buffer, int fd)
 		buffer[read_line] = '\0';
 		if (!backup)
 			backup = ft_strdup("");
-		temp = backup;
-		backup = ft_strjoin(temp, buffer);
-		free(temp);
-		temp = NULL;
+		backup = ft_strjoin(backup, buffer);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}

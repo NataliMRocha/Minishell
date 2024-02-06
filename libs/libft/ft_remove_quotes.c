@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 12:21:30 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/05 19:33:00 by codespace        ###   ########.fr       */
+/*   Created: 2024/02/02 15:26:13 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/02/05 18:57:56 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char *ft_remove_quotes(char *str)
 {
-	char	*alloc;
-	size_t	total_size;
+	int	i;
+	char *new_str;
 
-	total_size = nmemb * size;
-	if (nmemb == 0 || size == 0 || (total_size / size != nmemb))
-		return (malloc(0));
-	alloc = malloc(total_size);
-	if (alloc != NULL)
-		while (total_size)
-			alloc[--total_size] = 0;
-	return ((void *)alloc);
+	new_str = ft_strdup("");
+	i = 0;
+	while(str && str[i])
+	{
+		if(str[i] == '\'')
+		{
+			while(str[i] && str[++i] != '\'')
+				new_str = ft_strjoin_char(new_str, str[i]);
+			i++;
+		}
+		else if(str[i] == '\"')
+		{
+			while(str[i] && str[++i] != '\"')
+				new_str = ft_strjoin_char(new_str, str[i]);
+			i++;
+		}
+		else
+			new_str = ft_strjoin_char(new_str, str[i++]);
+	}
+	return (new_str);
 }
