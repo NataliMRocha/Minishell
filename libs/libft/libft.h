@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 20:16:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 14:17:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:42:57 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			ft_isnum(char *str);
 char		*get_next_line(int fd);
 int			ft_is_whitespace(char c);
 char		*ft_strcpy_delim(const char *src, char delim);
-char		*ft_strjoin_char(char * str, char c);
+char		*ft_strjoin_char(char *str, char c);
 char		*ft_remove_quotes(char *str);
 
 #endif

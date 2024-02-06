@@ -14,22 +14,18 @@
 
 char *ft_remove_quotes(char *str)
 {
-	int	i;
-	char *new_str;
+	int		i;
+	char	*new_str;
+	char	quote;
 
 	new_str = ft_strdup("");
 	i = 0;
 	while(str && str[i])
 	{
-		if(str[i] == '\'')
+		if(str[i] == '\'' || str[i] == '\"')
 		{
-			while(str[i] && str[++i] != '\'')
-				new_str = ft_strjoin_char(new_str, str[i]);
-			i++;
-		}
-		else if(str[i] == '\"')
-		{
-			while(str[i] && str[++i] != '\"')
+			quote = str[i];
+			while(str[i] && str[++i] != quote)
 				new_str = ft_strjoin_char(new_str, str[i]);
 			i++;
 		}

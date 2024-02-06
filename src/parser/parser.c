@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/02 19:37:14 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:38:53 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	parser(t_token *token_list, t_envs **envs, char *get_cmd)
 {
-	list_fill(&token_list, get_cmd);
+	list_fill(&token_list, get_cmd, *envs);
 	//TODO: função para verificar se o comando é um builtin
 	//TODO: função para verificar se o comando é um executável
 	//TODO: função pra lidar com os redirects e verifica se temos acesso e permissao aos arquivos
