@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 15:19:31 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:48:34 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,20 @@ int main(void)
 	t_token *temp;
 	t_envs **var_envs = create_envs_table();
 	char *get_cmd;
+	int i;
 	//setup_signals();
 
 	while (1)
 	{
 		get_cmd = ft_readline();
 		// heredoc("result_heredoc", "eof", *var_envs);
-		if (list_fill(&token_list, get_cmd, *var_envs) != 0)
+		i = 0;
+		i = parser(&token_list, var_envs, get_cmd);
+		if (i == 2)
 			continue;
+		if (i == 3)
+			break;
 		temp = token_list;
-		if (token_list && ft_strncmp("export", token_list->data, ft_strlen(token_list->data)) == 0)
-			ft_export(temp->next->data, var_envs);
-		else if (token_list && ft_strncmp("unset", token_list->data, ft_strlen(token_list->data)) == 0)
-			ft_unset(temp->next->data, var_envs);
-		else if (token_list && ft_strncmp("env", token_list->data, ft_strlen(token_list->data)) == 0)
-			print_env_list(*var_envs);
-		else if (token_list && ft_strncmp("exit", token_list->data, ft_strlen(token_list->data)) == 0)
-			break ;
 		printf("\n-------------------------------------------------------------\n");
 		while(temp)
 		{
