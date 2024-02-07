@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 21:48:34 by natali           ###   ########.fr       */
+/*   Updated: 2024/02/07 15:21:05 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ int main(void)
 	{
 		get_cmd = ft_readline();
 		// heredoc("result_heredoc", "eof", *var_envs);
-		i = 0;
-		i = parser(&token_list, var_envs, get_cmd);
-		if (i == 2)
+		if (list_fill(&token_list, get_cmd, *var_envs) != 0)
 			continue;
+		i = parser(&token_list, var_envs);
 		if (i == 3)
 			break;
 		temp = token_list;

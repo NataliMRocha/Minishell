@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 11:31:45 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:27:42 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	count_chars(char *res)
 	i = 0;
 	if (res && res[i] && (res[i] == '"' || res[i] == *"'"))
 		return (ft_handle_quote(&res[i], res[i]));
-	while (res && res[i] && res[0] == '$' && ft_isalnum(res[i + 1]))
-		i++;
 	if (i > 0)
 		return (i + 1);
 	while (res && res[i] && !ft_is_whitespace(res[i]) && !is_symbol(&res[i]))

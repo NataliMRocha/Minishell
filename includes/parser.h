@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 21:46:42 by natali           ###   ########.fr       */
+/*   Updated: 2024/02/07 11:13:46 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void				splited_free(char **s, int w);
 int				    heredoc(char *name, char *delim, t_envs *var_envs);
 void				free_env_list(t_envs *list);
 int                 check_builtin(t_token **token_list, t_envs **envs);
-int                 parser(t_token **token_list, t_envs **envs, char *get_cmd);
+int                 parser(t_token **token_list, t_envs **envs);
 #endif
