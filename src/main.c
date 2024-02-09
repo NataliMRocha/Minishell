@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/07 15:21:05 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:01:55 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int main(void)
 	t_token *temp;
 	t_envs **var_envs = create_envs_table();
 	char *get_cmd;
-	int i;
 	//setup_signals();
 
 	while (1)
@@ -27,8 +26,7 @@ int main(void)
 		// heredoc("result_heredoc", "eof", *var_envs);
 		if (list_fill(&token_list, get_cmd, *var_envs) != 0)
 			continue;
-		i = parser(&token_list, var_envs);
-		if (i == 3)
+		if (parser(&token_list, var_envs) == 3)
 			break;
 		temp = token_list;
 		printf("\n-------------------------------------------------------------\n");
@@ -36,11 +34,8 @@ int main(void)
 		{
 			if (temp->data == NULL)
 				break;
-			char *chatao = expand_var(temp->data, *var_envs);
-			chatao = ft_remove_quotes(chatao);
-			printf("data: %s  \t  type: %d\n", chatao, temp->type);
+			printf("data: %s  \t  type: %d\n", temp->data, temp->type);
 			temp = temp->next;
-			free(chatao);
 		}
 		printf("\n-------------------------------------------------------------\n");
 		free(get_cmd);

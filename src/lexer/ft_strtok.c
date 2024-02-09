@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/07 15:27:42 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:13:40 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	ft_handle_quote(char *str, char quote)
 {
 	int	i;
 
-	i = 1;
-	while (str && str[i] && str[0] == quote)
+	i = 0;
+	if (str && str[i] && (str[i] == '"' || str[i] == *"'"))
+		quote = str[i++];
+	while (str && str[i])
 	{
 		if (str[i++] == quote)
 			return (i);
@@ -68,12 +70,12 @@ int	count_chars(char *res)
 	int	j;
 
 	i = 0;
-	if (res && res[i] && (res[i] == '"' || res[i] == *"'"))
-		return (ft_handle_quote(&res[i], res[i]));
-	if (i > 0)
-		return (i + 1);
-	while (res && res[i] && !ft_is_whitespace(res[i]) && !is_symbol(&res[i]))
+	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i])
+		&& res[i] != '"' && res[i] != '\'')
 		i++;
+	i += ft_handle_quote(&res[i], 0);
+	if (i > 0)
+		return (i);
 	j = is_symbol(res);
 	if (j > 0)
 		i = j;
@@ -92,7 +94,7 @@ char	*ft_strtok(char *str, int call)
 	if (!res)
 		return (NULL);
 	i = 0;
-	while (res && res[i] && ft_is_whitespace(res[i]))
+	while (res && res[i] && is_space(res[i]))
 		i++;
 	j = count_chars(&res[i]);
 	token = ft_substr(res, i, j);
