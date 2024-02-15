@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/07 14:56:31 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:41:56 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void	ft_unset(char *key, t_envs **envs)
 	}
 }
 
-// TODO: bloquear a edição a variavel "?" pelo usuario
-// TODO: verificar se a key existe e se o valor é valido, caso contrario retornar erro
-void	verify_key(char **key, char *var)
+int	verify_key(char **key, char *var)
 {
 	*key = ft_strcpy_delim(var, '=');
-	if (!key && !*key && (!*key[0] || *key[0] == '?'))
+	if (key && *key && (*key[0] || *key[0] == '?'))
 	{
 		printf("minishell: export: `%s': not a valid identifier\n", *key);
-		free(key);
+		free(*key);
+		return (1);
 	}
+	return (0);
 }
 
 void	ft_export(char *var, t_envs **envs)
@@ -58,7 +58,8 @@ void	ft_export(char *var, t_envs **envs)
 		temp = temp->next;
 	if (strchr(var, '='))
 	{
-		verify_key(&key, var);
+		if (verify_key(&key, var))
+			return ;
 		value = ft_remove_quotes(expand_var(ft_strchr(var, '=') + 1, *envs));
 		new_node = ft_getenv(*envs, key);
 		if (new_node)
