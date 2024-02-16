@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/16 12:44:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:21:26 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,19 @@ void	remove_tokens_after_handle(t_token **token_list, int token_to_remove,
 		t_token_type type_to_remove)
 {
 	t_token	*delete;
-	
-	while (token_list && token_to_remove > 0)
+
+	while (token_list && *token_list && token_to_remove > 0)
 	{
-		if ((*token_list)->type == type_to_remove)
+		if (*token_list && (*token_list)->type == type_to_remove && (*token_list)->prev
+			&& (*token_list)->next && (*token_list)->next->next)
 		{
 			delete = *token_list;
 			(*token_list)->prev->next = (*token_list)->next->next;
 			(*token_list)->next->next->prev = (*token_list)->prev;
-			while (token_list && (*token_list)->prev)
-				*token_list = (*token_list)->prev;
 			delete->next = NULL;
 			delete->prev = NULL;
+			while (token_list && (*token_list)->prev)
+				*token_list = (*token_list)->prev;
 			free_token_list(delete);
 			token_to_remove--;
 		}
