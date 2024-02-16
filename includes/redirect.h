@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/16 11:15:12 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/02/16 11:13:54 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/02/16 12:38:24 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef REDIRECTS_H
+# define REDIRECTS_H
 
-# include "read.h"
-# include "lexer.h"
-# include "parser.h"
-# include "exec.h"
-# include "builtin.h"
-# include "redirect.h"
-# include "fcntl.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libs/libft/libft.h"
+# include "structs.h"
+
+int	heredoc(char *name, char *delim, t_envs *var_envs);
+int	redir_out(t_token *tokens, t_envs *envs, t_token_type type);
 
 #endif

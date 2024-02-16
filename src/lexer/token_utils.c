@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 11:14:49 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:35:16 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_token	*find_last_node(t_token *head)
 {
 	if (head == NULL)
 		return (NULL);
-	while (head->next)
+	while (head && head->next)
 		head = head->next;
 	return (head);
 }

@@ -6,10 +6,11 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 14:22:20 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/15 13:52:33 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// TODO: Muito provavelmente esse arquivo sera enviado para o exec
 #include "../../includes/minishell.h"
 
 t_envs	*new_envs_node(char *key, char *value)

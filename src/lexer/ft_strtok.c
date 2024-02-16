@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/08 17:13:40 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:03:52 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*ft_strtok(char *str, int call)
 	int			i;
 	int			j;
 
-	if (str && call == 0)
+	if (str && *str && call == 0)
 		res = ft_strdup(str);
 	if (!res)
 		return (NULL);

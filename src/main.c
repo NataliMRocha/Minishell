@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/15 13:34:35 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:37:08 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(void)
 	{
 		get_cmd = ft_readline();
 		// heredoc("result_heredoc", "eof", *var_envs);
-		if (list_fill(&token_list, get_cmd, *var_envs) != 0)
+		if (list_fill(&token_list, get_cmd, *var_envs) != 0 || redir_out(token_list, *var_envs, REDIR_OUT) < 0)
 			continue;
 		if (parser(&token_list, var_envs) == 3)
 			break;
