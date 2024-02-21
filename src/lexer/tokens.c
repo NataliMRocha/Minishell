@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/15 14:40:02 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:55:23 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_write_types(t_token *list)
 	if (list->data[0] == '>' && list->data[1] == '>')
 		return ((void)(list->type = REDIR_APPEND));
 	if (list->data[0] == '<' && list->data[1] == '<')
-		return ((void)(list->type = REDIR_HERE_DOC));
+		return ((void)(list->type = HEREDOC));
 	if (list->data[0] == '|')
 		return ((void)(list->type = PIPE));
 	if (list->data[0] == '>')
