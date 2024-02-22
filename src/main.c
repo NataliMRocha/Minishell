@@ -6,17 +6,32 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/16 12:37:08 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:08:48 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+void	print_ast(t_ast *root)
+{
+	if (root)
+	{
+		print_ast(root->left);
+
+		if (root && root->tokens_to_exec)
+			printf("%s ", root->tokens_to_exec->data);
+		else
+			printf("%d ", root->type);
+
+		print_ast(root->right);
+	}
+}
+
 int main(void)
 {
 	t_token *token_list = NULL;
-	t_token *temp;
 	t_envs **var_envs = create_envs_table();
+	t_ast	*tree;
 	char *get_cmd;
 	//setup_signals();
 
@@ -24,20 +39,12 @@ int main(void)
 	{
 		get_cmd = ft_readline();
 		// heredoc("result_heredoc", "eof", *var_envs);
-		if (list_fill(&token_list, get_cmd, *var_envs) != 0 || redir_out(token_list, *var_envs, REDIR_OUT) < 0)
+		if (list_fill(&token_list, get_cmd, *var_envs) != 0)
 			continue;
-		if (parser(&token_list, var_envs) == 3)
-			break;
-		temp = token_list;
-		printf("\n-------------------------------------------------------------\n");
-		while(temp)
-		{
-			if (temp->data == NULL)
-				break;
-			printf("data: %s  \t  type: %d\n", temp->data, temp->type);
-			temp = temp->next;
-		}
-		printf("\n-------------------------------------------------------------\n");
+		tree = parser(token_list, var_envs);
+		printf("\n\ncomandos: ");
+		print_ast(tree);
+		printf("\n");
 		free(get_cmd);
 		free_token_list(token_list);
 		token_list = NULL;

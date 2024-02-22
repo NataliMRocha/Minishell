@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/21 17:55:23 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:24:01 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,49 @@ void	ft_write_types(t_token *list)
 		return ((void)(list->type = REDIR_OUT));
 	if (list->data[0] == '<')
 		return ((void)(list->type = REDIR_IN));
-	if (list->data[0] == '"')
+	if (list->data[0] == '"' && !is_redirect(list->prev))
 		return ((void)(list->type = DQUOTE));
-	if (list->data[0] == '\'')
+	if (list->data[0] == '\'' && !is_redirect(list->prev))
 		return ((void)(list->type = QUOTE));
 	if (list->data[0] == '(')
-		return ((void)(list->type = PAREN_OPEN));
-	if (list->data[0] == ')')
-		return ((void)(list->type = PAREN_CLOSE));
+		return ((void)(list->type = BLOCK));
+	if (is_redirect(list->prev) && list->type == WORD)
+		return ((void)(list->type = ARCHIVE));
+}
+
+void	stack_fill(t_token *list)
+{
+	list->data = "";
+	list->type = 0;
+	list->next = NULL;
+	list->prev = NULL;
+}
+
+void	append_node(t_token **list, char *content)
+{
+	t_token	*node;
+	t_token	*last_node;
+
+	if (list == NULL)
+		return ;
+	node = malloc(sizeof(t_token));
+	stack_fill(node);
+	if (node == NULL)
+		return ;
+	node->next = NULL;
+	node->data = content;
+	if (*list == NULL)
+	{
+		*list = node;
+		node->prev = NULL;
+	}
+	else
+	{
+		last_node = find_last_node(*list);
+		last_node->next = node;
+		node->prev = last_node;
+	}
+	ft_write_types(node);
 }
 
 int	list_fill(t_token **list, char *readline, t_envs *var_envs)

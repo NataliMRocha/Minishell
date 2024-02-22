@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 22:14:22 by codespace         #+#    #+#             */
-/*   Updated: 2024/02/21 19:24:13 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:18:23 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ typedef enum e_token_type
 	WORD,
 	QUOTE,
 	DQUOTE,
-	PAREN_CLOSE,
-	PAREN_OPEN,
+	BLOCK,
+	ARCHIVE,
 	PIPE,
 	HEREDOC,
 	REDIR_IN,

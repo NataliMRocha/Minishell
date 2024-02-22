@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/02/15 13:43:07 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:45:23 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,23 @@ int	is_redir_followed_by_pipe(t_token *tmp)
 int	is_duplicated_symbol(t_token *tmp)
 {
 	char	*c1;
-    char	*c2;
+	char	*c2;
 
+	if (!tmp || !tmp->data)
+		return (0);
 	c1 = tmp->data;
 	c2 = "";
 	if (is_symbol(c1) && (ft_strlen(tmp->data) > 2))
 		return (1);
 	if (tmp->next && is_symbol(tmp->next->data))
 		c2 = tmp->next->data;
-    return (c1[0] == c2[0]);
+	return (c1[0] == c2[0]);
+}
+
+int	check_block_error(t_token *list)
+{
+	return (list->type == BLOCK && !ft_handle_block(list->data, 1))
+		|| (list->type == BLOCK && is_redirect(list->prev));
 }
 
 int	check_syntax_error(t_token **list)
@@ -47,16 +55,18 @@ int	check_syntax_error(t_token **list)
 			return (1);
 		if (is_duplicated_symbol(tmp))
 			return (1);
+		if (check_block_error(tmp))
+			return (1);
 		tmp = tmp->next;
 	}
-	if (tmp->type > 3 && tmp->next == NULL)
+	if (tmp->type > 4 && tmp->next == NULL)
 		return (1);
 	return (0);
 }
 
 int	check_quotes_error(t_token *list)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (list)

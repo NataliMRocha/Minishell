@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/15 15:03:52 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:05:02 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,19 @@ int	ft_handle_quote(char *str, char quote)
 	return (0);
 }
 
-char	*free_static(char *res, int i, int j)
+int	ft_handle_block(char *str, int check_close)
 {
-	char	*temp;
+	int	i;
 
-	if (res && res[0] == '\0')
-		return (NULL);
-	temp = ft_strdup(&res[i + j]);
-	if ((temp && temp[0] == '\0') || ft_strncmp(res, temp, 125) == 0)
-	{
-		free(temp);
-		temp = NULL;
-	}
-	free(res);
-	res = NULL;
-	return (temp);
+	i = 0;
+	if (str && str[i] == '(')
+		while(str && str[i] && str[++i] != ')')
+			;
+	if (str && str[i] != ')' && check_close == 1)
+		return (0);
+	if (str && str[i] == ')')
+		i++;
+	return (i);
 }
 
 int	is_symbol(char *res)
@@ -50,7 +48,7 @@ int	is_symbol(char *res)
 	int		j;
 	int		i;
 
-	symbols = "><|&()";
+	symbols = "><|&";
 	i = 0;
 	j = 0;
 	while (res && res[j] && ft_strchr(symbols, res[j]))
@@ -71,11 +69,12 @@ int	count_chars(char *res)
 
 	i = 0;
 	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i])
-		&& res[i] != '"' && res[i] != '\'')
+		&& res[i] != '"' && res[i] != '\'' && res[i] != '(')
 		i++;
-	i += ft_handle_quote(&res[i], 0);
-	if (i > 0)
-		return (i);
+	if (ft_handle_quote(&res[i], 0))
+		return (ft_handle_quote(&res[i], 0));
+	if(ft_handle_block(&res[i], 0))
+		return (ft_handle_block(&res[i], 0));
 	j = is_symbol(res);
 	if (j > 0)
 		i = j;

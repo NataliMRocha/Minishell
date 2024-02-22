@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:04:56 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/15 13:47:34 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:05:52 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,12 @@ int	update_status_error(t_envs *var_envs, char *status)
 	free(node->value);
 	node->value = ft_strdup(status);
 	return (ft_atoi(status));
+}
+
+int	is_redirect(t_token *token)
+{
+	if (token && (token->type == REDIR_OUT || token->type == REDIR_APPEND
+			|| token->type == REDIR_IN || token->type == HEREDOC))
+		return (1);
+	return (0);
 }
