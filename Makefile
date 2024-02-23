@@ -22,6 +22,7 @@ PARSER_SOURCES_PATH = ./src/parser/
 EXEC_SOURCES_PATH = ./src/exec/
 BUILTIN_SOURCES_PATH = ./src/builtin/
 REDIRECT_SOURCES_PATH = ./src/redirect/
+AST_SOURCES_PATH = ./src/ast_construtor/
 INCLUDES_PATH = ./includes/
 
 SOURCES = main.c
@@ -30,13 +31,15 @@ READ_SOURCES = ft_readline.c
 
 LEXER_SOURCES = ft_strtok.c tokens.c token_utils.c
 
-PARSER_SOURCES = check_syntax.c expand_env_var.c parser_utils.c parser.c ast.c
+PARSER_SOURCES = check_syntax.c expand_env_var.c parser_utils.c parser.c
 
 EXEC_SOURCES = handle_signals.c
 
 BUILTIN_SOURCES = environ_list.c
 
 REDIRECT_SOURCES = heredoc.c redirect.c
+
+AST_SOURCES = ast.c handle_redirect.c ast_utils.c
 
 OBJECTS += $(addprefix $(BIN_PATH), $(SOURCES:%.c=%.o))
 
@@ -51,6 +54,8 @@ OBJECTS += $(addprefix $(BIN_PATH), $(EXEC_SOURCES:%.c=%.o))
 OBJECTS += $(addprefix $(BIN_PATH), $(BUILTIN_SOURCES:%.c=%.o))
 
 OBJECTS += $(addprefix $(BIN_PATH), $(REDIRECT_SOURCES:%.c=%.o))
+
+OBJECTS += $(addprefix $(BIN_PATH), $(AST_SOURCES:%.c=%.o))
 
 
 all: libft $(BIN_PATH) $(NAME)
@@ -85,6 +90,10 @@ $(BIN_PATH)%.o: $(BUILTIN_SOURCES_PATH)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
 
 $(BIN_PATH)%.o: $(REDIRECT_SOURCES_PATH)%.c
+	@echo $(BLUE)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
+
+$(BIN_PATH)%.o: $(AST_SOURCES_PATH)%.c
 	@echo $(BLUE)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
 

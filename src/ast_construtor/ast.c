@@ -47,19 +47,22 @@ char	**command_constructor(t_token *tokens)
 	t_token	*temp;
 	int		i;
 
+	while (tokens && tokens->prev)
+		tokens = tokens->prev;
 	temp = tokens;
 	i = 0;
-	while (temp && i++)
+	while (temp && ++i)
 		temp = temp->next;
 	cmd = ft_calloc(i + 1, sizeof(char *));
 	temp = tokens;
 	i = 0;
 	while (temp)
 	{
-		cmd[i] = temp->data;
+		cmd[i] = ft_strdup(temp->data);
 		temp = temp->next;
 		i++;
 	}
+	cmd[i] = NULL;
 	return (cmd);
 }
 
@@ -71,7 +74,7 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 	else
 	 	cmd = command_constructor(tokens);
 	ast_node->type = EXEC;
-	ast_node->tokens_to_exec = cmd;
+	ast_node->command_list = cmd;
 }
 
 t_ast	*ast_constructor(t_token *tokens)

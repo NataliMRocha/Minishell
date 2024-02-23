@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/22 16:08:48 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:05:14 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 
 void	print_ast(t_ast *root)
 {
+	int	i;
+
+	i = 0;
 	if (root)
 	{
 		print_ast(root->left);
 
-		if (root && root->tokens_to_exec)
-			printf("%s ", root->tokens_to_exec->data);
+		if (root && root->command_list)
+			while(root->command_list[i])
+				printf("%s ", root->command_list[i++]);
 		else
 			printf("%d ", root->type);
 
 		print_ast(root->right);
 	}
 }
+
 
 int main(void)
 {
@@ -39,6 +44,8 @@ int main(void)
 	{
 		get_cmd = ft_readline();
 		// heredoc("result_heredoc", "eof", *var_envs);
+		if (ft_strncmp(get_cmd, "exit", 4) == 0)
+			break;
 		if (list_fill(&token_list, get_cmd, *var_envs) != 0)
 			continue;
 		tree = parser(token_list, var_envs);
@@ -47,10 +54,13 @@ int main(void)
 		printf("\n");
 		free(get_cmd);
 		free_token_list(token_list);
+		free_ast(tree);
+		tree = NULL;
 		token_list = NULL;
 	}
 	free(get_cmd);
 	free_token_list(token_list);
 	free_env_list(*var_envs);
+	free_ast(tree);
 	return (0);
 }

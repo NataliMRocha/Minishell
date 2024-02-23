@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 22:14:22 by codespace         #+#    #+#             */
-/*   Updated: 2024/02/22 12:18:23 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 10:02:11 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_envs
 
 typedef struct s_ast
 {
-	t_token			*tokens_to_exec;
+	char			**command_list;
 	t_token_type	type;
 	int				fd;
 	struct s_ast	*right;

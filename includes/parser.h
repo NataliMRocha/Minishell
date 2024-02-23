@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/22 12:59:46 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 10:03:03 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,4 @@ t_ast	*parser(t_token *token_list, t_envs **envs);
 int		update_status_error(t_envs *var_envs, char *status);
 int		is_redirect(t_token *token);
 
-t_ast	*ast_constructor(t_token *tokens);
 #endif
