@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 12:18:35 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:44:31 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	print_ast(t_ast *root)
 void	free_program(t_ast **root, t_token **token_list, char **get_cmd)
 {
 	free(*get_cmd);
-	// free_token_list(*token_list);
 	free_ast(*root);
+	free_token_list(*token_list);
 	*root = NULL;
 	*token_list = NULL;
 }
