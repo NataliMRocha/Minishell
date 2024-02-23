@@ -23,17 +23,18 @@ t_token	*search_type_to_split(t_token *tokens)
 	return (NULL);
 }
 
-int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
+int	ast_split_node(t_ast *root, t_token *tokens, t_token **token_to_split)
 {
 	t_token	*right;
 
 	right = NULL;
-	if (!root || !tokens || !token_to_split)
+	if (!root || !tokens || !*token_to_split)
 		return (0);
-	right = token_to_split->next;
+	right = (*token_to_split)->next;
 	right->prev = NULL;
-	root->type = token_to_split->type;
-	tokens = token_to_split->prev;
+	root->type = (*token_to_split)->type;
+	free((*token_to_split)->data);
+	tokens = (*token_to_split)->prev;
 	if (tokens)
 		tokens->next = NULL;
 	root->left = ast_constructor(tokens);
@@ -41,24 +42,25 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 	return (1);
 }
 
-char	**command_constructor(t_token *tokens)
+char	**command_constructor(t_token **tokens)
 {
 	char	**cmd;
 	t_token	*temp;
 	int		i;
 
-	while (tokens && tokens->prev)
-		tokens = tokens->prev;
-	temp = tokens;
+	while (tokens && (*tokens)->prev)
+		*tokens = (*tokens)->prev;
+	temp = *tokens;
 	i = 0;
 	while (temp && ++i)
 		temp = temp->next;
 	cmd = ft_calloc(i + 1, sizeof(char *));
-	temp = tokens;
+	temp = *tokens;
 	i = 0;
 	while (temp)
 	{
 		cmd[i] = ft_strdup(temp->data);
+		free(temp->data);
 		temp = temp->next;
 		i++;
 	}
@@ -69,10 +71,13 @@ char	**command_constructor(t_token *tokens)
 void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 {
 	char	**cmd;
-	if (ast_split_node(ast_node, tokens, search_type_to_split(tokens)))
+	t_token *to_split;
+
+	to_split = search_type_to_split(tokens);
+	if (ast_split_node(ast_node, tokens, &to_split))
 		return ;
 	else
-	 	cmd = command_constructor(tokens);
+	 	cmd = command_constructor(&tokens);
 	ast_node->type = EXEC;
 	ast_node->command_list = cmd;
 }

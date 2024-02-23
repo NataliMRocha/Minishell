@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 11:04:06 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:13:05 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,5 @@ void	free_token_list(t_token *list)
 		list = NULL;
 		list = tmp;
 	}
+	list = NULL;
 }

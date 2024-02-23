@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:31:54 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 11:11:47 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:13:16 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	free_ast(t_ast *root)
 		free(root->command_list);
 		free(root);
 	}
+	root = NULL;
 }
