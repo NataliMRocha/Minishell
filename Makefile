@@ -33,7 +33,7 @@ LEXER_SOURCES = ft_strtok.c tokens.c token_utils.c
 
 PARSER_SOURCES = check_syntax.c expand_env_var.c parser_utils.c parser.c
 
-EXEC_SOURCES = handle_signals.c
+EXEC_SOURCES = handle_signals.c exec.c
 
 BUILTIN_SOURCES = environ_list.c
 

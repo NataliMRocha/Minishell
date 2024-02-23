@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 12:44:31 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:56:52 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	free_program(t_ast **root, t_token **token_list, char **get_cmd)
 int main(void)
 {
 	t_token *token_list = NULL;
-	t_envs **var_envs = create_envs_table();
+	t_envs **var_envs = create_envs_table(0);
 	t_ast	*root;
 	char *get_cmd;
 	//setup_signals();
@@ -60,6 +60,7 @@ int main(void)
 		printf("\ncomandos: ");
 		print_ast(root);
 		printf("\n");
+		exec(root);
 		free_program(&root, &token_list, &get_cmd);
 	}
 	free_program(&root, &token_list, &get_cmd);

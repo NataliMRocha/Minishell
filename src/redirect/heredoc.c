@@ -6,13 +6,13 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/16 10:48:52 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:55:42 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int    heredoc(char *name, char *delim, t_envs *var_envs)
+int    heredoc(char *name, char *delim)
 {
     char	*buf;
     int		fd;
@@ -29,7 +29,7 @@ int    heredoc(char *name, char *delim, t_envs *var_envs)
             break ;
 		if (ft_strchr(buf, '$'))
 		{
-			temp = expand_var(buf, var_envs);
+			temp = expand_var(buf);
         	ft_putstr_fd(temp, fd);
 			free(temp);
 		}

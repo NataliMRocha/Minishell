@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:47:16 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/31 17:39:26 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:00:46 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*get_line(char *backup, char *buffer, int fd)
 		buffer[read_line] = '\0';
 		if (!backup)
 			backup = ft_strdup("");
-		backup = ft_strjoin(backup, buffer);
+		backup = ft_strjoin(backup, buffer, 1);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
