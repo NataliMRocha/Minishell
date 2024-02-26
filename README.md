@@ -11,8 +11,8 @@ Repositorio para a criação do projeto minishell da 42 São Paulo
 - [ ] redirect
 - [ ] verificar se o comando e executavel/ acessivel ou builtin
 - [x] expandir variaveis
-- [ ] executar
-- [ ] guardar o status da execução
+- [x] executar
+- [x] guardar o status da execução
 
 **1 2 3 | **1 2 3
 export tes='echo oi'

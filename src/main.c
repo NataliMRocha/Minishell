@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 19:13:58 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/26 21:30:52 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int main(void)
 		printf("\ncomandos: ");
 		print_ast(root);
 		printf("\n");
-		exec(root);
+		starting_exec(root);
 		free_program(&root, &token_list, &get_cmd);
 	}
 	free_program(&root, &token_list, &get_cmd);
