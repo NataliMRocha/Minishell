@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:04:56 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/22 11:05:52 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:49:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	free_env_list(t_envs *list)
 	}
 }
 
-int	update_status_error(t_envs *var_envs, char *status)
+int	update_status_error(char *status)
 {
 	t_envs	*node;
 
-	node = ft_getenv(var_envs, "?");
+	node = ft_getenv("?");
 	free(node->value);
 	node->value = ft_strdup(status);
 	return (ft_atoi(status));

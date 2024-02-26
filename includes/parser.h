@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 16:55:15 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:49:36 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	splited_free(char **s, int w);
 void	free_env_list(t_envs *list);
 int		check_builtin(t_token **token_list, t_envs **envs);
 t_ast	*parser(t_token *token_list, t_envs **envs);
-int		update_status_error(t_envs *var_envs, char *status);
+int		update_status_error(char *status);
 int		is_redirect(t_token *token);
 
 #endif

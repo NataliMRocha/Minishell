@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/16 15:21:26 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:55:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	close_fds(int *fd, int i)
 		close(fd[j++]);
 }
 
-int	handle_fd_error(int *fd, int i, t_token *token_list, t_envs *var_envs)
+int	handle_fd_error(int *fd, int i, t_token *token_list)
 {
 	if (fd[i] < 0)
 	{
 		close_fds(fd, i);
 		printf("minishell: %s: Permission denied\n", token_list->next->data);
-		update_status_error(var_envs, "1");
+		update_status_error("1");
 		return (1);
 	}
 	return (0);
@@ -57,7 +57,7 @@ void	remove_tokens_after_handle(t_token **token_list, int token_to_remove,
 	}
 }
 
-int	redir_out(t_token *tokens, t_envs *envs, t_token_type type)
+int	redir_out(t_token *tokens, t_token_type type)
 {
 	t_token	*temp;
 	int		fd[1024];
@@ -71,7 +71,7 @@ int	redir_out(t_token *tokens, t_envs *envs, t_token_type type)
 		if (temp->type == type)
 		{
 			fd[i] = open(temp->next->data, O_WRONLY | O_APPEND | O_CREAT, 0644);
-			if (handle_fd_error(fd, i, temp, envs))
+			if (handle_fd_error(fd, i, temp))
 				break ;
 			i++;
 		}

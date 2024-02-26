@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 12:10:45 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:07:17 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void exec(t_ast *root)
 	t_envs *paths;
 	char **path;
 	int i;
-	int j;
+	int status;
+	pid_t j;
+	pid_t pid;
 
 	starting_exec(root);
 	paths = ft_getenv("PATH");
@@ -31,9 +33,18 @@ void exec(t_ast *root)
 	}
 	j = fork();
 	if (j == 0)
+	{
 		if (execve(path[i], root->command_list, NULL) < 0)
 			printf("deu ruim\n");
-	waitpid(i, NULL, 0);
+	}
+	if (j != 0)
+	{
+		pid = waitpid(j, &status, 0);
+		if (WIFEXITED(pid))
+			printf("Sucesso status code: %d\n", WEXITSTATUS(status));
+		else if (WIFSIGNALED(pid))
+			printf("Falha status code: %d\n", WEXITSTATUS(status));
+	}
 }
 
 void handle_and_or(t_ast *root)
