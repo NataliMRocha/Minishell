@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 21:42:17 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/26 20:39:25 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ void starting_exec(t_ast *root)
 {
 	if(root->type == AND || root->type == OR)
 		handle_and_or(root);
-	//else if (root->type == PIPE)
-	//	handle_pipe(root);
+	else if (root->type == PIPE)
+		handle_pipe(root);
+/* 	else if(root->left)
+		starting_exec(root->left);
+	else if(root->right)
+		starting_exec(root->right);
+	//aqui ele estaria no começo da linha de comando?
+	else if(!root->left)
+		exec(root); */
 }
