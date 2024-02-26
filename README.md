@@ -4,8 +4,8 @@ Repositorio para a criação do projeto minishell da 42 São Paulo
 - [x] variaveis de ambiente
 - [x] tokenizar
 - [x] analisar sintaxe
-- [ ] criar lista de comandos
-- [ ] arvore de execução
+- [x] arvore de execução
+- [x] criar lista de comandos
 - [ ] pipe
 - [ ] builtins
 - [ ] redirect
