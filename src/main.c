@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 16:56:52 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:13:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int main(void)
 		// heredoc("result_heredoc", "eof", *var_envs);
 		if (ft_strncmp(get_cmd, "exit", 4) == 0)
 			break;
-		if (list_fill(&token_list, get_cmd, *var_envs) != 0)
+		if (list_fill(&token_list, get_cmd) != 0)
 			continue;
-		root = parser(token_list, var_envs);
+		root = parser(token_list);
 		printf("\ncomandos: ");
 		print_ast(root);
 		printf("\n");

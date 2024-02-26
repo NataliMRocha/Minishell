@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/22 12:24:01 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:12:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	append_node(t_token **list, char *content)
 	ft_write_types(node);
 }
 
-int	list_fill(t_token **list, char *readline, t_envs *var_envs)
+int	list_fill(t_token **list, char *readline)
 {
 	char	*token;
 	int		call;
@@ -92,7 +92,7 @@ int	list_fill(t_token **list, char *readline, t_envs *var_envs)
 			free(readline);
 			free_token_list(*list);
 			free(token);
-			return(update_status_error(var_envs, "2"));
+			return(update_status_error("2"));
 	}
 	return (0);
 }

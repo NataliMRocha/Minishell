@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/22 15:11:00 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:17:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,22 @@
 //TODO: função pra lidar com os redirects e verifica se temos acesso e permissao aos arquivos
 //TODO: função para executar o comando
 
-t_ast	*parser(t_token *token_list, t_envs **envs)
+t_ast	*parser(t_token *token_list)
 {
 	t_ast	*tree;
 
-	(void)envs;
 	tree = NULL;
 	tree = ast_constructor(token_list);
 	// free_token_list(token_list);
 	return (tree);
 }
 
-int	check_builtin(t_token **token_list, t_envs **envs)
+int	check_builtin(t_token **token_list)
 {
 	t_token	*tmp;
+	t_envs	**envs;
 
+	envs = create_envs_table(1);
 	tmp = *token_list;
 	while(tmp)
 	{

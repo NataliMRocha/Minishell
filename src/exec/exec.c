@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 19:08:24 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/26 19:36:18 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ void exec(t_ast *root)
 	}
 	else if (j > 0)
 	{
-		waitpid(j, &status, 0);
+		wait(&status);
 		free(ft_getenv("?")->value);
 		ft_getenv("?")->value = ft_itoa(status);
+		printf("\n\nstatus_code: %s\n", ft_getenv("?")->value);
 		if (WIFEXITED(status))
 			printf("Sucesso status code: %d\n", WEXITSTATUS(status));
 		else
@@ -54,7 +55,6 @@ void handle_and_or(t_ast *root)
 	t_envs *status_code;
 
 	status_code = ft_getenv("?");
-	printf("func: handle_and_or - status_code: %s\n", ft_getenv("?")->value);
 	exec(root->left);
 	if((!status_code->value && root->type == AND))
 		exec(root->right);

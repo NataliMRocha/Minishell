@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:15:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/22 11:45:08 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:12:37 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		stack_len(t_token *list);
 t_token	*find_last_node(t_token *head);
 void	stack_fill(t_token *list);
 void	append_node(t_token **list, char *content);
-int		list_fill(t_token **list, char *readline, t_envs *envs);
+int		list_fill(t_token **list, char *readline);
 void	ft_write_types(t_token *list);
 void	free_token_list(t_token *list);
 
