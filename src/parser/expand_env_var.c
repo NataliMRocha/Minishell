@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 19:17:04 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/26 21:03:38 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_envs **create_envs_table(int is_created)
 	int				i;
 
 	i = -1;
-	if (is_created == 1)
+	if (is_created)
 		return (&envs);
 	envs = new_envs_node("?", "0");
 	while (__environ[++i])

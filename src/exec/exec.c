@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 19:36:18 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/26 21:13:44 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void exec(t_ast *root)
 			break;
 	}
 	j = fork();
-	if (j == 0)
+	if (j == 0 && root->type == EXEC)
 	{
 		if (execve(path[i], root->command_list, NULL) < 0)
 			printf("deu ruim\n");
@@ -40,25 +40,24 @@ void exec(t_ast *root)
 	else if (j > 0)
 	{
 		wait(&status);
-		free(ft_getenv("?")->value);
-		ft_getenv("?")->value = ft_itoa(status);
-		printf("\n\nstatus_code: %s\n", ft_getenv("?")->value);
-		if (WIFEXITED(status))
-			printf("Sucesso status code: %d\n", WEXITSTATUS(status));
+		update_status_error(ft_itoa(status));
+		if (!status)
+			printf("Sucesso status code: %d\n", status);
 		else
-			printf("Falha status code: %d\n", WEXITSTATUS(status));
+			printf("Falha status code: %d\n", status);
 	}
 }
 
 void handle_and_or(t_ast *root)
 {
-	t_envs *status_code;
+	int status_code;
 
-	status_code = ft_getenv("?");
 	exec(root->left);
-	if((!status_code->value && root->type == AND))
+	status_code = ft_atoi(ft_getenv("?")->value);
+	printf("\n\n CODIGO DE ERRO: %d\n", status_code);
+	if((!status_code) && root->type == AND)
 		exec(root->right);
-	else if (status_code->value && root->type == OR)
+	else if (status_code && root->type == OR)
 		exec(root->right);
 }
 
