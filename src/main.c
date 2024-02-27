@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/27 17:19:22 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:35:55 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ int	update_status_error(int i)
 {
 	int static	status;
 
+
+	if (i == -1)
+		return (status);
 	status = i;
 	return (status);
 }

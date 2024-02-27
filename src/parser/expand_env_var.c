@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 21:03:38 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/27 17:34:17 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_envs **create_envs_table(int is_created)
 	i = -1;
 	if (is_created)
 		return (&envs);
-	envs = new_envs_node("?", "0");
 	while (__environ[++i])
 	{
 		tmp = ft_split(__environ[i], '=');
