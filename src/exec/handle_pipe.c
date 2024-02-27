@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: namoreir <namoreir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/02/26 21:00:15 by natali           ###   ########.fr       */
+/*   Updated: 2024/02/27 14:09:49 by namoreir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,30 @@ void	pipe_fork(int *fd, t_ast *root, int in_out)
 	//FD[1] TROCO O FD DE INPUT PARA LER DO PIPE
 	else if (in_out == 1)
 		dup2(fd[0], STDIN_FILENO);
-	//EXECUTO O NÓ DA ESQUERDA ESCREVENDO NO PIPE
-	if (in_out == 0 && root->left->type != REDIR_OUT)
-		starting_exec(root->left);
-	else if (in_out == 1)
-		starting_exec(root->right);
     close(fd[0]);
     close(fd[1]);
-    exit(0);
+	//EXECUTO O NÓ DA ESQUERDA ESCREVENDO NO PIPE
+	if (in_out == 0 && root->left->type != REDIR_OUT)
+	{
+		starting_exec(root->left);
+		close(STDIN_FILENO);
+		close(STDOUT_FILENO);
+		close(STDERR_FILENO);
+	}
+	else if (in_out == 1)
+	{
+		starting_exec(root->right);
+		close(STDIN_FILENO);
+		close(STDOUT_FILENO);
+		close(STDERR_FILENO);
+	}
+	exit(0);
 }
 
 void handle_pipe(t_ast *root)
 {
-	int	fd[2];
-	int	status_code;
+	int		fd[2];
+	int		status_code;
 	pid_t	intpid[2];
 
 	if (root->left->type == REDIR_OUT)
@@ -50,13 +60,15 @@ void handle_pipe(t_ast *root)
 		if (intpid[1] < 0)
 			ft_putstr_fd("fork error\n", STDERR_FILENO);
 		if (intpid[1] == 0)
-			pipe_fork(fd, root, 0);
+			pipe_fork(fd, root, 1);
 		close(fd[0]);
 		close(fd[1]);
-		waitpid(intpid[0], &status_code, 0);
 		waitpid(intpid[1], &status_code, 0);
+		waitpid(intpid[0], &status_code, 0);
 		update_status_error(ft_itoa(status_code));
 	}
 	else
 		update_status_error(ft_itoa(EXIT_FAILURE));
+	close(fd[0]);
+	close(fd[1]);
 }
