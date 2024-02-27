@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/27 03:16:55 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/27 17:08:30 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void exec(t_ast *root)
+void	exec(t_ast *root)
 {
 	char	*path;
 	int		status;
@@ -25,12 +25,18 @@ void exec(t_ast *root)
 	i = fork();
 	if (i == 0 && root->type == EXEC)
 	{
-		if (execve(path, root->command_list, NULL) < 0)
+		if (path && execve(path, root->command_list, NULL) < 0)
 			printf("deu ruim\n");
+		else
+		{
+			printf("comando não encontrado\n");
+			free_program(&root, NULL, NULL, create_envs_table(1));
+			exit(update_status_error(127));
+		}
 	}
 	wait(&status);
-	update_status_error(ft_itoa(status));
 	free(path);
+	update_status_error(status);
 }
 
 void handle_and_or(t_ast *root)

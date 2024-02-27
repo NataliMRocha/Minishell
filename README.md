@@ -6,11 +6,11 @@ Repositorio para a criação do projeto minishell da 42 São Paulo
 - [x] analisar sintaxe
 - [x] arvore de execução
 - [x] criar lista de comandos
-- [ ] pipe
+- [x] pipe
 - [ ] builtins
 - [ ] redirect
-- [ ] verificar se o comando e executavel/ acessivel ou builtin
-- [x] expandir variaveis
+- [x] verificar se o comando e executavel/ acessivel ou builtin
+- [ ] expandir variaveis
 - [x] executar
 - [x] guardar o status da execução
 

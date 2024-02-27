@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 16:55:32 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/27 16:32:43 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	handle_fd_error(int *fd, int i, t_token *token_list)
 	{
 		close_fds(fd, i);
 		printf("minishell: %s: Permission denied\n", token_list->next->data);
-		update_status_error("1");
+		update_status_error(1);
 		return (1);
 	}
 	return (0);

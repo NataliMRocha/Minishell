@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 19:12:22 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/27 16:32:14 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	list_fill(t_token **list, char *readline)
 			free(readline);
 			free_token_list(*list);
 			free(token);
-			return(update_status_error("2"));
+			return(update_status_error(2));
 	}
 	return (0);
 }
