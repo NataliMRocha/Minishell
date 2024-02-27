@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/02/26 20:55:36 by natali           ###   ########.fr       */
+/*   Updated: 2024/02/26 21:00:15 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	pipe_fork(int *fd, t_ast *root, int in_out)
 		dup2(fd[0], STDIN_FILENO);
 	//EXECUTO O NÓ DA ESQUERDA ESCREVENDO NO PIPE
 	if (in_out == 0 && root->left->type != REDIR_OUT)
-		exec(root->left);
+		starting_exec(root->left);
 	else if (in_out == 1)
-		exec(root->right);
+		starting_exec(root->right);
     close(fd[0]);
     close(fd[1]);
     exit(0);
@@ -39,7 +39,7 @@ void handle_pipe(t_ast *root)
 
 	if (root->left->type == REDIR_OUT)
 		starting_exec(root->left);
-	if (pipe(fd) == 0)
+	if (!pipe(fd))
 	{
 		intpid[0] = fork();
 		if (intpid[0] < 0)
