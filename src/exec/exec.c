@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 21:03:22 by natali           ###   ########.fr       */
+/*   Updated: 2024/02/27 03:16:55 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void exec(t_ast *root)
 	int		status;
 	pid_t	i;
 
-	starting_exec(root);
+	if (root->left || root->right)
+		starting_exec(root);
 	path = verify_path(root);
 	status = ft_atoi(ft_getenv("?")->value);
 	i = fork();
@@ -29,6 +30,7 @@ void exec(t_ast *root)
 	}
 	wait(&status);
 	update_status_error(ft_itoa(status));
+	free(path);
 }
 
 void handle_and_or(t_ast *root)
