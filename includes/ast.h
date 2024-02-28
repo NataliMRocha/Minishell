@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:03:10 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 14:59:49 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:09:09 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "structs.h"
 
-t_ast	*ast_constructor(t_token *tokens);
 t_token	*search_type_to_split(t_token *tokens);
 int		ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split);
 char	**command_constructor(t_token **tokens);

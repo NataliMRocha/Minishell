@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/27 14:52:57 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:11:56 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_ast	*parser(t_token *token_list)
 
 	tree = NULL;
 	tree = ast_constructor(token_list);
-	// free_token_list(token_list);
+	free_token_list(token_list);
+	token_list = NULL;
 	return (tree);
 }
 

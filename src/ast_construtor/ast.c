@@ -23,8 +23,6 @@ t_token	*search_type_to_split(t_token *tokens)
 	return (NULL);
 }
 
-
-
 int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 {
 	t_token	*right;

@@ -6,11 +6,12 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/27 17:08:30 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:45:42 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <errno.h>
 
 void	exec(t_ast *root)
 {
@@ -21,16 +22,17 @@ void	exec(t_ast *root)
 	if (root->left || root->right)
 		starting_exec(root);
 	path = verify_path(root);
-	status = ft_atoi(ft_getenv("?")->value);
+	status = update_status_error(-1);
 	i = fork();
 	if (i == 0 && root->type == EXEC)
 	{
-		if (path && execve(path, root->command_list, NULL) < 0)
-			printf("deu ruim\n");
-		else
+		if (execve(path, root->command_list, NULL) < 0)
 		{
-			printf("comando não encontrado\n");
-			free_program(&root, NULL, NULL, create_envs_table(1));
+			ft_putstr_fd("command not found: ", STDERR_FILENO);
+			ft_putstr_fd(root->command_list[0], STDERR_FILENO);
+			ft_putstr_fd("\n", STDERR_FILENO);
+			free_program(&root, &path, create_envs_table(1));
+			close_fds(NULL, 1);
 			exit(update_status_error(127));
 		}
 	}
@@ -44,7 +46,7 @@ void handle_and_or(t_ast *root)
 	int status_code;
 
 	exec(root->left);
-	status_code = ft_atoi(ft_getenv("?")->value);
+	status_code = update_status_error(-1);
 	if((!status_code) && root->type == AND)
 		exec(root->right);
 	else if (status_code && root->type == OR)

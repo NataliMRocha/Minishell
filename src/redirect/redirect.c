@@ -6,20 +6,12 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/27 16:32:43 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:16:32 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	close_fds(int *fd, int i)
-{
-	int	j;
-
-	j = 0;
-	while (j < i)
-		close(fd[j++]);
-}
 
 int	handle_fd_error(int *fd, int i, t_token *token_list)
 {

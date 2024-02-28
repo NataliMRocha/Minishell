@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/27 16:32:14 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:40:17 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void	append_node(t_token **list, char *content)
 	if (list == NULL)
 		return ;
 	node = malloc(sizeof(t_token));
-	stack_fill(node);
 	if (node == NULL)
 		return ;
+	stack_fill(node);
 	node->next = NULL;
 	node->data = content;
-	if (*list == NULL)
+	if (*list == NULL || (*list)->data == NULL)
 	{
 		*list = node;
 		node->prev = NULL;

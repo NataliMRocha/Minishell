@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 21:03:38 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/28 11:48:14 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,25 @@ t_envs **create_envs_table(int is_created)
 {
 	static t_envs	*envs;
 	t_envs			*head;
-	char			**tmp;
+	char			*tmp[2];
 	int				i;
 
 	i = -1;
 	if (is_created)
 		return (&envs);
-	envs = new_envs_node("?", "0");
 	while (__environ[++i])
 	{
-		tmp = ft_split(__environ[i], '=');
 		head = envs;
-		while (envs->next)
+		tmp[0] = ft_strcpy_delim(__environ[i], '=');
+		tmp[1] = ft_strchr(__environ[i], '=') + 1;
+		while (envs && envs->next)
 			envs = envs->next;
-		envs->next = new_envs_node(tmp[0], tmp[1]);
+		if (!head)
+			head = new_envs_node(tmp[0], tmp[1]);
+		else
+			envs->next = new_envs_node(tmp[0], tmp[1]);
 		envs = head;
-		splited_free(tmp, 3);
+		free(tmp[0]);
 	}
 	return (&envs);
 }

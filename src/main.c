@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/27 17:19:22 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:40:54 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ int	update_status_error(int i)
 {
 	int static	status;
 
+
+	if (i == -1)
+		return (status);
 	status = i;
 	return (status);
 }
 
-void	free_program(t_ast **root, t_token **token_list, char **get_cmd, t_envs **var_envs)
+void	free_program(t_ast **root, char **get_cmd, t_envs **var_envs)
 {
 	if (get_cmd && *get_cmd)
 		free(*get_cmd);
@@ -28,11 +31,6 @@ void	free_program(t_ast **root, t_token **token_list, char **get_cmd, t_envs **v
 	{
 		free_ast(*root);
 		*root = NULL;
-	}
-	if (token_list && *token_list)
-	{
-		free_token_list(*token_list);
-		*token_list = NULL;
 	}
 	if (var_envs && *var_envs)
 		free_env_list(*var_envs);
@@ -57,8 +55,10 @@ int main(void)
 			continue;
 		root = parser(token_list);
 		starting_exec(root);
-		free_program(&root, &token_list, &get_cmd, NULL);
+		free_program(&root, &get_cmd, NULL);
+		token_list = NULL;
 	}
-	free_program(&root, &token_list, &get_cmd, var_envs);
+	free_program(&root, &get_cmd, var_envs);
+	close_fds(NULL, 1);
 	return (0);
 }
