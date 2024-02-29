@@ -1,0 +1,531 @@
+==35400== Memcheck, a memory error detector
+==35400== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==35400== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==35400== Command: ./minishell
+==35400== Parent PID: 15506
+==35400== 
+==35423== 
+==35423== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35423== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35423==    <inherited from parent>
+==35423== 
+==35423== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35423==    <inherited from parent>
+==35423== 
+==35423== Open file descriptor 39: /dev/ptmx
+==35423==    <inherited from parent>
+==35423== 
+==35423== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35423==    <inherited from parent>
+==35423== 
+==35423== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35423==    <inherited from parent>
+==35423== 
+==35423== 
+==35423== HEAP SUMMARY:
+==35423==     in use at exit: 208,293 bytes in 226 blocks
+==35423==   total heap usage: 935 allocs, 709 frees, 252,766 bytes allocated
+==35423== 
+==35423== LEAK SUMMARY:
+==35423==    definitely lost: 0 bytes in 0 blocks
+==35423==    indirectly lost: 0 bytes in 0 blocks
+==35423==      possibly lost: 0 bytes in 0 blocks
+==35423==    still reachable: 0 bytes in 0 blocks
+==35423==         suppressed: 208,293 bytes in 226 blocks
+==35423== 
+==35423== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35423-- 
+--35423-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,220 bytes in 222 blocks
+--35423-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,073 bytes in 4 blocks
+==35423== 
+==35423== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35426== 
+==35426== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35426== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35426==    <inherited from parent>
+==35426== 
+==35426== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35426==    <inherited from parent>
+==35426== 
+==35426== Open file descriptor 39: /dev/ptmx
+==35426==    <inherited from parent>
+==35426== 
+==35426== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35426==    <inherited from parent>
+==35426== 
+==35426== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35426==    <inherited from parent>
+==35426== 
+==35426== 
+==35426== HEAP SUMMARY:
+==35426==     in use at exit: 208,293 bytes in 226 blocks
+==35426==   total heap usage: 935 allocs, 709 frees, 252,773 bytes allocated
+==35426== 
+==35426== LEAK SUMMARY:
+==35426==    definitely lost: 0 bytes in 0 blocks
+==35426==    indirectly lost: 0 bytes in 0 blocks
+==35426==      possibly lost: 0 bytes in 0 blocks
+==35426==    still reachable: 0 bytes in 0 blocks
+==35426==         suppressed: 208,293 bytes in 226 blocks
+==35426== 
+==35426== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35426-- 
+--35426-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,220 bytes in 222 blocks
+--35426-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,073 bytes in 4 blocks
+==35426== 
+==35426== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35428== 
+==35428== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35428== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35428==    <inherited from parent>
+==35428== 
+==35428== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35428==    <inherited from parent>
+==35428== 
+==35428== Open file descriptor 39: /dev/ptmx
+==35428==    <inherited from parent>
+==35428== 
+==35428== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35428==    <inherited from parent>
+==35428== 
+==35428== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35428==    <inherited from parent>
+==35428== 
+==35428== 
+==35428== HEAP SUMMARY:
+==35428==     in use at exit: 208,293 bytes in 226 blocks
+==35428==   total heap usage: 935 allocs, 709 frees, 252,773 bytes allocated
+==35428== 
+==35428== LEAK SUMMARY:
+==35428==    definitely lost: 0 bytes in 0 blocks
+==35428==    indirectly lost: 0 bytes in 0 blocks
+==35428==      possibly lost: 0 bytes in 0 blocks
+==35428==    still reachable: 0 bytes in 0 blocks
+==35428==         suppressed: 208,293 bytes in 226 blocks
+==35428== 
+==35428== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35428-- 
+--35428-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,220 bytes in 222 blocks
+--35428-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,073 bytes in 4 blocks
+==35428== 
+==35428== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35425== 
+==35425== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35425== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35425==    <inherited from parent>
+==35425== 
+==35425== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35425==    <inherited from parent>
+==35425== 
+==35425== Open file descriptor 39: /dev/ptmx
+==35425==    <inherited from parent>
+==35425== 
+==35425== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35425==    <inherited from parent>
+==35425== 
+==35425== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35425==    <inherited from parent>
+==35425== 
+==35425== 
+==35425== HEAP SUMMARY:
+==35425==     in use at exit: 208,293 bytes in 226 blocks
+==35425==   total heap usage: 935 allocs, 709 frees, 252,773 bytes allocated
+==35425== 
+==35425== LEAK SUMMARY:
+==35425==    definitely lost: 0 bytes in 0 blocks
+==35425==    indirectly lost: 0 bytes in 0 blocks
+==35425==      possibly lost: 0 bytes in 0 blocks
+==35425==    still reachable: 0 bytes in 0 blocks
+==35425==         suppressed: 208,293 bytes in 226 blocks
+==35425== 
+==35425== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35425-- 
+--35425-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,220 bytes in 222 blocks
+--35425-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,073 bytes in 4 blocks
+==35425== 
+==35425== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35424== 
+==35424== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35424== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35424==    <inherited from parent>
+==35424== 
+==35424== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35424==    <inherited from parent>
+==35424== 
+==35424== Open file descriptor 39: /dev/ptmx
+==35424==    <inherited from parent>
+==35424== 
+==35424== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35424==    <inherited from parent>
+==35424== 
+==35424== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35424==    <inherited from parent>
+==35424== 
+==35424== 
+==35424== HEAP SUMMARY:
+==35424==     in use at exit: 208,293 bytes in 226 blocks
+==35424==   total heap usage: 909 allocs, 683 frees, 252,273 bytes allocated
+==35424== 
+==35424== LEAK SUMMARY:
+==35424==    definitely lost: 0 bytes in 0 blocks
+==35424==    indirectly lost: 0 bytes in 0 blocks
+==35424==      possibly lost: 0 bytes in 0 blocks
+==35424==    still reachable: 0 bytes in 0 blocks
+==35424==         suppressed: 208,293 bytes in 226 blocks
+==35424== 
+==35424== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35424-- 
+--35424-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,220 bytes in 222 blocks
+--35424-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,073 bytes in 4 blocks
+==35424== 
+==35424== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35422== 
+==35422== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35422== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35422==    <inherited from parent>
+==35422== 
+==35422== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35422==    <inherited from parent>
+==35422== 
+==35422== Open file descriptor 39: /dev/ptmx
+==35422==    <inherited from parent>
+==35422== 
+==35422== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35422==    <inherited from parent>
+==35422== 
+==35422== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35422==    <inherited from parent>
+==35422== 
+==35422== 
+==35422== HEAP SUMMARY:
+==35422==     in use at exit: 208,293 bytes in 226 blocks
+==35422==   total heap usage: 909 allocs, 683 frees, 252,273 bytes allocated
+==35422== 
+==35422== LEAK SUMMARY:
+==35422==    definitely lost: 0 bytes in 0 blocks
+==35422==    indirectly lost: 0 bytes in 0 blocks
+==35422==      possibly lost: 0 bytes in 0 blocks
+==35422==    still reachable: 0 bytes in 0 blocks
+==35422==         suppressed: 208,293 bytes in 226 blocks
+==35422== 
+==35422== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35422-- 
+--35422-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,220 bytes in 222 blocks
+--35422-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,073 bytes in 4 blocks
+==35422== 
+==35422== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35480== 
+==35480== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35480== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35480==    <inherited from parent>
+==35480== 
+==35480== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35480==    <inherited from parent>
+==35480== 
+==35480== Open file descriptor 39: /dev/ptmx
+==35480==    <inherited from parent>
+==35480== 
+==35480== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35480==    <inherited from parent>
+==35480== 
+==35480== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35480==    <inherited from parent>
+==35480== 
+==35480== 
+==35480== HEAP SUMMARY:
+==35480==     in use at exit: 208,354 bytes in 229 blocks
+==35480==   total heap usage: 1,009 allocs, 780 frees, 254,057 bytes allocated
+==35480== 
+==35480== LEAK SUMMARY:
+==35480==    definitely lost: 0 bytes in 0 blocks
+==35480==    indirectly lost: 0 bytes in 0 blocks
+==35480==      possibly lost: 0 bytes in 0 blocks
+==35480==    still reachable: 0 bytes in 0 blocks
+==35480==         suppressed: 208,354 bytes in 229 blocks
+==35480== 
+==35480== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35480-- 
+--35480-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,222 bytes in 222 blocks
+--35480-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,132 bytes in 7 blocks
+==35480== 
+==35480== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35482== 
+==35482== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35482== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35482==    <inherited from parent>
+==35482== 
+==35482== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35482==    <inherited from parent>
+==35482== 
+==35482== Open file descriptor 39: /dev/ptmx
+==35482==    <inherited from parent>
+==35482== 
+==35482== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35482==    <inherited from parent>
+==35482== 
+==35482== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35482==    <inherited from parent>
+==35482== 
+==35482== 
+==35482== HEAP SUMMARY:
+==35482==     in use at exit: 208,354 bytes in 229 blocks
+==35482==   total heap usage: 1,009 allocs, 780 frees, 254,057 bytes allocated
+==35482== 
+==35482== LEAK SUMMARY:
+==35482==    definitely lost: 0 bytes in 0 blocks
+==35482==    indirectly lost: 0 bytes in 0 blocks
+==35482==      possibly lost: 0 bytes in 0 blocks
+==35482==    still reachable: 0 bytes in 0 blocks
+==35482==         suppressed: 208,354 bytes in 229 blocks
+==35482== 
+==35482== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35482-- 
+--35482-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,222 bytes in 222 blocks
+--35482-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,132 bytes in 7 blocks
+==35482== 
+==35482== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35486== 
+==35486== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35486== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35486==    <inherited from parent>
+==35486== 
+==35486== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35486==    <inherited from parent>
+==35486== 
+==35486== Open file descriptor 39: /dev/ptmx
+==35486==    <inherited from parent>
+==35486== 
+==35486== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35486==    <inherited from parent>
+==35486== 
+==35486== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35486==    <inherited from parent>
+==35486== 
+==35486== 
+==35486== HEAP SUMMARY:
+==35486==     in use at exit: 208,354 bytes in 229 blocks
+==35486==   total heap usage: 1,009 allocs, 780 frees, 254,057 bytes allocated
+==35486== 
+==35486== LEAK SUMMARY:
+==35486==    definitely lost: 0 bytes in 0 blocks
+==35486==    indirectly lost: 0 bytes in 0 blocks
+==35486==      possibly lost: 0 bytes in 0 blocks
+==35486==    still reachable: 0 bytes in 0 blocks
+==35486==         suppressed: 208,354 bytes in 229 blocks
+==35486== 
+==35486== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35486-- 
+--35486-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,222 bytes in 222 blocks
+--35486-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,132 bytes in 7 blocks
+==35486== 
+==35486== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35485== 
+==35485== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35485== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35485==    <inherited from parent>
+==35485== 
+==35485== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35485==    <inherited from parent>
+==35485== 
+==35485== Open file descriptor 39: /dev/ptmx
+==35485==    <inherited from parent>
+==35485== 
+==35485== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35485==    <inherited from parent>
+==35485== 
+==35485== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35485==    <inherited from parent>
+==35485== 
+==35485== 
+==35485== HEAP SUMMARY:
+==35485==     in use at exit: 208,354 bytes in 229 blocks
+==35485==   total heap usage: 1,009 allocs, 780 frees, 254,057 bytes allocated
+==35485== 
+==35485== LEAK SUMMARY:
+==35485==    definitely lost: 0 bytes in 0 blocks
+==35485==    indirectly lost: 0 bytes in 0 blocks
+==35485==      possibly lost: 0 bytes in 0 blocks
+==35485==    still reachable: 0 bytes in 0 blocks
+==35485==         suppressed: 208,354 bytes in 229 blocks
+==35485== 
+==35485== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35485-- 
+--35485-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,222 bytes in 222 blocks
+--35485-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,132 bytes in 7 blocks
+==35485== 
+==35485== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35488== 
+==35488== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35488== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35488==    <inherited from parent>
+==35488== 
+==35488== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35488==    <inherited from parent>
+==35488== 
+==35488== Open file descriptor 39: /dev/ptmx
+==35488==    <inherited from parent>
+==35488== 
+==35488== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35488==    <inherited from parent>
+==35488== 
+==35488== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35488==    <inherited from parent>
+==35488== 
+==35488== 
+==35488== HEAP SUMMARY:
+==35488==     in use at exit: 208,354 bytes in 229 blocks
+==35488==   total heap usage: 1,009 allocs, 780 frees, 254,057 bytes allocated
+==35488== 
+==35488== LEAK SUMMARY:
+==35488==    definitely lost: 0 bytes in 0 blocks
+==35488==    indirectly lost: 0 bytes in 0 blocks
+==35488==      possibly lost: 0 bytes in 0 blocks
+==35488==    still reachable: 0 bytes in 0 blocks
+==35488==         suppressed: 208,354 bytes in 229 blocks
+==35488== 
+==35488== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35488-- 
+--35488-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,222 bytes in 222 blocks
+--35488-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,132 bytes in 7 blocks
+==35488== 
+==35488== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35483== 
+==35483== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35483== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35483==    <inherited from parent>
+==35483== 
+==35483== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35483==    <inherited from parent>
+==35483== 
+==35483== Open file descriptor 39: /dev/ptmx
+==35483==    <inherited from parent>
+==35483== 
+==35483== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35483==    <inherited from parent>
+==35483== 
+==35483== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35483==    <inherited from parent>
+==35483== 
+==35483== 
+==35483== HEAP SUMMARY:
+==35483==     in use at exit: 208,354 bytes in 229 blocks
+==35483==   total heap usage: 983 allocs, 754 frees, 253,564 bytes allocated
+==35483== 
+==35483== LEAK SUMMARY:
+==35483==    definitely lost: 0 bytes in 0 blocks
+==35483==    indirectly lost: 0 bytes in 0 blocks
+==35483==      possibly lost: 0 bytes in 0 blocks
+==35483==    still reachable: 0 bytes in 0 blocks
+==35483==         suppressed: 208,354 bytes in 229 blocks
+==35483== 
+==35483== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35483-- 
+--35483-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,222 bytes in 222 blocks
+--35483-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,132 bytes in 7 blocks
+==35483== 
+==35483== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35481== 
+==35481== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35481== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35481==    <inherited from parent>
+==35481== 
+==35481== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35481==    <inherited from parent>
+==35481== 
+==35481== Open file descriptor 39: /dev/ptmx
+==35481==    <inherited from parent>
+==35481== 
+==35481== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35481==    <inherited from parent>
+==35481== 
+==35481== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35481==    <inherited from parent>
+==35481== 
+==35481== 
+==35481== HEAP SUMMARY:
+==35481==     in use at exit: 208,354 bytes in 229 blocks
+==35481==   total heap usage: 983 allocs, 754 frees, 253,564 bytes allocated
+==35481== 
+==35481== LEAK SUMMARY:
+==35481==    definitely lost: 0 bytes in 0 blocks
+==35481==    indirectly lost: 0 bytes in 0 blocks
+==35481==      possibly lost: 0 bytes in 0 blocks
+==35481==    still reachable: 0 bytes in 0 blocks
+==35481==         suppressed: 208,354 bytes in 229 blocks
+==35481== 
+==35481== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35481-- 
+--35481-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,222 bytes in 222 blocks
+--35481-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,132 bytes in 7 blocks
+==35481== 
+==35481== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35479== 
+==35479== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35479== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35479==    <inherited from parent>
+==35479== 
+==35479== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35479==    <inherited from parent>
+==35479== 
+==35479== Open file descriptor 39: /dev/ptmx
+==35479==    <inherited from parent>
+==35479== 
+==35479== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35479==    <inherited from parent>
+==35479== 
+==35479== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35479==    <inherited from parent>
+==35479== 
+==35479== 
+==35479== HEAP SUMMARY:
+==35479==     in use at exit: 208,354 bytes in 229 blocks
+==35479==   total heap usage: 983 allocs, 754 frees, 253,564 bytes allocated
+==35479== 
+==35479== LEAK SUMMARY:
+==35479==    definitely lost: 0 bytes in 0 blocks
+==35479==    indirectly lost: 0 bytes in 0 blocks
+==35479==      possibly lost: 0 bytes in 0 blocks
+==35479==    still reachable: 0 bytes in 0 blocks
+==35479==         suppressed: 208,354 bytes in 229 blocks
+==35479== 
+==35479== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35479-- 
+--35479-- used_suppression:     63 <Readline> suppress.txt:8 suppressed: 204,222 bytes in 222 blocks
+--35479-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,132 bytes in 7 blocks
+==35479== 
+==35479== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==35400== 
+==35400== FILE DESCRIPTORS: 5 open (0 std) at exit.
+==35400== Open file descriptor 103: /snap/code/153/usr/share/code/v8_context_snapshot.bin
+==35400==    <inherited from parent>
+==35400== 
+==35400== Open file descriptor 40: /snap/code/153/usr/share/code/resources/app/node_modules.asar
+==35400==    <inherited from parent>
+==35400== 
+==35400== Open file descriptor 39: /dev/ptmx
+==35400==    <inherited from parent>
+==35400== 
+==35400== Open file descriptor 38: /home/natali/.config/Code/logs/20240229T112451/ptyhost.log
+==35400==    <inherited from parent>
+==35400== 
+==35400== Open file descriptor 3: /home/natali/Documents/42/minishell/val.log
+==35400==    <inherited from parent>
+==35400== 
+==35400== 
+==35400== HEAP SUMMARY:
+==35400==     in use at exit: 208,372 bytes in 231 blocks
+==35400==   total heap usage: 996 allocs, 765 frees, 253,797 bytes allocated
+==35400== 
+==35400== LEAK SUMMARY:
+==35400==    definitely lost: 0 bytes in 0 blocks
+==35400==    indirectly lost: 0 bytes in 0 blocks
+==35400==      possibly lost: 0 bytes in 0 blocks
+==35400==    still reachable: 0 bytes in 0 blocks
+==35400==         suppressed: 208,372 bytes in 231 blocks
+==35400== 
+==35400== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--35400-- 
+--35400-- used_suppression:     62 <Readline> suppress.txt:8 suppressed: 204,199 bytes in 221 blocks
+--35400-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,173 bytes in 10 blocks
+==35400== 
+==35400== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
