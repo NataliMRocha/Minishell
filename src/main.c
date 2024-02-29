@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 11:44:13 by natali           ###   ########.fr       */
+/*   Updated: 2024/02/29 15:22:47 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void close_all_fds(void)
+{
+	int	i;
+
+	i = 3;
+	while (i < 1024)
+		close(i++);
+}
 
 int	update_status_error(int i)
 {
