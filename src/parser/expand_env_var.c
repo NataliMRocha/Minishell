@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 13:54:24 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:37:09 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ char	*result_var(char *buf,int *i, char *result)
 			result = ft_strjoin_char(result, buf[i]);
 		i++;
 	}
+	free(buf);
 	return (result);
 }
