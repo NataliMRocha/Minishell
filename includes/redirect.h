@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:13:54 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/26 16:55:52 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/29 18:39:26 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "structs.h"
 
 int    heredoc(char *name, char *delim);
-int	redir_out(t_token *tokens, t_token_type type);
-
+void    handle_redir(t_ast *root);
+int    is_redir_in(t_ast *root);
+int    check_redirect(t_ast *root);
 #endif

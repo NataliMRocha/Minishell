@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 13:52:54 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:31:10 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void starting_exec(t_ast *root)
 		handle_and_or(root);
 	else if (root->type == PIPE)
 		handle_pipe(root);
+	else if (check_redirect(root))
+		handle_redir(root);
 	else if(root->left)
 		starting_exec(root->left);
 	else if(root->right)
