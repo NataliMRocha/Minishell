@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 15:45:42 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:34:08 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	exec(t_ast *root)
 			ft_putstr_fd("command not found: ", STDERR_FILENO);
 			ft_putstr_fd(root->command_list[0], STDERR_FILENO);
 			ft_putstr_fd("\n", STDERR_FILENO);
+			root = ast_holder(NULL, 1);
 			free_program(&root, &path, create_envs_table(1));
 			close_fds(NULL, 1);
 			exit(update_status_error(127));
