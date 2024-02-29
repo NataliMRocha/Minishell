@@ -11,7 +11,7 @@ Repositorio para a criação do projeto minishell da 42 São Paulo
 - [ ] builtins
 - [ ] redirect
 - [x] verificar se o comando e executavel/ acessivel ou builtin
-- [ ] expandir variaveis
+- [x] expandir variaveis
 - [ ] sinais
 - [ ] transformar as envs em char **
 - [x] executar

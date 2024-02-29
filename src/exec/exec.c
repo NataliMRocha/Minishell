@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 17:34:22 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:59:43 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**expanded_variable(t_ast **root)
 	while (root && (*root)->command_list[++i])
 		(*root)->command_list[i] = expand_var((*root)->command_list[i]);
 	expanded = ft_calloc(i, sizeof(char *));
-	i = 0;
+	i = -1;
 	j = 0;
 	while((*root)->command_list[++i])
 		if (*(*root)->command_list[i])
@@ -45,7 +45,7 @@ void	exec(t_ast *root)
 	i = fork();
 	if (i == 0 && root->type == EXEC)
 	{
-		if (execve(path, &root->command_list[i], NULL) < 0)
+		if (execve(path, &root->command_list[i], __environ) < 0)
 		{
 			ft_putstr_fd("command not found: ", STDERR_FILENO);
 			ft_putstr_fd(root->command_list[0], STDERR_FILENO);

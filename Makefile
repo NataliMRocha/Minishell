@@ -35,7 +35,7 @@ PARSER_SOURCES = check_syntax.c expand_env_var.c parser_utils.c parser.c
 
 EXEC_SOURCES = handle_signals.c exec.c verify_path.c handle_pipe.c
 
-BUILTIN_SOURCES = environ_list.c
+BUILTIN_SOURCES = environ_list.c envs.c
 
 REDIRECT_SOURCES = heredoc.c redirect.c
 
