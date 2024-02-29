@@ -1,293 +1,47 @@
-==21280== Memcheck, a memory error detector
-==21280== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==21280== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==21280== Command: ./minishell
-==21280== Parent PID: 19728
-==21280== 
-==21353== 
-==21353== FILE DESCRIPTORS: 7 open at exit.
-==21353== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==21353==    <inherited from parent>
-==21353== 
-==21353== Open file descriptor 42: /dev/ptmx
-==21353==    <inherited from parent>
-==21353== 
-==21353== Open AF_UNIX socket 41: <unknown>
-==21353==    <inherited from parent>
-==21353== 
-==21353== Open file descriptor 38: /usr/share/code/resources/app/node_modules.asar
-==21353==    <inherited from parent>
-==21353== 
-==21353== Open AF_UNIX socket 37: <unknown>
-==21353==    <inherited from parent>
-==21353== 
-==21353== Open file descriptor 36: /nfs/homes/egeraldo/.config/Code/logs/20240229T141921/ptyhost.log
-==21353==    <inherited from parent>
-==21353== 
-==21353== Open file descriptor 3: /nfs/homes/egeraldo/nave/minishell/val.log
-==21353==    <inherited from parent>
-==21353== 
-==21353== 
-==21353== HEAP SUMMARY:
-==21353==     in use at exit: 204,720 bytes in 219 blocks
-==21353==   total heap usage: 776 allocs, 557 frees, 233,760 bytes allocated
-==21353== 
-==21353== LEAK SUMMARY:
-==21353==    definitely lost: 0 bytes in 0 blocks
-==21353==    indirectly lost: 0 bytes in 0 blocks
-==21353==      possibly lost: 0 bytes in 0 blocks
-==21353==    still reachable: 0 bytes in 0 blocks
-==21353==         suppressed: 204,720 bytes in 219 blocks
-==21353== 
-==21353== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---21353-- 
---21353-- used_suppression:     58 <Readline> suppress.txt:8 suppressed: 200,653 bytes in 215 blocks
---21353-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,067 bytes in 4 blocks
-==21353== 
-==21353== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==21355== 
-==21355== FILE DESCRIPTORS: 7 open at exit.
-==21355== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==21355==    <inherited from parent>
-==21355== 
-==21355== Open file descriptor 42: /dev/ptmx
-==21355==    <inherited from parent>
-==21355== 
-==21355== Open AF_UNIX socket 41: <unknown>
-==21355==    <inherited from parent>
-==21355== 
-==21355== Open file descriptor 38: /usr/share/code/resources/app/node_modules.asar
-==21355==    <inherited from parent>
-==21355== 
-==21355== Open AF_UNIX socket 37: <unknown>
-==21355==    <inherited from parent>
-==21355== 
-==21355== Open file descriptor 36: /nfs/homes/egeraldo/.config/Code/logs/20240229T141921/ptyhost.log
-==21355==    <inherited from parent>
-==21355== 
-==21355== Open file descriptor 3: /nfs/homes/egeraldo/nave/minishell/val.log
-==21355==    <inherited from parent>
-==21355== 
-==21355== 
-==21355== HEAP SUMMARY:
-==21355==     in use at exit: 204,720 bytes in 219 blocks
-==21355==   total heap usage: 776 allocs, 557 frees, 233,766 bytes allocated
-==21355== 
-==21355== LEAK SUMMARY:
-==21355==    definitely lost: 0 bytes in 0 blocks
-==21355==    indirectly lost: 0 bytes in 0 blocks
-==21355==      possibly lost: 0 bytes in 0 blocks
-==21355==    still reachable: 0 bytes in 0 blocks
-==21355==         suppressed: 204,720 bytes in 219 blocks
-==21355== 
-==21355== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---21355-- 
---21355-- used_suppression:     58 <Readline> suppress.txt:8 suppressed: 200,653 bytes in 215 blocks
---21355-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,067 bytes in 4 blocks
-==21355== 
-==21355== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==21357== 
-==21357== FILE DESCRIPTORS: 7 open at exit.
-==21357== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==21357==    <inherited from parent>
-==21357== 
-==21357== Open file descriptor 42: /dev/ptmx
-==21357==    <inherited from parent>
-==21357== 
-==21357== Open AF_UNIX socket 41: <unknown>
-==21357==    <inherited from parent>
-==21357== 
-==21357== Open file descriptor 38: /usr/share/code/resources/app/node_modules.asar
-==21357==    <inherited from parent>
-==21357== 
-==21357== Open AF_UNIX socket 37: <unknown>
-==21357==    <inherited from parent>
-==21357== 
-==21357== Open file descriptor 36: /nfs/homes/egeraldo/.config/Code/logs/20240229T141921/ptyhost.log
-==21357==    <inherited from parent>
-==21357== 
-==21357== Open file descriptor 3: /nfs/homes/egeraldo/nave/minishell/val.log
-==21357==    <inherited from parent>
-==21357== 
-==21357== 
-==21357== HEAP SUMMARY:
-==21357==     in use at exit: 204,720 bytes in 219 blocks
-==21357==   total heap usage: 776 allocs, 557 frees, 233,766 bytes allocated
-==21357== 
-==21357== LEAK SUMMARY:
-==21357==    definitely lost: 0 bytes in 0 blocks
-==21357==    indirectly lost: 0 bytes in 0 blocks
-==21357==      possibly lost: 0 bytes in 0 blocks
-==21357==    still reachable: 0 bytes in 0 blocks
-==21357==         suppressed: 204,720 bytes in 219 blocks
-==21357== 
-==21357== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---21357-- 
---21357-- used_suppression:     58 <Readline> suppress.txt:8 suppressed: 200,653 bytes in 215 blocks
---21357-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,067 bytes in 4 blocks
-==21357== 
-==21357== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==21356== 
-==21356== FILE DESCRIPTORS: 7 open at exit.
-==21356== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==21356==    <inherited from parent>
-==21356== 
-==21356== Open file descriptor 42: /dev/ptmx
-==21356==    <inherited from parent>
-==21356== 
-==21356== Open AF_UNIX socket 41: <unknown>
-==21356==    <inherited from parent>
-==21356== 
-==21356== Open file descriptor 38: /usr/share/code/resources/app/node_modules.asar
-==21356==    <inherited from parent>
-==21356== 
-==21356== Open AF_UNIX socket 37: <unknown>
-==21356==    <inherited from parent>
-==21356== 
-==21356== Open file descriptor 36: /nfs/homes/egeraldo/.config/Code/logs/20240229T141921/ptyhost.log
-==21356==    <inherited from parent>
-==21356== 
-==21356== Open file descriptor 3: /nfs/homes/egeraldo/nave/minishell/val.log
-==21356==    <inherited from parent>
-==21356== 
-==21356== 
-==21356== HEAP SUMMARY:
-==21356==     in use at exit: 204,720 bytes in 219 blocks
-==21356==   total heap usage: 776 allocs, 557 frees, 233,766 bytes allocated
-==21356== 
-==21356== LEAK SUMMARY:
-==21356==    definitely lost: 0 bytes in 0 blocks
-==21356==    indirectly lost: 0 bytes in 0 blocks
-==21356==      possibly lost: 0 bytes in 0 blocks
-==21356==    still reachable: 0 bytes in 0 blocks
-==21356==         suppressed: 204,720 bytes in 219 blocks
-==21356== 
-==21356== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---21356-- 
---21356-- used_suppression:     58 <Readline> suppress.txt:8 suppressed: 200,653 bytes in 215 blocks
---21356-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,067 bytes in 4 blocks
-==21356== 
-==21356== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==21354== 
-==21354== FILE DESCRIPTORS: 7 open at exit.
-==21354== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==21354==    <inherited from parent>
-==21354== 
-==21354== Open file descriptor 42: /dev/ptmx
-==21354==    <inherited from parent>
-==21354== 
-==21354== Open AF_UNIX socket 41: <unknown>
-==21354==    <inherited from parent>
-==21354== 
-==21354== Open file descriptor 38: /usr/share/code/resources/app/node_modules.asar
-==21354==    <inherited from parent>
-==21354== 
-==21354== Open AF_UNIX socket 37: <unknown>
-==21354==    <inherited from parent>
-==21354== 
-==21354== Open file descriptor 36: /nfs/homes/egeraldo/.config/Code/logs/20240229T141921/ptyhost.log
-==21354==    <inherited from parent>
-==21354== 
-==21354== Open file descriptor 3: /nfs/homes/egeraldo/nave/minishell/val.log
-==21354==    <inherited from parent>
-==21354== 
-==21354== 
-==21354== HEAP SUMMARY:
-==21354==     in use at exit: 204,720 bytes in 219 blocks
-==21354==   total heap usage: 754 allocs, 535 frees, 233,369 bytes allocated
-==21354== 
-==21354== LEAK SUMMARY:
-==21354==    definitely lost: 0 bytes in 0 blocks
-==21354==    indirectly lost: 0 bytes in 0 blocks
-==21354==      possibly lost: 0 bytes in 0 blocks
-==21354==    still reachable: 0 bytes in 0 blocks
-==21354==         suppressed: 204,720 bytes in 219 blocks
-==21354== 
-==21354== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---21354-- 
---21354-- used_suppression:     58 <Readline> suppress.txt:8 suppressed: 200,653 bytes in 215 blocks
---21354-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,067 bytes in 4 blocks
-==21354== 
-==21354== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==21352== 
-==21352== FILE DESCRIPTORS: 7 open at exit.
-==21352== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==21352==    <inherited from parent>
-==21352== 
-==21352== Open file descriptor 42: /dev/ptmx
-==21352==    <inherited from parent>
-==21352== 
-==21352== Open AF_UNIX socket 41: <unknown>
-==21352==    <inherited from parent>
-==21352== 
-==21352== Open file descriptor 38: /usr/share/code/resources/app/node_modules.asar
-==21352==    <inherited from parent>
-==21352== 
-==21352== Open AF_UNIX socket 37: <unknown>
-==21352==    <inherited from parent>
-==21352== 
-==21352== Open file descriptor 36: /nfs/homes/egeraldo/.config/Code/logs/20240229T141921/ptyhost.log
-==21352==    <inherited from parent>
-==21352== 
-==21352== Open file descriptor 3: /nfs/homes/egeraldo/nave/minishell/val.log
-==21352==    <inherited from parent>
-==21352== 
-==21352== 
-==21352== HEAP SUMMARY:
-==21352==     in use at exit: 204,720 bytes in 219 blocks
-==21352==   total heap usage: 754 allocs, 535 frees, 233,369 bytes allocated
-==21352== 
-==21352== LEAK SUMMARY:
-==21352==    definitely lost: 0 bytes in 0 blocks
-==21352==    indirectly lost: 0 bytes in 0 blocks
-==21352==      possibly lost: 0 bytes in 0 blocks
-==21352==    still reachable: 0 bytes in 0 blocks
-==21352==         suppressed: 204,720 bytes in 219 blocks
-==21352== 
-==21352== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---21352-- 
---21352-- used_suppression:     58 <Readline> suppress.txt:8 suppressed: 200,653 bytes in 215 blocks
---21352-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,067 bytes in 4 blocks
-==21352== 
-==21352== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==21280== 
-==21280== FILE DESCRIPTORS: 7 open at exit.
-==21280== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==21280==    <inherited from parent>
-==21280== 
-==21280== Open file descriptor 42: /dev/ptmx
-==21280==    <inherited from parent>
-==21280== 
-==21280== Open AF_UNIX socket 41: <unknown>
-==21280==    <inherited from parent>
-==21280== 
-==21280== Open file descriptor 38: /usr/share/code/resources/app/node_modules.asar
-==21280==    <inherited from parent>
-==21280== 
-==21280== Open AF_UNIX socket 37: <unknown>
-==21280==    <inherited from parent>
-==21280== 
-==21280== Open file descriptor 36: /nfs/homes/egeraldo/.config/Code/logs/20240229T141921/ptyhost.log
-==21280==    <inherited from parent>
-==21280== 
-==21280== Open file descriptor 3: /nfs/homes/egeraldo/nave/minishell/val.log
-==21280==    <inherited from parent>
-==21280== 
-==21280== 
-==21280== HEAP SUMMARY:
-==21280==     in use at exit: 204,746 bytes in 221 blocks
-==21280==   total heap usage: 767 allocs, 546 frees, 233,612 bytes allocated
-==21280== 
-==21280== LEAK SUMMARY:
-==21280==    definitely lost: 0 bytes in 0 blocks
-==21280==    indirectly lost: 0 bytes in 0 blocks
-==21280==      possibly lost: 0 bytes in 0 blocks
-==21280==    still reachable: 0 bytes in 0 blocks
-==21280==         suppressed: 204,746 bytes in 221 blocks
-==21280== 
-==21280== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---21280-- 
---21280-- used_suppression:     57 <Readline> suppress.txt:8 suppressed: 200,638 bytes in 214 blocks
---21280-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,108 bytes in 7 blocks
-==21280== 
-==21280== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==22810== Memcheck, a memory error detector
+==22810== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==22810== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==22810== Command: ./minishell
+==22810== Parent PID: 19728
+==22810== 
+==22810== 
+==22810== FILE DESCRIPTORS: 7 open at exit.
+==22810== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==22810==    <inherited from parent>
+==22810== 
+==22810== Open file descriptor 42: /dev/ptmx
+==22810==    <inherited from parent>
+==22810== 
+==22810== Open AF_UNIX socket 41: <unknown>
+==22810==    <inherited from parent>
+==22810== 
+==22810== Open file descriptor 38: /usr/share/code/resources/app/node_modules.asar
+==22810==    <inherited from parent>
+==22810== 
+==22810== Open AF_UNIX socket 37: <unknown>
+==22810==    <inherited from parent>
+==22810== 
+==22810== Open file descriptor 36: /nfs/homes/egeraldo/.config/Code/logs/20240229T141921/ptyhost.log
+==22810==    <inherited from parent>
+==22810== 
+==22810== Open file descriptor 3: /nfs/homes/egeraldo/nave/minishell/val.log
+==22810==    <inherited from parent>
+==22810== 
+==22810== 
+==22810== HEAP SUMMARY:
+==22810==     in use at exit: 204,743 bytes in 221 blocks
+==22810==   total heap usage: 725 allocs, 504 frees, 232,938 bytes allocated
+==22810== 
+==22810== LEAK SUMMARY:
+==22810==    definitely lost: 0 bytes in 0 blocks
+==22810==    indirectly lost: 0 bytes in 0 blocks
+==22810==      possibly lost: 0 bytes in 0 blocks
+==22810==    still reachable: 0 bytes in 0 blocks
+==22810==         suppressed: 204,743 bytes in 221 blocks
+==22810== 
+==22810== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--22810-- 
+--22810-- used_suppression:     57 <Readline> suppress.txt:8 suppressed: 200,638 bytes in 214 blocks
+--22810-- used_suppression:      4 <AddHistory> suppress.txt:16 suppressed: 4,105 bytes in 7 blocks
+==22810== 
+==22810== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

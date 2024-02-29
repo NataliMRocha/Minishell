@@ -6,20 +6,11 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 15:25:29 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:29:13 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void close_all_fds(void)
-{
-	int	i;
-
-	i = 3;
-	while (i < 1024)
-		close(i++);
-}
 
 int	update_status_error(int i)
 {
@@ -53,7 +44,6 @@ int main(void)
 
 	t_envs **var_envs = create_envs_table(0);
 	root = NULL;
-	close_all_fds();
 	while (1)
 	{
 		get_cmd = ft_readline();
