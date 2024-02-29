@@ -6,11 +6,28 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 11:14:49 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:43:27 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char	*free_static(char *res, int i, int j)
+{
+	char	*temp;
+
+	if (res && res[0] == '\0')
+		return (NULL);
+	temp = ft_strdup(&res[i + j]);
+	if ((temp && temp[0] == '\0') || ft_strncmp(res, temp, 125) == 0)
+	{
+		free(temp);
+		temp = NULL;
+	}
+	free(res);
+	res = NULL;
+	return (temp);
+}
 
 int	stack_len(t_token *list)
 {
@@ -31,44 +48,9 @@ t_token	*find_last_node(t_token *head)
 {
 	if (head == NULL)
 		return (NULL);
-	while (head->next)
+	while (head && head->next)
 		head = head->next;
 	return (head);
-}
-
-void	stack_fill(t_token *list)
-{
-	list->data = "";
-	list->type = 0;
-	list->next = NULL;
-	list->prev = NULL;
-}
-
-void	append_node(t_token **list, char *content)
-{
-	t_token	*node;
-	t_token	*last_node;
-
-	if (list == NULL)
-		return ;
-	node = malloc(sizeof(t_token));
-	stack_fill(node);
-	if (node == NULL)
-		return ;
-	node->next = NULL;
-	node->data = content;
-	ft_write_types(node);
-	if (*list == NULL)
-	{
-		*list = node;
-		node->prev = NULL;
-	}
-	else
-	{
-		last_node = find_last_node(*list);
-		last_node->next = node;
-		node->prev = last_node;
-	}
 }
 
 void	free_token_list(t_token *list)
@@ -80,7 +62,7 @@ void	free_token_list(t_token *list)
 		tmp = list->next;
 		free(list->data);
 		free(list);
-		list = NULL;
 		list = tmp;
 	}
+	list = NULL;
 }

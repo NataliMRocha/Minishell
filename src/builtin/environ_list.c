@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environ_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 11:43:30 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:54:12 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,18 @@ void	ft_unset(char *key, t_envs **envs)
 	}
 }
 
-// TODO: bloquear a edição a variavel "?" pelo usuario
+int	verify_key(char **key, char *var)
+{
+	*key = ft_strcpy_delim(var, '=');
+	if (key && *key && (*key[0] || *key[0] == '?'))
+	{
+		printf("minishell: export: `%s': not a valid identifier\n", *key);
+		free(*key);
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_export(char *var, t_envs **envs)
 {
 	t_envs	*temp;
@@ -47,9 +58,10 @@ void	ft_export(char *var, t_envs **envs)
 		temp = temp->next;
 	if (strchr(var, '='))
 	{
-		key = ft_strcpy_delim(var, '=');
-		value = ft_remove_quotes(expand_var(ft_strchr(var, '=') + 1, *envs));
-		new_node = ft_getenv(*envs, key);
+		if (verify_key(&key, var))
+			return ;
+		value = ft_remove_quotes(expand_var(ft_strchr(var, '=') + 1));
+		new_node = ft_getenv(key);
 		if (new_node)
 		{
 			free(new_node->value);

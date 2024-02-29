@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 20:16:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 15:42:57 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:00:03 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char		*ft_strnstr(const char *str, const char *substr, size_t len);
 void		*ft_calloc(size_t length, size_t size_type);
 char		*ft_strdup(const char *src);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
-char		*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char const *s1, char const *s2, int flag);
 char		*ft_strtrim(char const *s1, char const *set);
 char		**ft_split(char const *s, char c);
 char		*ft_itoa(int n);
@@ -73,7 +73,7 @@ void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int			ft_isnum(char *str);
 char		*get_next_line(int fd);
-int			ft_is_whitespace(char c);
+int			is_space(char c);
 char		*ft_strcpy_delim(const char *src, char delim);
 char		*ft_strjoin_char(char *str, char c);
 char		*ft_remove_quotes(char *str);

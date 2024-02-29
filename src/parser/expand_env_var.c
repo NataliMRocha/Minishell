@@ -6,10 +6,11 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 14:22:20 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:31:57 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// TODO: Muito provavelmente esse arquivo sera enviado para o exec
 #include "../../includes/minishell.h"
 
 t_envs	*new_envs_node(char *key, char *value)
@@ -25,30 +26,38 @@ t_envs	*new_envs_node(char *key, char *value)
 	return (new_node);
 }
 
-t_envs **create_envs_table(void)
+t_envs **create_envs_table(int is_created)
 {
 	static t_envs	*envs;
 	t_envs			*head;
-	char			**tmp;
+	char			*tmp[2];
 	int				i;
 
 	i = -1;
-	envs = new_envs_node("?", "0");
+	if (is_created)
+		return (&envs);
 	while (__environ[++i])
 	{
-		tmp = ft_split(__environ[i], '=');
 		head = envs;
-		while (envs->next)
+		tmp[0] = ft_strcpy_delim(__environ[i], '=');
+		tmp[1] = ft_strchr(__environ[i], '=') + 1;
+		while (envs && envs->next)
 			envs = envs->next;
-		envs->next = new_envs_node(tmp[0], tmp[1]);
+		if (!head)
+			head = new_envs_node(tmp[0], tmp[1]);
+		else
+			envs->next = new_envs_node(tmp[0], tmp[1]);
 		envs = head;
-		splited_free(tmp, 3);
+		free(tmp[0]);
 	}
 	return (&envs);
 }
 
-t_envs	*ft_getenv(t_envs *envs, char *key)
+t_envs	*ft_getenv(char *key)
 {
+	t_envs *envs;
+
+	envs = *create_envs_table(1);
 	while (envs)
 	{
 		if (ft_strncmp(envs->key, key, 125) == 0)
@@ -58,7 +67,7 @@ t_envs	*ft_getenv(t_envs *envs, char *key)
 	return (NULL);
 }
 
-char	*result_var(char *buf, t_envs *envs, int *i, char *result)
+char	*result_var(char *buf,int *i, char *result)
 {
 	char	*var_name;
 	t_envs	*node;
@@ -66,14 +75,14 @@ char	*result_var(char *buf, t_envs *envs, int *i, char *result)
 	var_name = ft_strdup("");
 	while ((ft_isalnum(buf[*i + 1]) || buf[*i+1] == '?') && buf[++*i])
 		var_name = ft_strjoin_char(var_name, buf[*i]);
-	node = ft_getenv(envs, var_name);
+	node = ft_getenv(var_name);
 	if (node)
-		result = ft_strjoin(result, ft_getenv(envs, var_name)->value);
+		result = ft_strjoin(result, ft_getenv(var_name)->value, 1);
 	free(var_name);
 	return (result);
 }
 
- char	*expand_var(char *buf, t_envs *envs)
+ char	*expand_var(char *buf)
 {
 	char	*result;
 	int		i;
@@ -87,7 +96,7 @@ char	*result_var(char *buf, t_envs *envs, int *i, char *result)
 		while (single_quotes-- > 0)
 			result = ft_strjoin_char(result, buf[i++]);
 		if (buf[i] == '$')
-			result = result_var(buf, envs, &i, result);
+			result = result_var(buf, &i, result);
 		else
 			result = ft_strjoin_char(result, buf[i]);
 		i++;

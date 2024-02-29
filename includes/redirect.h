@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_char.c                                  :+:      :+:    :+:   */
+/*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 10:51:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 17:00:54 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/02/16 11:13:54 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/02/26 16:55:52 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef REDIRECTS_H
+# define REDIRECTS_H
 
-char	*ft_strjoin_char(char *str, char c)
-{
-	char concat[2];
+# include "structs.h"
 
-	concat[0] = c;
-	concat[1] = '\0';
-	str = ft_strjoin(str, concat, 1);
-	return (str);
-}
+int    heredoc(char *name, char *delim);
+int	redir_out(t_token *tokens, t_token_type type);
+
+#endif

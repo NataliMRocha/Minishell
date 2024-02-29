@@ -6,25 +6,31 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:07:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/01 11:37:44 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:11:19 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "read.h"
+# include "../libs/libft/libft.h"
+# include "ast.h"
+# include "builtin.h"
+# include "exec.h"
+# include "fcntl.h"
 # include "lexer.h"
 # include "parser.h"
-# include "exec.h"
-# include "builtin.h"
-# include "fcntl.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <signal.h>
-# include <readline/readline.h>
+# include "read.h"
+# include "redirect.h"
 # include <readline/history.h>
-# include "../libs/libft/libft.h"
+# include <readline/readline.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <unistd.h>
+
+void	free_program(t_ast **root, char **get_cmd, t_envs **var_envs);
+int		update_status_error(int i);
 
 #endif

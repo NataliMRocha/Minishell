@@ -3,56 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 15:19:31 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:44:13 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+int	update_status_error(int i)
+{
+	static int status;
+
+	if (i == -1)
+		return (status);
+	status = i;
+	return (status);
+}
+
+void	free_program(t_ast **root, char **get_cmd, t_envs **var_envs)
+{
+	if (get_cmd && *get_cmd)
+		free(*get_cmd);
+	if (root && *root)
+	{
+		free_ast(*root);
+		*root = NULL;
+	}
+	if (var_envs && *var_envs)
+		free_env_list(*var_envs);
+}
+
 int main(void)
 {
 	t_token *token_list = NULL;
-	t_token *temp;
-	t_envs **var_envs = create_envs_table();
+	t_ast	*root;
 	char *get_cmd;
 	//setup_signals();
 
+	t_envs **var_envs = create_envs_table(0);
+	root = NULL;
 	while (1)
 	{
 		get_cmd = ft_readline();
-		// heredoc("result_heredoc", "eof", *var_envs);
-		if (list_fill(&token_list, get_cmd, *var_envs) != 0)
+		if (ft_strncmp(get_cmd, "exit", 4) == 0)
+			break;
+		if (list_fill(&token_list, get_cmd) != 0)
 			continue;
-		temp = token_list;
-		if (token_list && ft_strncmp("export", token_list->data, ft_strlen(token_list->data)) == 0)
-			ft_export(temp->next->data, var_envs);
-		else if (token_list && ft_strncmp("unset", token_list->data, ft_strlen(token_list->data)) == 0)
-			ft_unset(temp->next->data, var_envs);
-		else if (token_list && ft_strncmp("env", token_list->data, ft_strlen(token_list->data)) == 0)
-			print_env_list(*var_envs);
-		else if (token_list && ft_strncmp("exit", token_list->data, ft_strlen(token_list->data)) == 0)
-			break ;
-		printf("\n-------------------------------------------------------------\n");
-		while(temp)
-		{
-			if (temp->data == NULL)
-				break;
-			char *chatao = expand_var(temp->data, *var_envs);
-			chatao = ft_remove_quotes(chatao);
-			printf("data: %s  \t  type: %d\n", chatao, temp->type);
-			temp = temp->next;
-			free(chatao);
-		}
-		printf("\n-------------------------------------------------------------\n");
-		free(get_cmd);
-		free_token_list(token_list);
+		// heredoc("result_heredoc", "eof", *var_envs);
+		root = parser(token_list);
+		starting_exec(root);
+		free_program(&root, &get_cmd, NULL);
 		token_list = NULL;
 	}
-	free(get_cmd);
-	free_token_list(token_list);
-	free_env_list(*var_envs);
+	free_program(&root, &get_cmd, var_envs);
+	close_fds(NULL, 1);
 	return (0);
 }

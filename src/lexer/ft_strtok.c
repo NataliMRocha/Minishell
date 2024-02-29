@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/06 11:31:45 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:55:51 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	ft_handle_quote(char *str, char quote)
 {
 	int	i;
 
-	i = 1;
-	while (str && str[i] && str[0] == quote)
+	i = 0;
+	if (str && str[i] && (str[i] == '"' || str[i] == *"'"))
+		quote = str[i++];
+	while (str && str[i])
 	{
 		if (str[i++] == quote)
 			return (i);
@@ -25,21 +27,19 @@ int	ft_handle_quote(char *str, char quote)
 	return (0);
 }
 
-char	*free_static(char *res, int i, int j)
+int	ft_handle_block(char *str, int check_close)
 {
-	char	*temp;
+	int	i;
 
-	if (res && res[0] == '\0')
-		return (NULL);
-	temp = ft_strdup(&res[i + j]);
-	if ((temp && temp[0] == '\0') || ft_strncmp(res, temp, 125) == 0)
-	{
-		free(temp);
-		temp = NULL;
-	}
-	free(res);
-	res = NULL;
-	return (temp);
+	i = 0;
+	if (str && str[i] == '(')
+		while(str && str[i] && str[++i] != ')')
+			;
+	if (str && str[i] != ')' && check_close == 1)
+		return (0);
+	if (str && str[i] == ')')
+		i++;
+	return (i);
 }
 
 int	is_symbol(char *res)
@@ -48,7 +48,7 @@ int	is_symbol(char *res)
 	int		j;
 	int		i;
 
-	symbols = "><|&()";
+	symbols = "><|&";
 	i = 0;
 	j = 0;
 	while (res && res[j] && ft_strchr(symbols, res[j]))
@@ -68,14 +68,13 @@ int	count_chars(char *res)
 	int	j;
 
 	i = 0;
-	if (res && res[i] && (res[i] == '"' || res[i] == *"'"))
-		return (ft_handle_quote(&res[i], res[i]));
-	while (res && res[i] && res[0] == '$' && ft_isalnum(res[i + 1]))
+	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i])
+		&& res[i] != '"' && res[i] != '\'' && res[i] != '(')
 		i++;
-	if (i > 0)
-		return (i + 1);
-	while (res && res[i] && !ft_is_whitespace(res[i]) && !is_symbol(&res[i]))
-		i++;
+	if (ft_handle_quote(&res[i], 0))
+		return (ft_handle_quote(&res[i], 0));
+	if(ft_handle_block(&res[i], 0))
+		return (ft_handle_block(&res[i], 0));
 	j = is_symbol(res);
 	if (j > 0)
 		i = j;
@@ -89,12 +88,12 @@ char	*ft_strtok(char *str, int call)
 	int			i;
 	int			j;
 
-	if (str && call == 0)
+	if (str && *str && call == 0)
 		res = ft_strdup(str);
 	if (!res)
 		return (NULL);
 	i = 0;
-	while (res && res[i] && ft_is_whitespace(res[i]))
+	while (res && res[i] && is_space(res[i]))
 		i++;
 	j = count_chars(&res[i]);
 	token = ft_substr(res, i, j);

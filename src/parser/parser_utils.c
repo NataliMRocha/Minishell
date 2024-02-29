@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:04:56 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/01/31 17:06:02 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:53:26 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,12 @@ void	free_env_list(t_envs *list)
 		free(list);
 		list = tmp;
 	}
+}
+
+int	is_redirect(t_token *token)
+{
+	if (token && (token->type == REDIR_OUT || token->type == REDIR_APPEND
+			|| token->type == REDIR_IN || token->type == HEREDOC))
+		return (1);
+	return (0);
 }
