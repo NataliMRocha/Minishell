@@ -6,24 +6,11 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 18:44:19 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:45:25 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-//TODO: função para verificar se o comando é um executável
-//TODO: função pra lidar com os redirects e verifica se temos acesso e permissao aos arquivos
-//TODO: função para executar o comando
-
-t_ast	*ast_holder(t_ast *root, int its_created)
-{
-	static t_ast	*ast_address;
-
-	if (root && !its_created)
-		ast_address = root;
-	return (ast_address);
-}
 
 t_ast	*parser(t_token *token_list)
 {

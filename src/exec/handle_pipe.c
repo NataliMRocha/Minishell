@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/02/29 12:26:04 by natali           ###   ########.fr       */
+/*   Updated: 2024/02/29 12:46:10 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,6 @@ void	close_fds(int *fd, int std_fds)
 		close(STDIN_FILENO);
 		close(STDOUT_FILENO);
 		close(STDERR_FILENO);
-	}
-}
-
-void print_tree(t_ast *root)
-{
-	//TODO: APAGAR
-	int i = 0;
-	if(root)
-	{
-		print_tree(root->right);
-		while (root->command_list[i] != NULL)
-		{
-			ft_putstr_fd(root->command_list[i], STDOUT_FILENO);
-			ft_putstr_fd("\n", STDOUT_FILENO);
-			i++;
-		}
-		print_tree(root->left);
 	}
 }
 
