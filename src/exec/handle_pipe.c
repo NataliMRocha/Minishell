@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/02/28 16:25:13 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:44:25 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	pipe_fork(int *fd, t_ast *root, int in_out)
 		starting_exec(root->right);
 		close_fds(NULL, 1);
 	}
+	root = ast_holder(NULL, 1);
 	free_program(&root, NULL, create_envs_table(1));
 	exit(update_status_error(-1));
 }

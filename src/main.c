@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 16:28:18 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:33:46 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int main(void)
 	while (1)
 	{
 		get_cmd = ft_readline();
-		// heredoc("result_heredoc", "eof", *var_envs);
 		if (ft_strncmp(get_cmd, "exit", 4) == 0)
 			break;
 		if (list_fill(&token_list, get_cmd) != 0)
 			continue;
+		// heredoc("result_heredoc", "eof", *var_envs);
 		root = parser(token_list);
 		starting_exec(root);
 		free_program(&root, &get_cmd, NULL);
