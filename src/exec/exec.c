@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 17:15:19 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:32:03 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,27 @@
 
 char	**expanded_variable(t_ast **root)
 {
-	int	i;
-	char **expanded;
+	char	**expanded;
+	int		i;
+	int		j;
 
 	i = -1;
 	expanded = NULL;
 	while (root && (*root)->command_list[++i])
 		(*root)->command_list[i] = expand_var((*root)->command_list[i]);
+	expanded = ft_calloc(i, sizeof(char *));
 	i = 0;
 	if (root && !*(*root)->command_list[i])
 	{
-		expanded = ft_calloc(i, sizeof(char *));
+		j = 0;
 		while((*root)->command_list[++i])
-			expanded[i - 1] = ft_strdup((*root)->command_list[i]);
+			if (*(*root)->command_list[i])
+				expanded[j++] = ft_strdup((*root)->command_list[i]);
 		free_split((*root)->command_list);
 		(*root)->command_list = NULL;
 		return (expanded);
 	}
+	free(expanded);
 	return ((*root)->command_list);
 }
 
