@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 12:42:04 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:52:54 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	exec(t_ast *root)
 	int		status;
 	pid_t	i;
 
-	if (root->left || root->right)
-		starting_exec(root);
 	path = verify_path(root);
 	status = update_status_error(-1);
 	i = fork();
@@ -45,12 +43,12 @@ void handle_and_or(t_ast *root)
 {
 	int status_code;
 
-	exec(root->left);
+	starting_exec(root->left);
 	status_code = update_status_error(-1);
 	if((!status_code) && root->type == AND)
-		exec(root->right);
+		starting_exec(root->right);
 	else if (status_code && root->type == OR)
-		exec(root->right);
+		starting_exec(root->right);
 }
 
 void starting_exec(t_ast *root)
