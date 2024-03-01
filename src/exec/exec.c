@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/01 14:57:39 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:51:03 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	expanded_variable(t_ast **root)
+char	**expanded_variable(char **cmd_list)
 {
 	char	**expanded;
 	int		i;
@@ -20,17 +20,17 @@ void	expanded_variable(t_ast **root)
 
 	i = -1;
 	expanded = NULL;
-	while (root && (*root)->command_list[++i])
-		(*root)->command_list[i] = expand_var((*root)->command_list[i]);
-	expanded = ft_calloc(i, sizeof(char *));
+	while (cmd_list && cmd_list[++i])
+		cmd_list[i] = expand_var(cmd_list[i]);
+	expanded = ft_calloc(i + 1, sizeof(char *));
 	i = -1;
 	j = 0;
-	while ((*root)->command_list[++i])
-		if (*(*root)->command_list[i])
-			expanded[j++] = ft_strdup((*root)->command_list[i]);
-	free_split((*root)->command_list);
-	(*root)->command_list = NULL;
-	(*root)->command_list = expanded;
+	while (cmd_list[++i])
+		if (*cmd_list[i])
+			expanded[j++] = ft_strdup(cmd_list[i]);
+	free_split(cmd_list);
+	cmd_list = NULL;
+	return (expanded);
 }
 
 void	exec_error(char *cmd)
@@ -49,7 +49,7 @@ void	exec(t_ast *root)
 
 	status = update_status_error(-1);
 	i = -1;
-	expanded_variable(&root);
+	root->command_list = expanded_variable(root->command_list);
 	path = verify_path(root);
 	i = fork();
 	if (i == 0 && root->type == EXEC)
