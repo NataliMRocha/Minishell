@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:22:38 by codespace         #+#    #+#             */
-/*   Updated: 2024/02/29 17:20:47 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:24:13 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ char	*verify_path(t_ast *root)
 	int		i;
 	char	*result;
 
-	if (root->command_list && access(root->command_list[0], F_OK) == 0)
+	if (root->command_list && !*root->command_list)
+		return (ft_strdup("1"));
+	if (access(root->command_list[0], F_OK) == 0)
 		return (ft_strdup(root->command_list[0]));
 	paths = ft_getenv("PATH");
 	path = ft_split(paths->value, ':');
