@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 18:40:40 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/01 14:46:51 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,43 @@ int    is_redir_in(t_ast *root)
     {
         update_status_error(0);
         access(root->command_list[0], F_OK);
-        if (errno = ENOENT)
-            ft_putstr_fd("No such file or directory\n", 2);
+        if (errno == ENOENT)
+        {
+            ft_putstr_fd(root->command_list[0], 2);
+            ft_putstr_fd(": No such file or directory\n", 2);
+        }
         access(root->command_list[0], W_OK | R_OK);
         if (errno == EACCES)
-            ft_putstr_fd("Permission denied\n", 2);
+        {
+            ft_putstr_fd(root->command_list[0], 2);
+            ft_putstr_fd(": Permission denied\n", 2);
+        }
+        return (0);
+    }
+    dup2(root->fd, STDIN_FILENO);
+    close(root->fd);
+    return (1);
+}
+
+int    is_redir_in(t_ast *root)
+{
+    errno = 0;
+    root->fd = open(root->command_list[0], O_CREAT, O_TRUNC);
+    if (root->fd < 0)
+    {
+        update_status_error(0);
+        access(root->command_list[0], F_OK);
+        if (errno == ENOENT)
+        {
+            ft_putstr_fd(root->command_list[0], 2);
+            ft_putstr_fd(": No such file or directory\n", 2);
+        }
+        access(root->command_list[0], W_OK | R_OK);
+        if (errno == EACCES)
+        {
+            ft_putstr_fd(root->command_list[0], 2);
+            ft_putstr_fd(": Permission denied\n", 2);
+        }
         return (0);
     }
     dup2(root->fd, STDIN_FILENO);
