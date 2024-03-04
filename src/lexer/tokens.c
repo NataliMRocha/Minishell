@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 16:30:31 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:55:21 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	list_fill(t_token **list, char *readline)
 			printf("Syntax Error\n");
 			free(readline);
 			free_token_list(*list);
+			*list = NULL;
+			// list = NULL;
 			free(token);
 			return(update_status_error(2));
 	}

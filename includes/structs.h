@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 22:14:22 by codespace         #+#    #+#             */
-/*   Updated: 2024/02/23 10:02:11 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:16:24 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_envs
 
 typedef struct s_ast
 {
-	char			**command_list;
+	char			**cmd_list;
 	t_token_type	type;
 	int				fd;
 	struct s_ast	*right;

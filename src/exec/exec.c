@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/04 13:15:38 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/04 16:56:32 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,19 @@ void	exec(t_ast *root)
 
 	status = update_status_error(-1);
 	i = -1;
-	root->command_list = expanded_variable(root->command_list);
+	root->cmd_list = expanded_variable(root->cmd_list);
 	path = verify_path(root);
 	i = fork();
 	if (i == 0 && root->type == EXEC)
 	{
 		i = -1;
 		envs = envs_to_array();
-		if (execve(path, root->command_list, envs) == 0)
+		if (execve(path, root->cmd_list, envs) == 0)
 			;
 		else if (path && *path == '0')
-			exec_error(root->command_list[0]);
+			exec_error(root->cmd_list[0]);
 		root = ast_holder(NULL, 1);
+		free_split(envs);
 		free_program(&root, &path, create_envs_table(1));
 		close_fds(NULL, 1);
 		exit(update_status_error(127));

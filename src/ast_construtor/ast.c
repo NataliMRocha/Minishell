@@ -33,7 +33,7 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 	right = token_to_split->next;
 	right->prev = NULL;
 	root->type = token_to_split->type;
-	root->command_list = ft_split(token_to_split->data, 0);
+	root->cmd_list = ft_split(token_to_split->data, 0);
 	root->fd = 0;
 	tokens = token_to_split->prev;
 	if (tokens)
@@ -57,7 +57,7 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 	else
 	 	cmd = command_constructor(&tokens);
 	ast_node->type = EXEC;
-	ast_node->command_list = cmd;
+	ast_node->cmd_list = cmd;
 }
 
 char	**command_constructor(t_token **tokens)

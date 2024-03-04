@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:31:54 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 15:23:07 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:16:47 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	free_ast(t_ast *root)
 		free_ast(root->right);
 		root->right = NULL;
 	}
-	if (root->command_list)
-		free_split(root->command_list);
+	if (root->cmd_list)
+		free_split(root->cmd_list);
 	free(root);
 	root = NULL;
 	root = ast_holder(root, 0);
