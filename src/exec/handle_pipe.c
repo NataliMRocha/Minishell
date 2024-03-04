@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/02/29 15:17:04 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/04 09:49:38 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ void handle_pipe(t_ast *root)
 		waitpid(intpid[0], &status_code, 0);
 		waitpid(intpid[1], &status_code, 0);
 		update_status_error(status_code);
-		/* if (update_status_error(-1) != 0)
-			free_program(&root, NULL, NULL); */
 	}
 	else
 		update_status_error(EXIT_FAILURE);

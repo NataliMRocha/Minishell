@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/01 18:51:03 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/04 09:49:16 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	exec_error(char *cmd)
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
-// TODO: fix the expanded_variable function
 void	exec(t_ast *root)
 {
 	char	*path;
 	int		status;
 	pid_t	i;
+	char	**envs;
 
 	status = update_status_error(-1);
 	i = -1;
@@ -54,7 +54,8 @@ void	exec(t_ast *root)
 	i = fork();
 	if (i == 0 && root->type == EXEC)
 	{
-		if (execve(path, &root->command_list[i], NULL) == 0);
+		envs = envs_to_array();
+		if (execve(path, root->command_list, envs) == 0);
 		else if (path && *path == '0')
 			exec_error(root->command_list[0]);
 		root = ast_holder(NULL, 1);
