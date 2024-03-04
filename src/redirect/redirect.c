@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/04 12:55:09 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/04 13:27:29 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ int    check_redirect(t_ast *root)
     return (0);
 }
 
+void	ft_puterror(char *cmd, char *str)
+{
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+}
+
 int    is_redir_in(t_ast *root)
 {
     if (!root->fd)
@@ -29,15 +35,11 @@ int    is_redir_in(t_ast *root)
         update_status_error(1);
         if (access(root->command_list[0], F_OK))
         {
-            ft_putstr_fd(root->command_list[0], 2);
-            ft_putstr_fd(": No such file or directory\n", 2);
+           ft_puterror(root->command_list[0], ": No such file or directory\n");
             return (0);
         }
         if (access(root->command_list[0], W_OK | R_OK))
-        {
-            ft_putstr_fd(root->command_list[0], 2);
-            ft_putstr_fd(": Permission denied\n", 2);
-        }
+			ft_puterror(root->command_list[0], ": Permission denied\n");
         return (0);
     }
     dup2(root->fd, STDIN_FILENO);
