@@ -34,7 +34,7 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 	right->prev = NULL;
 	root->type = token_to_split->type;
 	root->command_list = ft_split(token_to_split->data, 0);
-	root->fd = -1;
+	root->fd = 0;
 	tokens = token_to_split->prev;
 	if (tokens)
 		tokens->next = NULL;
