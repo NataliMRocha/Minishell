@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:22:38 by codespace         #+#    #+#             */
-/*   Updated: 2024/02/28 12:49:10 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:24:13 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*verify_path(t_ast *root)
 	int		i;
 	char	*result;
 
+	if (root->command_list && !*root->command_list)
+		return (ft_strdup("1"));
 	if (access(root->command_list[0], F_OK) == 0)
 		return (ft_strdup(root->command_list[0]));
 	paths = ft_getenv("PATH");
@@ -40,9 +42,10 @@ char	*verify_path(t_ast *root)
 	i = -1;
 	while (path && path[++i] && root->type == EXEC)
 	{
-		path[i] = ft_strjoin(ft_strjoin(path[i], "/", 1), root->command_list[0], 1);
+		path[i] = ft_strjoin(ft_strjoin(path[i], "/", 1), root->command_list[0],
+			1);
 		if (access(path[i], F_OK) == 0)
-			break;
+			break ;
 	}
 	result = ft_strdup(path[i]);
 	free_split(path);

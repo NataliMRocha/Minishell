@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/02/29 15:45:46 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/04 10:59:58 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	pipe_fork(int *fd, t_ast *root, int in_out)
 		dup2(fd[1], STDOUT_FILENO);
 	else if (in_out == 1)
 		dup2(fd[0], STDIN_FILENO);
-    close_fds(fd, 0);
+	close_fds(fd, 0);
 	if (in_out == 0 && root->left->type != REDIR_OUT)
 	{
 		starting_exec(root->left);
@@ -63,7 +63,7 @@ void	exec_pipe(pid_t *intpid, int *fd, t_ast *root)
 		pipe_fork(fd, root, 1);
 }
 
-void handle_pipe(t_ast *root)
+void	handle_pipe(t_ast *root)
 {
 	int		fd[2];
 	int		status_code;

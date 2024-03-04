@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/01 16:30:17 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/04 12:14:03 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ int    is_redir_in(t_ast *root)
 {
     if (!root->fd)
         root->fd = open(root->command_list[0], O_RDONLY);
+    if (!root->fd)
+        root->fd = open(root->command_list[0], O_RDONLY);
     if (root->fd < 0)
     {
         update_status_error(0);
+        errno = 0;
         errno = 0;
         access(root->command_list[0], F_OK);
         if (errno == ENOENT)
@@ -49,12 +52,16 @@ int    is_redir_in(t_ast *root)
 }
 
 int    is_redir_out(t_ast *root)
+int    is_redir_out(t_ast *root)
 {
+    if (!root->fd)
+        root->fd = open(root->command_list[0], O_RDWR | O_CREAT | O_TRUNC, 0666);
     if (!root->fd)
         root->fd = open(root->command_list[0], O_RDWR | O_CREAT | O_TRUNC, 0666);
     if (root->fd < 0)
     {
         update_status_error(0);
+        errno = 0;
         errno = 0;
         access(root->command_list[0], W_OK | R_OK);
         if (errno == EACCES)
@@ -64,6 +71,7 @@ int    is_redir_out(t_ast *root)
         }
         return (0);
     }
+    dup2(root->fd, STDOUT_FILENO);
     dup2(root->fd, STDOUT_FILENO);
     close(root->fd);
     return (1);
@@ -90,6 +98,7 @@ void    handle_redir(t_ast *root)
         if (!is_redir_in(root->right))
         {
 		    close_fds(std_fd, 0);
+		    close_fds(std_fd, 0);
             return ;
         }
     }
@@ -97,5 +106,5 @@ void    handle_redir(t_ast *root)
     dup2(std_fd[1], STDOUT_FILENO); 
     dup2(std_fd[0], STDIN_FILENO);
     close_fds(std_fd, 0);
+    close_fds(std_fd, 0);
 }
-
