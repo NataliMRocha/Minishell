@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/04 12:47:39 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/04 12:55:09 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <errno.h>
 
 int    check_redirect(t_ast *root)
 {
@@ -49,20 +48,18 @@ int    is_redir_in(t_ast *root)
 int    is_redir_out(t_ast *root)
 {
     if (!root->fd)
-    {    
-        //root = root->right;
+    {
+        root = root->right;
         root->fd = open(root->command_list[0], O_RDWR | O_CREAT | O_TRUNC, 0666);
     }
-/*     else if (!root->right->fd && root->type == REDIR_APPEND)
+    else if (!root->right->fd && root->type == REDIR_APPEND)
     {
         root = root->right;
         root->fd = open(root->command_list[0], O_RDWR | O_CREAT | O_APPEND, 0666);
-    } */
+    }
     if (root->fd < 0)
     {
-        errno = 0;
-        access(root->command_list[0], W_OK | R_OK);
-        if (errno == EACCES)
+        if (access(root->command_list[0], W_OK | R_OK))
         {
             ft_putstr_fd(root->command_list[0], 2);
             ft_putstr_fd(": Permission denied\n", 2);
@@ -92,7 +89,7 @@ void    handle_redir(t_ast *root)
         }
     }
     else if(root->type == REDIR_IN)
-    {   
+    {
         if (!is_redir_in(root->right))
         {
 		    close_fds(std_fd, 0);
@@ -100,7 +97,7 @@ void    handle_redir(t_ast *root)
         }
     }
     starting_exec(root->left);
-    dup2(std_fd[1], STDOUT_FILENO); 
+    dup2(std_fd[1], STDOUT_FILENO);
     dup2(std_fd[0], STDIN_FILENO);
     close_fds(std_fd, 0);
 }
