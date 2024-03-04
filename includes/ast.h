@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:03:10 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 18:44:13 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/04 10:17:19 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	**command_constructor(t_token **tokens);
 void	try_split_else_exec(t_ast *ast_node, t_token *tokens);
 t_ast	*ast_constructor(t_token *tokens);
 t_ast	*ast_holder(t_ast *root, int its_created);
-void	handle_redirect(t_token **tokens);
-void	move_redirect_right(t_token **arch, t_token **word);
 void	free_ast(t_ast *root);
 
 #endif
