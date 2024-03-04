@@ -89,7 +89,7 @@ t_ast	*ast_constructor(t_token *tokens)
 	t_ast	*root;
 
 	root = ft_calloc(1, sizeof(t_ast));
-	handle_redirect(&tokens);
+	move_redirect(&tokens);
 	try_split_else_exec(root, tokens);
 	return (root);
 }

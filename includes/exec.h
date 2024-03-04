@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:37 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 12:09:28 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:24:14 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,6 @@ void    pipe_fork(int *fd, t_ast *root, int in_out);
 void	close_fds(int *fd, int std_fds);
 void    starting_exec(t_ast *root);
 char	*verify_path(t_ast *root);
+void	free_split(char **path);
+
 #endif

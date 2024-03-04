@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_redirect.c                                  :+:      :+:    :+:   */
+/*   move_redirect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -25,7 +25,7 @@ void	move_redirect_right(t_token **arch, t_token **word)
 	(*word)->type = type;
 }
 
-void	handle_redirect(t_token **tokens)
+void	move_redirect(t_token **tokens)
 {
 	t_token	*temp;
 
