@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/01 11:20:29 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/04 10:24:44 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*result_var(char *buf,int *i, char *result)
+char	*result_var(char *buf, int *i, char *result)
 {
 	char	*var_name;
 	t_envs	*node;
 
 	var_name = ft_strdup("");
-	while ((ft_isalnum(buf[*i + 1]) || buf[*i+1] == '?') && buf[++*i])
+	while ((ft_isalnum(buf[*i + 1]) || buf[*i + 1] == '?') && buf[++*i])
 		var_name = ft_strjoin_char(var_name, buf[*i]);
 	node = ft_getenv(var_name);
 	if (node)
@@ -27,7 +27,7 @@ char	*result_var(char *buf,int *i, char *result)
 	return (result);
 }
 
- char	*expand_var(char *buf)
+char	*expand_var(char *buf)
 {
 	char	*result;
 	int		i;

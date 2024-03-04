@@ -37,9 +37,9 @@ EXEC_SOURCES = handle_signals.c exec.c verify_path.c handle_pipe.c
 
 BUILTIN_SOURCES = environ_list.c envs.c
 
-REDIRECT_SOURCES = heredoc.c redirect.c
+REDIRECT_SOURCES = heredoc.c redirect.c move_redirect.c
 
-AST_SOURCES = ast.c handle_redirect.c ast_utils.c
+AST_SOURCES = ast.c ast_utils.c
 
 OBJECTS += $(addprefix $(BIN_PATH), $(SOURCES:%.c=%.o))
 
