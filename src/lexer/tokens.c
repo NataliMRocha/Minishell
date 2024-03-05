@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/04 16:55:21 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/05 11:00:28 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	list_fill(t_token **list, char *readline)
 			free(readline);
 			free_token_list(*list);
 			*list = NULL;
-			// list = NULL;
+			list = NULL;
 			free(token);
 			return(update_status_error(2));
 	}

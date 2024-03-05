@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/04 23:44:44 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/05 11:57:54 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_handle_block(char *str, int check_close)
 		i++;
 	return (i);
 }
-#TODO: Não esta tokenizando corretamente por exemplo ls| tudo junto
+// #TODO: Não esta tokenizando corretamente por exemplo ls| tudo junto
 int	is_symbol(char *res)
 {
 	char	*symbols;
@@ -53,12 +53,13 @@ int	is_symbol(char *res)
 	j = 0;
 	while (res && res[j] && ft_strchr(symbols, res[j]))
 	{
-		if (res[j] != res[j + 1] && ft_strchr(symbols, res[j])
-			&& ft_strchr(symbols, res[j + 1]))
+		if (res[j] != res[0])
 			i++;
 		j++;
 	}
 	j -= i;
+	if (j > 2)
+		return (2);
 	return (j);
 }
 
