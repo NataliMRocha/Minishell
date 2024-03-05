@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/05 19:25:20 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/05 20:26:35 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	handling_redir(t_ast *root, int first_call)
 
 void	handle_redir(t_ast *root)
 {
+	//TODO: ARRUMAR O FLUXO QUANDO TIVER ALGUM PROBLEMA PARA ABRIR ARQUIVO
 	int	std_fd[2];
 	t_fds	**fds;
 	t_fds	*tmp;
