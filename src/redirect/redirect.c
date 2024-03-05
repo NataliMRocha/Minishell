@@ -3,14 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/05 19:07:02 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/05 19:25:20 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	dup_and_close(int	*std_fd)
+{
+	dup2(std_fd[1], STDOUT_FILENO);
+	dup2(std_fd[0], STDIN_FILENO);
+	close_fds(std_fd, 0);
+}
+
+void	free_list(t_fds	**fds)
+{
+	t_fds	*tmp;
+
+	if (!fds || !*fds)
+		return ;
+	while(*fds)
+	{
+		tmp = (*fds)->next;
+		free(*fds);
+		*fds = tmp;
+	}
+}
 
 int	check_redirect(t_ast *root)
 {
@@ -98,6 +119,7 @@ void	handle_redir(t_ast *root)
 {
 	int	std_fd[2];
 	t_fds	**fds;
+	t_fds	*tmp;
 
 	std_fd[0] = dup(STDIN_FILENO);
 	std_fd[1] = dup(STDOUT_FILENO);
@@ -107,6 +129,7 @@ void	handle_redir(t_ast *root)
 	if(root->left->type == EXEC)
 	{
 		fds = init_fds(NULL, 0);
+		tmp = *fds;
 		while (fds && *fds)
 		{
 			if ((*fds)->type == REDIR_IN)
@@ -115,9 +138,8 @@ void	handle_redir(t_ast *root)
 					is_redir_out((*fds)->name[0], (*fds)->type);
 			*fds = (*fds)->next;
 		}
+		free_list(&tmp);
 	}
 	starting_exec(root->left);
-	dup2(std_fd[1], STDOUT_FILENO);
-	dup2(std_fd[0], STDIN_FILENO);
-	close_fds(std_fd, 0);
+	dup_and_close(std_fd);
 }
