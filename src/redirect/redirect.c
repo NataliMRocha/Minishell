@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/04 16:16:47 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/05 12:25:53 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,8 @@ int	is_redir_in(t_ast *root)
 	if (root->fd < 0)
 	{
 		if (access(root->cmd_list[0], F_OK))
-		{
 			ft_puterror(root->cmd_list[0], ": No such file or directory\n");
-			return (0);
-		}
-		if (access(root->cmd_list[0], W_OK | R_OK))
+		else if (access(root->cmd_list[0], W_OK | R_OK))
 			ft_puterror(root->cmd_list[0], ": Permission denied\n");
 		return (0);
 	}
@@ -52,17 +49,15 @@ int	is_redir_out(t_ast *root)
 	if (!root->fd && root->type == REDIR_OUT)
 	{
 		root = root->right;
-		root->fd = open(root->cmd_list[0], O_RDWR | O_CREAT | O_TRUNC,
-				0666);
+		root->fd = open(root->cmd_list[0], O_CREAT | O_TRUNC, 0666);
 	}
 	else if (!root->right->fd && root->type == REDIR_APPEND)
 	{
 		root = root->right;
 		if (access(root->cmd_list[0], F_OK))
-			root->fd = open(root->cmd_list[0], O_RDWR | O_CREAT | O_TRUNC,
-					0666);
+			root->fd = open(root->cmd_list[0], O_CREAT | O_TRUNC, 0666);
 		else
-			root->fd = open(root->cmd_list[0], O_RDWR | O_APPEND, 0666);
+			root->fd = open(root->cmd_list[0], O_APPEND, 0666);
 	}
 	if (root->fd < 0)
 	{
