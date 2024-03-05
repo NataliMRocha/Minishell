@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 22:14:22 by codespace         #+#    #+#             */
-/*   Updated: 2024/03/04 16:16:24 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/05 17:09:01 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,12 @@ typedef struct s_ast
 	struct s_ast	*right;
 	struct s_ast	*left;
 }					t_ast;
+
+typedef struct s_fds
+{
+	char			**name;
+	int				type;
+	struct s_fds	*next;
+}					t_fds;
 
 #endif
