@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 12:55:51 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/04 23:44:44 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_handle_block(char *str, int check_close)
 		i++;
 	return (i);
 }
-
+#TODO: Não esta tokenizando corretamente por exemplo ls| tudo junto
 int	is_symbol(char *res)
 {
 	char	*symbols;
