@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/02/22 12:45:23 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:22:06 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_syntax_error(t_token **list)
 		return (0);
 	tmp = *list;
 	if (tmp->type == PIPE || tmp->type == AND || tmp->type == OR)
-		return (1);
+		return (tmp->type);
 	while (tmp->next)
 	{
 		if (is_redir_followed_by_pipe(tmp))

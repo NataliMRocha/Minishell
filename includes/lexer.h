@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:15:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 17:16:36 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:20:42 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int		list_fill(t_token **list, char *readline);
 void	ft_write_types(t_token *list);
 void	free_token_list(t_token **list);
 t_token	**get_tokens(t_token *tokens);
+void    print_error(int error);
+int     check_syntax_and_quotes(t_token **list, char *readline);
 
 #endif

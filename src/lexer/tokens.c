@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 17:17:17 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:26:54 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,33 @@ t_token	**get_tokens(t_token *tokens)
 	return (&list);
 }
 
+int check_syntax_and_quotes(t_token **list, char *readline)
+{
+	int	error;
+	
+	error = check_syntax_error(list);
+	if (error)
+	{		
+		print_error(error);
+		free(readline);
+		free_token_list(list);
+		*list = NULL;
+		list = NULL;
+		return (update_status_error(2));
+	}
+	error = check_quotes_error(*list);
+	if (error)
+	{
+		print_error(error);
+		free(readline);
+		free_token_list(list);
+		*list = NULL;
+		list = NULL;
+		return (update_status_error(2));
+	}
+	return (0);
+}
+
 int	list_fill(t_token **list, char *readline)
 {
 	char	*token;
@@ -95,16 +122,8 @@ int	list_fill(t_token **list, char *readline)
 		if (token && *token != '\0')
 			append_node(list, token);
 	}
-	if (*list && (check_syntax_error(list) || check_quotes_error(*list)))
-	{
-		printf("Syntax Error\n");
-		free(readline);
-		free_token_list(list);
-		*list = NULL;
-		list = NULL;
-		free(token);
-		return (update_status_error(2));
-	}
+	free(token);
 	get_tokens(*list);
 	return (0);
 }
+

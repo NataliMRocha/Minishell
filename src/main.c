@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 11:25:05 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:21:24 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int main(void)
 		if ((get_cmd && !*get_cmd) || list_fill(&token_list, get_cmd) != 0)
 			continue;
 		// heredoc("result_heredoc", "eof", *var_envs);
+		if (check_syntax_and_quotes(&token_list, get_cmd))
+			continue;
 		root = parser(token_list);
 		starting_exec(root);
 		free_program(&root, &get_cmd, NULL);

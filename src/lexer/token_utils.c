@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 17:25:51 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:26:00 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,16 @@ void	free_token_list(t_token **list)
 		*list = tmp;
 	}
 	list = NULL;
+}
+
+void print_error(int error)
+{
+	if (error == PIPE)
+		ft_putstr_fd("syntax error near unexpected token `|'\n", 2);
+	if(error == AND)
+		ft_putstr_fd("syntax error near unexpected token `&&'\n", 2);
+	if(error == OR)
+		ft_putstr_fd("syntax error near unexpected token `||'\n", 2);
+	if(error == 1)
+		ft_putstr_fd("Minishell can't deal with open quotes\n", 2);
 }
