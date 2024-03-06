@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 16:25:22 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:17:17 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	list_fill(t_token **list, char *readline)
 	{
 		printf("Syntax Error\n");
 		free(readline);
-		free_token_list(*list);
+		free_token_list(list);
 		*list = NULL;
 		list = NULL;
 		free(token);

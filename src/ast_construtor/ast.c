@@ -40,7 +40,8 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 		tokens->next = NULL;
 	root->left = ast_constructor(tokens);
 	root->right = ast_constructor(right);
-	free_token_list(right);
+	if (right && right->data && *right->data)
+		free_token_list(&right);
 	free(token_to_split->data);
 	free(token_to_split);
 	return (1);

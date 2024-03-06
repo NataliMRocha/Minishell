@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:15:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 16:25:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:16:36 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	stack_fill(t_token *list);
 void	append_node(t_token **list, char *content);
 int		list_fill(t_token **list, char *readline);
 void	ft_write_types(t_token *list);
-void	free_token_list(t_token *list);
+void	free_token_list(t_token **list);
 t_token	**get_tokens(t_token *tokens);
 
 #endif
