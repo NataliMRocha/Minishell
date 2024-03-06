@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 12:35:43 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/06 15:42:25 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,19 @@ char	**expanded_variable(char **cmd_list)
 	return (expanded);
 }
 
-void	exec_error(char *cmd)
+void	exec_error(char *cmd, char *path)
 {
-	ft_putstr_fd("command not found: ", STDERR_FILENO);
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
+	t_ast	*root;
+	if (path && *path == '0')
+	{
+		ft_putstr_fd("command not found: ", STDERR_FILENO);
+		ft_putstr_fd(cmd, STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
+	}
+	root = ast_holder(NULL, 1);
+	save_fds(NULL, 1);
+	free_program(&root, &path, create_envs_table(1));
+	close_fds(NULL, 1);
 }
 
 void	exec(t_ast *root)
@@ -51,19 +59,17 @@ void	exec(t_ast *root)
 	i = -1;
 	root->cmd_list = expanded_variable(root->cmd_list);
 	path = verify_path(root);
+	if (root->cmd_list && !*root->cmd_list)
+		return ;
 	i = fork();
 	if (i == 0 && root->type == EXEC)
 	{
-		i = -1;
 		envs = envs_to_array();
 		if (execve(path, root->cmd_list, envs) == 0)
 			;
-		else if (path && *path == '0')
-			exec_error(root->cmd_list[0]);
-		root = ast_holder(NULL, 1);
+		else
+			exec_error(root->cmd_list[0], path);
 		free_split(envs);
-		free_program(&root, &path, create_envs_table(1));
-		close_fds(NULL, 1);
 		exit(update_status_error(127));
 	}
 	wait(&status);

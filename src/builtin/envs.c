@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:39:09 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/04 15:44:32 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/06 15:22:35 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,10 @@ char	**envs_to_array(void)
 {
 	t_envs *envs;
 	int i;
-	char **environ;
+	static char **environ;
 
+	if (environ)
+		free_split(environ);
 	envs = *create_envs_table(1);
 	i = count_envs(envs);
 	environ = ft_calloc(i + 1, sizeof(char *));
