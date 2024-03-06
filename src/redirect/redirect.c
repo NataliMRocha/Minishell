@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 11:46:51 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:36:07 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	get_fds(t_ast *root)
 	if (root->left->type == EXEC && check_redirect(root) && root->right)
 		fds_list(root->right->cmd_list, root->type);
 }
+
 void	handle_fds(t_ast *root)
 {
 	t_fds	**fds;
@@ -95,10 +96,26 @@ void	handle_fds(t_ast *root)
 	}
 	free_list(fds);
 }
+
+void	save_fds(int *fds, int flag)
+{
+	static int save[2];
+
+	if (!flag)
+	{
+		save[0] = fds[0];
+		save[1] = fds[1];
+	}
+	if(*save && flag)
+	{
+		close(save[0]);
+		close(save[1]);
+	}
+}
+
 void	handle_redir(t_ast *root)
 {
 	int		std_fd[2];
-
 
 	std_fd[0] = dup(STDIN_FILENO);
 	std_fd[1] = dup(STDOUT_FILENO);
@@ -106,6 +123,7 @@ void	handle_redir(t_ast *root)
 		get_fds(root);
 	if (root->left->type == EXEC)
 		handle_fds(root->left);
+	save_fds(std_fd, 0);
 	starting_exec(root->left);
 	dup_and_close(std_fd);
 }

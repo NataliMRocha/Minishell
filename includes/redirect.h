@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:13:54 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 11:48:09 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:19:30 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ int		ft_puterror(char *cmd, char *str, t_ast *root);
 int		check_redirect(t_ast *root);
 void	free_list(t_fds **fds);
 void	dup_and_close(int *std_fd);
+void	save_fds(int *fds, int flag);
 #endif
