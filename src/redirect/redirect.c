@@ -6,13 +6,13 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 10:50:18 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:40:39 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	dup_and_close(int	*std_fd)
+void	dup_and_close(int *std_fd)
 {
 	if (!std_fd && !*std_fd)
 		return ;
@@ -21,13 +21,13 @@ void	dup_and_close(int	*std_fd)
 	close_fds(std_fd, 0);
 }
 
-void	free_list(t_fds	**fds)
+void	free_list(t_fds **fds)
 {
 	t_fds	*tmp;
 
 	if (!fds || !*fds)
 		return ;
-	while(*fds)
+	while (*fds)
 	{
 		tmp = (*fds)->next;
 		free(*fds);
@@ -43,15 +43,17 @@ int	check_redirect(t_ast *root)
 	return (0);
 }
 
-int	ft_puterror(char *cmd, char *str)
+int	ft_puterror(char *cmd, char *str, t_ast *root)
 {
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	update_status_error(1);
+	free_ast(root, 1);
+	root = NULL;
 	return (0);
 }
 
-t_fds	**init_fds(char **name, int type)
+t_fds	**fds_list(char **name, int type)
 {
 	static t_fds	*fds;
 	t_fds			*new;
@@ -67,9 +69,10 @@ t_fds	**init_fds(char **name, int type)
 	return (&fds);
 }
 
-int	is_redir_in(char *name)
+int	is_redir_in(char *name, t_ast *root)
 {
 	int	fd;
+
 	if (!access(name, F_OK))
 	{
 		fd = open(name, O_RDONLY);
@@ -77,13 +80,13 @@ int	is_redir_in(char *name)
 		close(fd);
 	}
 	else if (access(name, W_OK | R_OK))
-		return(ft_puterror(name, ": Permission denied\n"));
+		return (ft_puterror(name, ": Permission denied\n", root));
 	else
-		return(ft_puterror(name, ": No such file or directory\n"));
+		return (ft_puterror(name, ": No such file or directory\n", root));
 	return (1);
 }
 
-int	is_redir_out(char *name, int type)
+int	is_redir_out(char *name, int type, t_ast *root)
 {
 	int	fd;
 
@@ -98,48 +101,52 @@ int	is_redir_out(char *name, int type)
 			fd = open(name, O_RDWR | O_APPEND, 0666);
 	}
 	if (fd < 0 && access(name, W_OK | R_OK))
-		return(ft_puterror(name, ": Permission denied\n"));
+		return (ft_puterror(name, ": Permission denied\n", root));
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 	return (1);
 }
 
-void	handling_redir(t_ast *root)
+void	get_fds(t_ast *root)
 {
 	if (root->left && check_redirect(root->left))
 	{
-		init_fds(root->right->cmd_list, root->type);
-		handling_redir(root->left);
+		fds_list(root->right->cmd_list, root->type);
+		get_fds(root->left);
 	}
 	if (root->left->type == EXEC && check_redirect(root) && root->right)
-		init_fds(root->right->cmd_list, root->type);
+		fds_list(root->right->cmd_list, root->type);
 }
-
-void	handle_redir(t_ast *root)
+void	handle_fds(t_ast *root)
 {
-	//TODO: ARRUMAR O FLUXO QUANDO TIVER ALGUM PROBLEMA PARA ABRIR ARQUIVO
-	int	std_fd[2];
 	t_fds	**fds;
 	t_fds	*tmp;
+	fds = fds_list(NULL, 0);
+	tmp = *fds;
+	while (tmp)
+	{
+		if (tmp->type == REDIR_IN && !is_redir_in(tmp->name[0], root->left))
+			root = NULL;
+		else if ((tmp->type == REDIR_OUT || tmp->type == REDIR_APPEND)
+			&& !is_redir_out(tmp->name[0], tmp->type, root->left))
+			root = NULL;
+		if (!root)
+			break;
+		tmp = tmp->next;
+	}
+	free_list(fds);
+}
+void	handle_redir(t_ast *root)
+{
+	int		std_fd[2];
+
 
 	std_fd[0] = dup(STDIN_FILENO);
 	std_fd[1] = dup(STDOUT_FILENO);
-	if (init_fds(NULL, 0) && !*init_fds(NULL, 0))
-		handling_redir(root);
-	if(root->left->type == EXEC)
-	{
-		fds = init_fds(NULL, 0);
-		tmp = *fds;
-		while (fds && *fds)
-		{
-			if ((*fds)->type == REDIR_IN)
-					is_redir_in((*fds)->name[0]);
-			else if (((*fds)->type == REDIR_OUT || (*fds)->type == REDIR_APPEND))
-					is_redir_out((*fds)->name[0], (*fds)->type);
-			*fds = (*fds)->next;
-		}
-		free_list(&tmp);
-	}
+	if (fds_list(NULL, 0) && !*fds_list(NULL, 0))
+		get_fds(root);
+	if (root->left->type == EXEC)
+		handle_fds(root->left);
 	starting_exec(root->left);
 	dup_and_close(std_fd);
 }

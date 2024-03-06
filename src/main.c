@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/04 16:28:06 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/06 11:25:05 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_program(t_ast **root, char **get_cmd, t_envs **var_envs)
 		free(*get_cmd);
 	if (root && *root)
 	{
-		free_ast(*root);
+		free_ast(*root, 0);
 		*root = NULL;
 	}
 	if (var_envs && *var_envs)

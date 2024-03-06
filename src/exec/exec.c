@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/04 16:56:32 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/06 11:06:10 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	handle_and_or(t_ast *root)
 
 void	starting_exec(t_ast *root)
 {
+	if (!root)
+		return ;
 	if (root->type == AND || root->type == OR)
 		handle_and_or(root);
 	else if (root->type == PIPE)
