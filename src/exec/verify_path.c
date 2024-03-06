@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:22:38 by codespace         #+#    #+#             */
-/*   Updated: 2024/03/04 16:57:19 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/06 15:07:54 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*verify_path(t_ast *root)
 
 	if (root->cmd_list && !*root->cmd_list)
 		return (ft_strdup("1"));
-	if (access(root->cmd_list[0], F_OK) == 0)
+	if (strchr(root->cmd_list[0], '/') && access(root->cmd_list[0], F_OK) == 0)
 		return (ft_strdup(root->cmd_list[0]));
 	paths = ft_getenv("PATH");
 	path = ft_split(paths->value, ':');
