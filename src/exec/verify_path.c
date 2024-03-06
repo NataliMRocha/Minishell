@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:22:38 by codespace         #+#    #+#             */
-/*   Updated: 2024/03/06 15:07:54 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:46:16 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ char	*verify_path(t_ast *root)
 	i = -1;
 	while (path && path[++i] && root->type == EXEC)
 	{
-		path[i] = ft_strjoin(ft_strjoin(path[i], "/", 1), root->cmd_list[0],
-			1);
+		path[i] = ft_strjoin(ft_strjoin(path[i], "/", 1), root->cmd_list[0], 1);
 		if (access(path[i], F_OK) == 0)
 			break ;
 	}

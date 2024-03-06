@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/05 11:00:28 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:25:22 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,15 @@ void	append_node(t_token **list, char *content)
 	ft_write_types(node);
 }
 
+t_token	**get_tokens(t_token *tokens)
+{
+	static t_token	*list;
+
+	if (tokens)
+		list = tokens;
+	return (&list);
+}
+
 int	list_fill(t_token **list, char *readline)
 {
 	char	*token;
@@ -88,13 +97,14 @@ int	list_fill(t_token **list, char *readline)
 	}
 	if (*list && (check_syntax_error(list) || check_quotes_error(*list)))
 	{
-			printf("Syntax Error\n");
-			free(readline);
-			free_token_list(*list);
-			*list = NULL;
-			list = NULL;
-			free(token);
-			return(update_status_error(2));
+		printf("Syntax Error\n");
+		free(readline);
+		free_token_list(*list);
+		*list = NULL;
+		list = NULL;
+		free(token);
+		return (update_status_error(2));
 	}
+	get_tokens(*list);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:39:09 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 15:22:35 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:47:29 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**envs_to_array(void)
 	i = 0;
 	while (envs)
 	{
-		environ[i] = ft_strjoin(ft_strjoin(envs->key, "=", 0), envs->value, 0);
+		environ[i] = ft_strjoin(ft_strjoin(envs->key, "=", 0), envs->value, 1);
 		envs = envs->next;
 		i++;
 	}
