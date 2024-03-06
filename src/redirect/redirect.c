@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/05 20:26:35 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/06 10:50:18 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	dup_and_close(int	*std_fd)
 {
+	if (!std_fd && !*std_fd)
+		return ;
 	dup2(std_fd[1], STDOUT_FILENO);
 	dup2(std_fd[0], STDIN_FILENO);
 	close_fds(std_fd, 0);
@@ -41,11 +43,12 @@ int	check_redirect(t_ast *root)
 	return (0);
 }
 
-void	ft_puterror(char *cmd, char *str)
+int	ft_puterror(char *cmd, char *str)
 {
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	update_status_error(1);
+	return (0);
 }
 
 t_fds	**init_fds(char **name, int type)
@@ -74,9 +77,9 @@ int	is_redir_in(char *name)
 		close(fd);
 	}
 	else if (access(name, W_OK | R_OK))
-		ft_puterror(name, ": Permission denied\n");
+		return(ft_puterror(name, ": Permission denied\n"));
 	else
-		ft_puterror(name, ": No such file or directory\n");
+		return(ft_puterror(name, ": No such file or directory\n"));
 	return (1);
 }
 
@@ -84,6 +87,7 @@ int	is_redir_out(char *name, int type)
 {
 	int	fd;
 
+	fd = -1;
 	if (type == REDIR_OUT)
 		fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	else if (type == REDIR_APPEND)
@@ -94,22 +98,18 @@ int	is_redir_out(char *name, int type)
 			fd = open(name, O_RDWR | O_APPEND, 0666);
 	}
 	if (fd < 0 && access(name, W_OK | R_OK))
-	{
-		ft_puterror(name, ": Permission denied\n");
-		return (0);
-	}
+		return(ft_puterror(name, ": Permission denied\n"));
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 	return (1);
 }
 
-void	handling_redir(t_ast *root, int first_call)
+void	handling_redir(t_ast *root)
 {
-	first_call = first_call;
 	if (root->left && check_redirect(root->left))
 	{
 		init_fds(root->right->cmd_list, root->type);
-		handling_redir(root->left, 0);
+		handling_redir(root->left);
 	}
 	if (root->left->type == EXEC && check_redirect(root) && root->right)
 		init_fds(root->right->cmd_list, root->type);
@@ -124,9 +124,8 @@ void	handle_redir(t_ast *root)
 
 	std_fd[0] = dup(STDIN_FILENO);
 	std_fd[1] = dup(STDOUT_FILENO);
-	(void)fds;
 	if (init_fds(NULL, 0) && !*init_fds(NULL, 0))
-		handling_redir(root, 1);
+		handling_redir(root);
 	if(root->left->type == EXEC)
 	{
 		fds = init_fds(NULL, 0);
