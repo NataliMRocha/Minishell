@@ -40,9 +40,6 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 		tokens->next = NULL;
 	root->left = ast_constructor(tokens);
 	root->right = ast_constructor(right);
-	free_token_list(right);
-	free(token_to_split->data);
-	free(token_to_split);
 	return (1);
 }
 
@@ -66,7 +63,7 @@ char	**command_constructor(t_token **tokens)
 	t_token	*temp;
 	int		i;
 
-	while (tokens && (*tokens)->prev)
+	while (tokens && *tokens && (*tokens)->prev)
 		*tokens = (*tokens)->prev;
 	temp = *tokens;
 	i = 0;

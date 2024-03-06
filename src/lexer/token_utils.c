@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 12:43:27 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/06 14:12:16 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	free_token_list(t_token *list)
 	while (list)
 	{
 		tmp = list->next;
-		free(list->data);
+		if (list->data && *list->data)
+			free(list->data);
 		free(list);
 		list = tmp;
 	}
