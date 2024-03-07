@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 11:37:49 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:54:11 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,23 @@ char	*expand_var(char *buf)
 {
 	char	*result;
 	int		i;
-	int		single_quotes;
+	char	*quotes;
+	char	tmp[2];
 
 	i = 0;
 	result = ft_calloc(1, sizeof(char));
-	single_quotes = ft_handle_quote(buf, '\'', 0);
-	while (buf && i < (int)ft_strlen(buf) && buf[i])
+	if (buf[i] == '\'' || buf[i] == '"')
+		tmp[0] = buf[0];
+	quotes = ft_strtrim(buf, tmp);
+	while (buf && i < (int)ft_strlen(quotes) && quotes[i])
 	{
-		while (single_quotes-- > 0)
-			result = ft_strjoin_char(result, buf[i++]);
-		if (buf[i] == '$')
-			result = result_var(buf, &i, result);
+		if (quotes[i] == '$')
+			result = result_var(quotes, &i, result);
 		else
-			result = ft_strjoin_char(result, buf[i]);
+			result = ft_strjoin_char(result, quotes[i]);
 		i++;
 	}
 	free(buf);
+	free(quotes);
 	return (result);
 }
