@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/03/06 19:22:06 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/07 10:54:36 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	is_duplicated_symbol(t_token *tmp)
 		return (0);
 	c1 = tmp->data;
 	c2 = "";
-	if (is_symbol(c1) && (ft_strlen(tmp->data) > 2))
-		return (1);
 	if (tmp->next && is_symbol(tmp->next->data))
 		c2 = tmp->next->data;
 	return (c1[0] == c2[0]);
@@ -52,15 +50,17 @@ int	check_syntax_error(t_token **list)
 	while (tmp->next)
 	{
 		if (is_redir_followed_by_pipe(tmp))
-			return (1);
+			return (PIPE);
 		if (is_duplicated_symbol(tmp))
-			return (1);
+			return (tmp->type);
 		if (check_block_error(tmp))
 			return (1);
+		if (is_symbol(tmp->data) && is_symbol(tmp->next->data))
+			return (tmp->next->type);
 		tmp = tmp->next;
 	}
 	if (tmp->type > 4 && tmp->next == NULL)
-		return (1);
+		return (13);
 	return (0);
 }
 
