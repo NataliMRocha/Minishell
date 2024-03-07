@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   char_to_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:34:30 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 15:35:08 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:08:35 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#import "libft.h"
+#include "libft.h"
 
 char	*char_to_str(char c)
 {
