@@ -6,7 +6,7 @@
 #    By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 19:13:08 by egeraldo          #+#    #+#              #
-#    Updated: 2024/02/06 14:45:09 by egeraldo         ###   ########.fr        #
+#    Updated: 2024/03/07 15:36:42 by egeraldo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ M_SRC = ft_atoi.c     ft_isalpha.c  ft_memchr.c   ft_memset.c   ft_strlcpy.c \
 	ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 	ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 	ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c \
-	ft_strcpy_delim.c ft_strjoin_char.c ft_remove_quotes.c
+	ft_strcpy_delim.c ft_strjoin_char.c ft_remove_quotes.c char_to_str.c \
 
 M_OBJ = $(M_SRC:%.c=%.o)
 

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 20:16:53 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 17:48:00 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:36:30 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ int					is_space(char c);
 char				*ft_strcpy_delim(const char *src, char delim);
 char				*ft_strjoin_char(char *str, char c);
 char				*ft_remove_quotes(char *str);
+char				*char_to_str(char c);
 
 #endif
