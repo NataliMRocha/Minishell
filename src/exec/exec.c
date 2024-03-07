@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 15:42:25 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:32:41 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	starting_exec(t_ast *root)
 		handle_and_or(root);
 	else if (root->type == PIPE)
 		handle_pipe(root);
-	else if (check_redirect(root))
+	else if (is_redirect(root->type))
 		handle_redir(root);
 	else if(root->left)
 		starting_exec(root->left);

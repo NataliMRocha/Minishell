@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/29 17:49:34 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:32:33 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	splited_free(char **s, int w);
 void	free_env_list(t_envs *list);
 int		check_builtin(t_token **token_list);
 t_ast	*parser(t_token *token_list);
-int		is_redirect(t_token *token);
+int		is_redirect(int type);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 17:04:56 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 11:53:26 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:31:53 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	free_env_list(t_envs *list)
 	}
 }
 
-int	is_redirect(t_token *token)
+int	is_redirect(int type)
 {
-	if (token && (token->type == REDIR_OUT || token->type == REDIR_APPEND
-			|| token->type == REDIR_IN || token->type == HEREDOC))
+	if ((type == REDIR_OUT || type == REDIR_APPEND
+			|| type == REDIR_IN || type == HEREDOC))
 		return (1);
 	return (0);
 }

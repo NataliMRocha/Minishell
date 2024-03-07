@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 12:36:07 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/07 12:32:54 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int	is_redir_out(char *name, int type, t_ast *root)
 
 void	get_fds(t_ast *root)
 {
-	if (root->left && check_redirect(root->left))
+	if (root->left && is_redirect(root->left->type))
 	{
 		fds_list(root->right->cmd_list, root->type);
 		get_fds(root->left);
 	}
-	if (root->left->type == EXEC && check_redirect(root) && root->right)
+	if (root->left->type == EXEC && is_redirect(root->type) && root->right)
 		fds_list(root->right->cmd_list, root->type);
 }
 
@@ -81,17 +81,19 @@ void	handle_fds(t_ast *root)
 {
 	t_fds	**fds;
 	t_fds	*tmp;
+
 	fds = fds_list(NULL, 0);
 	tmp = *fds;
 	while (tmp)
 	{
-		if (tmp->type == REDIR_IN && !is_redir_in(tmp->name[0], root->left))
+		if ((tmp->type == REDIR_IN || tmp->type == HEREDOC)
+			&& !is_redir_in(tmp->name[0], root->left))
 			root = NULL;
 		else if ((tmp->type == REDIR_OUT || tmp->type == REDIR_APPEND)
 			&& !is_redir_out(tmp->name[0], tmp->type, root->left))
 			root = NULL;
 		if (!root)
-			break;
+			break ;
 		tmp = tmp->next;
 	}
 	free_list(fds);
@@ -99,14 +101,14 @@ void	handle_fds(t_ast *root)
 
 void	save_fds(int *fds, int flag)
 {
-	static int save[2];
+	static int	save[2];
 
 	if (!flag)
 	{
 		save[0] = fds[0];
 		save[1] = fds[1];
 	}
-	if(*save && flag)
+	if (*save && flag)
 	{
 		close(save[0]);
 		close(save[1]);
@@ -115,7 +117,7 @@ void	save_fds(int *fds, int flag)
 
 void	handle_redir(t_ast *root)
 {
-	int		std_fd[2];
+	int	std_fd[2];
 
 	std_fd[0] = dup(STDIN_FILENO);
 	std_fd[1] = dup(STDOUT_FILENO);

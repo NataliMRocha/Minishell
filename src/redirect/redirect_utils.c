@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:46:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 11:47:41 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:31:00 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,6 @@ void	free_list(t_fds **fds)
 		free(*fds);
 		*fds = tmp;
 	}
-}
-
-int	check_redirect(t_ast *root)
-{
-	if (root->type == REDIR_IN || root->type == REDIR_OUT
-		|| root->type == REDIR_APPEND)
-		return (1);
-	return (0);
 }
 
 int	ft_puterror(char *cmd, char *str, t_ast *root)

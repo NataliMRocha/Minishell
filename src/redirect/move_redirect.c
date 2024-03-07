@@ -34,7 +34,7 @@ void	move_redirect(t_token **tokens)
 	{
 		if (temp && temp->next && temp->type == ARCHIVE
 			&& temp->next->type == WORD)
-			while (temp && temp->type != WORD)
+			while (temp && (temp->type == ARCHIVE || is_redirect(temp->type)))
 			{
 				move_redirect_right(&temp, &temp->next);
 				if (temp->prev)

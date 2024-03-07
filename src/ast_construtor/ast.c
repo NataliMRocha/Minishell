@@ -16,9 +16,9 @@ t_token	*search_type_to_split(t_token *tokens)
 	if (temp && temp->type == PIPE)
 		return (temp);
 	temp = find_last_node(tokens);
-	while (temp && !is_redirect(temp))
+	while (temp && !is_redirect(temp->type))
 		temp = temp->prev;
-	if (temp && is_redirect(temp))
+	if (temp && is_redirect(temp->type))
 		return (temp);
 	return (NULL);
 }
