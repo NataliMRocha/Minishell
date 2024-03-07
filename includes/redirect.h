@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:13:54 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 12:30:53 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:31:58 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "structs.h"
 
-int		heredoc(char *delim, char count);
+int		heredoc(char **delim, char count);
 int		redir_out(t_token *tokens, t_token_type type);
 void	move_redirect(t_token **tokens);
 void	move_redirect_right(t_token **arch, t_token **word);

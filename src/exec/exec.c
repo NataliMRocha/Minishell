@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 12:32:41 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:10:11 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ char	**expanded_variable(char **cmd_list)
 	return (expanded);
 }
 
-void	exec_error(char *cmd, char *path)
+void	exec_error(char *cmd, char **path)
 {
 	t_ast	*root;
-	if (path && *path == '0')
+	if (path && *path && *path[0] == '0')
 	{
 		ft_putstr_fd("command not found: ", STDERR_FILENO);
 		ft_putstr_fd(cmd, STDERR_FILENO);
@@ -44,7 +44,7 @@ void	exec_error(char *cmd, char *path)
 	}
 	root = ast_holder(NULL, 1);
 	save_fds(NULL, 1);
-	free_program(&root, &path, create_envs_table(1));
+	free_program(&root, path, create_envs_table(1));
 	close_fds(NULL, 1);
 }
 
@@ -60,7 +60,7 @@ void	exec(t_ast *root)
 	root->cmd_list = expanded_variable(root->cmd_list);
 	path = verify_path(root);
 	if (root->cmd_list && !*root->cmd_list)
-		return ;
+		return (free(path));
 	i = fork();
 	if (i == 0 && root->type == EXEC)
 	{
@@ -68,7 +68,7 @@ void	exec(t_ast *root)
 		if (execve(path, root->cmd_list, envs) == 0)
 			;
 		else
-			exec_error(root->cmd_list[0], path);
+			exec_error(root->cmd_list[0], &path);
 		free_split(envs);
 		exit(update_status_error(127));
 	}

@@ -6,23 +6,27 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 12:41:09 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:19:29 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void filling_archive(char *delim, int fd)
+void	filling_archive(char *delim, int fd)
 {
-    char    *temp;
-    char    *buf;
+	char	*temp;
+	char	*buf;
 
-    while (1)
+	while (1)
 	{
-		write(1, "$>", 2);
-		buf = get_next_line(0);
+		// write(1, "$>", 2);
+		buf = readline("$> ");
 		if (ft_strncmp(buf, delim, ft_strlen(delim)) == 0)
+		{
+			ft_putstr_fd("\n", fd);
+			free(buf);
 			break ;
+		}
 		if (ft_strchr(buf, '$') && !ft_handle_quote(delim, 0, 1))
 		{
 			temp = expand_var(buf);
@@ -35,19 +39,23 @@ void filling_archive(char *delim, int fd)
 	}
 }
 
-int	heredoc(char *delim, char count)
+int	heredoc(char **delim, char count)
 {
 	int		fd;
 	char	*name;
+	char	*temp;
 
-    name = ft_strtrim(delim, "");
-	name = ft_strjoin("/tmp/", ft_strjoin_char(name, count), 0);
+	name = ft_strcpy_delim(*delim, 0);
+	temp = ft_strjoin_char(name, count);
+	name = ft_strjoin("/tmp/", temp, 0);
+	free(temp);
 	fd = open(name, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd < 0)
 		return (ft_putendl_fd("heredoc: archive not open", 2));
-	filling_archive(delim, fd);
-    free(delim);
-    delim = strdup(name);
+	filling_archive(*delim, fd);
+	free(*delim);
+	*delim = NULL;
+	*delim = strdup(name);
 	close(fd);
 	free(name);
 	return (fd);

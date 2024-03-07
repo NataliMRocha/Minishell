@@ -4,7 +4,7 @@ Repositorio para a criação do projeto minishell da 42 São Paulo
 - [x] variaveis de ambiente
 - [x] tokenizar
 - [x] analisar sintaxe
-- [ ] heredoc
+- [x] heredoc
 - [x] arvore de execução
 - [x] criar lista de comandos
 - [x] pipe

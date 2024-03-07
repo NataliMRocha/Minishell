@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 11:54:11 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 14:36:52 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*expand_var(char *buf)
 
 	i = 0;
 	result = ft_calloc(1, sizeof(char));
+	tmp[0] = 0;
 	if (buf[i] == '\'' || buf[i] == '"')
 		tmp[0] = buf[0];
 	quotes = ft_strtrim(buf, tmp);
