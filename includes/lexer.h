@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:15:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 19:20:42 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/07 11:36:21 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "structs.h"
 
-int		ft_handle_quote(char *str, char quote);
+int		ft_handle_quote(char *str, char quote, int check_close);
 int		ft_handle_block(char *str, int check_close);
 int		is_symbol(char *res);
 char	*ft_strtok(char *str, int call);

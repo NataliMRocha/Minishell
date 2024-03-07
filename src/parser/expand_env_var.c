@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/04 15:52:48 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/07 11:37:49 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*expand_var(char *buf)
 
 	i = 0;
 	result = ft_calloc(1, sizeof(char));
-	single_quotes = ft_handle_quote(buf, '\'');
+	single_quotes = ft_handle_quote(buf, '\'', 0);
 	while (buf && i < (int)ft_strlen(buf) && buf[i])
 	{
 		while (single_quotes-- > 0)

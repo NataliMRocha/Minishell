@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/03/07 10:54:36 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/07 11:38:18 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	check_syntax_error(t_token **list)
 			return (1);
 		if (is_symbol(tmp->data) && is_symbol(tmp->next->data))
 			return (tmp->next->type);
+		if (check_quotes_error(tmp))
+			return(1);
 		tmp = tmp->next;
 	}
 	if (tmp->type > 4 && tmp->next == NULL)
@@ -73,7 +75,7 @@ int	check_quotes_error(t_token *list)
 	{
 		if (list->data[0] == *"'" || list->data[0] == '"')
 		{
-			i = ft_handle_quote(list->data, list->data[0]);
+			i = ft_handle_quote(list->data, list->data[0], 1);
 			if (i == 0)
 				return (1);
 		}
