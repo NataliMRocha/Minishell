@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 12:37:18 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:12:31 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	**expanded_variable(char **cmd_list)
 void	exec_error(char *cmd, char **path)
 {
 	t_ast	*root;
+
 	if (path && *path && *path[0] == '0')
 	{
 		ft_putstr_fd("command not found: ", STDERR_FILENO);
@@ -60,6 +61,8 @@ void	exec(t_ast *root)
 	path = verify_path(root);
 	if (root->cmd_list && !*root->cmd_list)
 		return (free(path));
+	if (!execute_builtin(root))
+		return (free(path));
 	i = fork();
 	if (i == 0 && root->type == EXEC)
 	{
@@ -72,7 +75,7 @@ void	exec(t_ast *root)
 		exit(update_status_error(127));
 	}
 	pid_last_exit_status(i);
-	free(path);		
+	free(path);
 }
 
 void	handle_and_or(t_ast *root)
@@ -97,7 +100,7 @@ void	starting_exec(t_ast *root)
 		handle_pipe(root);
 	else if (is_redirect(root->type))
 		handle_redir(root);
-	else if(root->left)
+	else if (root->left)
 		starting_exec(root->left);
 	else if (root->right)
 		starting_exec(root->right);

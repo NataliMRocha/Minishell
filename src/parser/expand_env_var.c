@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 17:08:32 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:14:30 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*result_var(char *buf, int *i, char *result)
 	free(var_name);
 	return (result);
 }
+
 char	*trim_single_quotes(char *buf)
 {
 	char	*quotes;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:39:09 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 12:38:19 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:11:10 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ int	count_envs(t_envs *envs)
 
 char	**envs_to_array(void)
 {
-	t_envs *envs;
-	int i;
-	static char **environ;
+	t_envs		*envs;
+	int			i;
+	static char	**environ;
 
 	if (environ)
 		free_split(environ);

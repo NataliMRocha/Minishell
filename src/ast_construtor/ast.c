@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/07 22:57:06 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:12:05 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 {
 	char	**cmd;
-	t_token *to_split;
+	t_token	*to_split;
 
 	to_split = search_type_to_split(tokens);
 	if (ast_split_node(ast_node, tokens, to_split))
 		return ;
 	else
-	 	cmd = command_constructor(&tokens);
+		cmd = command_constructor(&tokens);
 	ast_node->type = EXEC;
 	ast_node->cmd_list = cmd;
 }

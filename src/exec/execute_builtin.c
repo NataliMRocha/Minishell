@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_readline.c                                      :+:      :+:    :+:   */
+/*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 11:37:28 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:11:51 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/03/08 17:15:02 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/03/08 18:12:17 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_readline(void)
+int	execute_builtin(t_ast *root)
 {
-	char	*buffer;
-	char	*prompt;
-
-	prompt = malloc(2);
-	prompt[0] = '\0';
-	prompt = ft_strjoin(prompt, "\001\x1b[32m\002", 1);
-	prompt = ft_strjoin(prompt, getenv("USER"), 1);
-	prompt = ft_strjoin(prompt, "@minishell $>", 1);
-	prompt = ft_strjoin(prompt, "\001\x1b[m\002", 1);
-	buffer = readline(prompt);
-	add_history(buffer);
-	free(prompt);
-	return (buffer);
+	if (!ft_strncmp(root->cmd_list[0], "export", 6))
+		return (ft_export(root->cmd_list));
+	return (1);
 }

@@ -33,9 +33,9 @@ LEXER_SOURCES = ft_strtok.c tokens.c token_utils.c
 
 PARSER_SOURCES = check_syntax.c expand_env_var.c parser_utils.c parser.c
 
-EXEC_SOURCES = handle_signals.c exec.c verify_path.c handle_pipe.c
+EXEC_SOURCES = handle_signals.c exec.c verify_path.c handle_pipe.c execute_builtin.c
 
-BUILTIN_SOURCES = environ_list.c envs.c
+BUILTIN_SOURCES = ft_export.c ft_unset.c envs.c
 
 REDIRECT_SOURCES = heredoc.c redirect.c move_redirect.c redirect_utils.c
 

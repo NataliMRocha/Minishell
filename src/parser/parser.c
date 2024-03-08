@@ -6,12 +6,11 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 16:50:02 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:10:54 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 t_ast	*parser(t_token *token_list, char *get_cmd)
 {
@@ -40,11 +39,13 @@ int	check_builtin(t_token **token_list)
 
 	envs = create_envs_table(1);
 	tmp = *token_list;
-	while(tmp)
+	while (tmp)
 	{
-		if (tmp->next && ft_strncmp("export", tmp->data, ft_strlen(tmp->data)) == 0)
-			ft_export(tmp->next->data, envs);
-		else if (tmp->next && ft_strncmp("unset", tmp->data, ft_strlen(tmp->data)) == 0)
+		if (tmp->next && ft_strncmp("export", tmp->data,
+				ft_strlen(tmp->data)) == 0)
+			ft_export(&tmp->next->data);
+		else if (tmp->next && ft_strncmp("unset", tmp->data,
+				ft_strlen(tmp->data)) == 0)
 			ft_unset(tmp->next->data, envs);
 		else if (ft_strncmp("env", tmp->data, ft_strlen(tmp->data)) == 0)
 			print_env_list(*envs);

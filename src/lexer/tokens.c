@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 15:05:50 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:11:27 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_token	**get_tokens(t_token *tokens)
 	return (&list);
 }
 
-int check_syntax_and_quotes(t_token **list, char *readline)
+int	check_syntax_and_quotes(t_token **list, char *readline)
 {
 	int	error;
 
@@ -126,4 +126,3 @@ int	list_fill(t_token **list, char *readline)
 	get_tokens(*list);
 	return (0);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:31:54 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 23:26:21 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:11:56 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_ast(t_ast *root, int one_leaf)
 		free_ast(root->left, 0);
 		root->left = NULL;
 	}
-	if(root && root->right)
+	if (root && root->right)
 	{
 		free_ast(root->right, 0);
 		root->right = NULL;
