@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 23:31:28 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/08 00:03:40 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,17 @@ void	handle_and_or(t_ast *root)
 
 	starting_exec(root->left);
 	status_code = update_status_error(-1);
-	if ((!status_code) && root->type == AND)
+	root = ast_holder(NULL, 1, 0);
+	if ((!status_code) && root && root->type == AND)
 		starting_exec(root->right);
-	else if (status_code && root->type == OR)
+	else if (status_code && root && root->type == OR)
 		starting_exec(root->right);
 }
 
 void	starting_exec(t_ast *root)
 {
 	if (!root)
-	{
-		root = ast_holder(root, 0, 1);
 		return ;
-	}
 	if (root->type == AND || root->type == OR)
 		handle_and_or(root);
 	else if (root->type == PIPE)

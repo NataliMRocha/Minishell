@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/03/07 23:41:25 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/08 00:43:28 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	handle_pipe(t_ast *root)
 		starting_exec(root->left);
 	if (!pipe(fd))
 	{
-		root = ast_holder(NULL,1, 0);
+		if (update_status_error(-1))
+			root = ast_holder(NULL,1, 0);
 		exec_pipe(intpid, fd, root);
 		close_fds(fd, 0);
 		waitpid(intpid[0], &status_code, 0);

@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 23:29:09 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/07 23:57:49 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_fds	**fds_list(char **name, int type)
 	return (&fds);
 }
 
-int	is_redir_in(char *name, t_ast *root)
+int	is_redir_in(char *name)
 {
 	int	fd;
 
@@ -39,13 +39,13 @@ int	is_redir_in(char *name, t_ast *root)
 		close(fd);
 	}
 	else if (access(name, W_OK | R_OK))
-		return (ft_puterror(name, ": Permission denied\n", root));
+		return (ft_puterror(name, ": Permission denied\n"));
 	else
-		return (ft_puterror(name, ": No such file or directory\n", root));
+		return (ft_puterror(name, ": No such file or directory\n"));
 	return (1);
 }
 
-int	is_redir_out(char *name, int type, t_ast *root)
+int	is_redir_out(char *name, int type)
 {
 	int	fd;
 
@@ -60,7 +60,7 @@ int	is_redir_out(char *name, int type, t_ast *root)
 			fd = open(name, O_RDWR | O_APPEND, 0666);
 	}
 	if (fd < 0 && access(name, W_OK | R_OK))
-		return (ft_puterror(name, ": Permission denied\n", root));
+		return (ft_puterror(name, ": Permission denied\n"));
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 	return (1);
@@ -87,10 +87,10 @@ int	handle_fds(t_ast *root)
 	while (tmp)
 	{
 		if ((tmp->type == REDIR_IN || tmp->type == HEREDOC)
-			&& !is_redir_in(tmp->name[0], root->left))
+			&& !is_redir_in(tmp->name[0]))
 			root = NULL;
 		else if ((tmp->type == REDIR_OUT || tmp->type == REDIR_APPEND)
-			&& !is_redir_out(tmp->name[0], tmp->type, root->left))
+			&& !is_redir_out(tmp->name[0], tmp->type))
 			root = NULL;
 		if (!root)
 			break ;

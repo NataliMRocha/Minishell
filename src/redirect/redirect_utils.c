@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:46:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 12:31:00 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:55:20 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ void	free_list(t_fds **fds)
 	}
 }
 
-int	ft_puterror(char *cmd, char *str, t_ast *root)
+int	ft_puterror(char *cmd, char *str)
 {
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	update_status_error(1);
-	free_ast(root, 1);
-	root = NULL;
 	return (0);
 }
