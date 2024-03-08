@@ -26,24 +26,21 @@ t_token	*search_type_to_split(t_token *tokens)
 int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 {
 	t_token	*right;
-	t_token	*temp;
 
 	right = NULL;
-	temp = tokens;
-	if (!root || !temp || !token_to_split)
+	if (!root || !tokens || !token_to_split)
 		return (0);
 	right = token_to_split->next;
 	right->prev = NULL;
 	root->type = token_to_split->type;
 	root->cmd_list = ft_split(token_to_split->data, 0);
 	root->fd = 0;
-	temp = token_to_split->prev;
-	if (temp)
-		temp->next = NULL;
-	root->left = ast_constructor(temp);
+	tokens = token_to_split->prev;
+	if (tokens)
+		tokens->next = NULL;
+	root->left = ast_constructor(tokens);
 	root->right = ast_constructor(right);
-	free(token_to_split->data);
-	free(token_to_split);
+	free_token_list(&token_to_split);
 	return (1);
 }
 
