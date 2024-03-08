@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 12:32:54 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:29:09 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	get_fds(t_ast *root)
 		fds_list(root->right->cmd_list, root->type);
 }
 
-void	handle_fds(t_ast *root)
+int	handle_fds(t_ast *root)
 {
 	t_fds	**fds;
 	t_fds	*tmp;
@@ -97,6 +97,9 @@ void	handle_fds(t_ast *root)
 		tmp = tmp->next;
 	}
 	free_list(fds);
+	if (!root)
+		return (0);
+	return (1);
 }
 
 void	save_fds(int *fds, int flag)
@@ -124,8 +127,10 @@ void	handle_redir(t_ast *root)
 	if (fds_list(NULL, 0) && !*fds_list(NULL, 0))
 		get_fds(root);
 	if (root->left->type == EXEC)
-		handle_fds(root->left);
+		if(!handle_fds(root->left))
+			root = ast_holder(root, 1, 1);
 	save_fds(std_fd, 0);
-	starting_exec(root->left);
+	if (root)
+		starting_exec(root->left);
 	dup_and_close(std_fd);
 }

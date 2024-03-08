@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 16:10:11 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:31:28 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	exec_error(char *cmd, char **path)
 		ft_putstr_fd(cmd, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
-	root = ast_holder(NULL, 1);
+	root = ast_holder(NULL, 1, 0);
 	save_fds(NULL, 1);
 	free_program(&root, path, create_envs_table(1));
 	close_fds(NULL, 1);
@@ -92,7 +92,10 @@ void	handle_and_or(t_ast *root)
 void	starting_exec(t_ast *root)
 {
 	if (!root)
+	{
+		root = ast_holder(root, 0, 1);
 		return ;
+	}
 	if (root->type == AND || root->type == OR)
 		handle_and_or(root);
 	else if (root->type == PIPE)

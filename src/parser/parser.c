@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/06 17:24:07 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:38:31 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ast	*parser(t_token *token_list)
 
 	tree = NULL;
 	tree = ast_constructor(token_list);
-	ast_holder(tree, 0);
+	ast_holder(tree, 0, 0);
 	if (token_list && token_list->data && *token_list->data)
 		free_token_list(&token_list);
 	token_list = NULL;

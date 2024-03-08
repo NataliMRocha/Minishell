@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 16:16:14 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 23:29:33 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int main(void)
 			continue;
 		root = parser(token_list);
 		starting_exec(root);
+		root = ast_holder(NULL, 1, 0);
 		free_program(&root, &get_cmd, NULL);
 		token_list = NULL;
 	}
