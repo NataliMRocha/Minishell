@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:22:38 by codespace         #+#    #+#             */
-/*   Updated: 2024/03/06 15:46:16 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 22:44:00 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_split(char **path)
 	int	i;
 
 	i = 0;
-	while (path[i])
+	while (path && path[i])
 	{
 		free(path[i]);
 		path[i] = NULL;
