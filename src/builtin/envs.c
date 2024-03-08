@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:39:09 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 11:31:44 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:38:19 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_envs	**create_envs_table(int is_created)
 		envs = head;
 		free(tmp[0]);
 	}
-	creat_error_env(&envs);
 	return (&envs);
 }
 

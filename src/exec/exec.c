@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 10:19:22 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:37:18 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	exec_error(char *cmd, char **path)
 		ft_putstr_fd(cmd, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
+	update_status_error(127);
 	root = ast_holder(NULL, 1, 1);
 	save_fds(NULL, 1);
 	free_program(&root, path, create_envs_table(1));
@@ -51,11 +52,9 @@ void	exec_error(char *cmd, char **path)
 void	exec(t_ast *root)
 {
 	char	*path;
-	int		status;
 	pid_t	i;
 	char	**envs;
 
-	status = update_status_error(-1);
 	i = -1;
 	root->cmd_list = expanded_variable(root->cmd_list);
 	path = verify_path(root);
@@ -72,9 +71,8 @@ void	exec(t_ast *root)
 		free_split(envs);
 		exit(update_status_error(127));
 	}
-	wait(&status);
-	free(path);
-	update_status_error(status);
+	pid_last_exit_status(i);
+	free(path);		
 }
 
 void	handle_and_or(t_ast *root)

@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 10:53:44 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:19:56 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ char	*result_var(char *buf, int *i, char *result)
 		var_name = ft_strjoin_char(var_name, buf[*i]);
 	node = ft_getenv(var_name);
 	if (node)
-		result = ft_strjoin(result, ft_getenv(var_name)->value, 1);
+		result = ft_strjoin(result, node->value, 1);
+	if(var_name[0] == '?')
+	{
+		free(result);
+		result = ft_itoa(update_status_error(-1));
+	}
 	free(var_name);
 	return (result);
 }

@@ -3,23 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 23:29:33 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:32:18 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	update_status_error(int i)
+void    pid_last_exit_status(pid_t pid)
 {
-	static int status;
+    int    status;
 
-	if (i == -1)
-		return (status);
-	status = i;
-	return (status);
+    waitpid(pid, &status, 0);
+    if (WIFEXITED(status))
+        status = WEXITSTATUS(status);
+    if (status == 139)
+        status = 1;
+    update_status_error(status);
+}
+
+int	update_status_error(int exit_status)
+{
+	static int    status;
+
+    if (exit_status != -1)
+        status = exit_status;
+    return (status);
 }
 
 void	free_program(t_ast **root, char **get_cmd, t_envs **var_envs)

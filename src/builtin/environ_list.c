@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 11:33:44 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:38:32 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,4 @@ void	print_env_list(t_envs *envs)
 		printf("%s=%s\n", envs->key, envs->value);
 		envs = envs->next;
 	}
-}
-
-void creat_error_env(t_envs **envs)
-{
-	t_envs *tmp;
-
-	tmp = *envs;
-	if (!tmp)
-		return;
-	while (tmp && tmp->next)
-		tmp = tmp->next;
-	tmp->next = new_envs_node("?", "0");
 }
