@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 16:13:42 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:55:00 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,6 @@ void	free_program(t_ast **root, char **get_cmd, t_envs **var_envs)
 		free_env_list(*var_envs);
 }
 
-void	capture_heredoc(t_token **token_list)
-{
-	t_token	*temp;
-	char	count;
-
-	temp = *token_list;
-	count = 'A';
-	while (temp)
-	{
-		if (temp->type == HEREDOC)
-			heredoc(&temp->next->data, count++);
-		temp = temp->next;
-	}
-}
-
 int main(void)
 {
 	t_token *token_list = NULL;
@@ -73,14 +58,11 @@ int main(void)
 	while (1)
 	{
 		get_cmd = ft_readline();
-		if (ft_strncmp(get_cmd, "exit", 4) == 0)
+		if (ft_strncmp(get_cmd, "exit", 4) == 0) // APAGAR
 			break;
-		if ((get_cmd && !*get_cmd) || list_fill(&token_list, get_cmd) != 0)
+		root = parser(token_list, get_cmd);
+		if (!root)
 			continue;
-		capture_heredoc(&token_list);
-		if (check_syntax_and_quotes(&token_list, get_cmd))
-			continue;
-		root = parser(token_list);
 		starting_exec(root);
 		root = ast_holder(NULL, 1, 0);
 		free_program(&root, &get_cmd, NULL);

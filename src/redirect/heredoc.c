@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 16:19:29 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:05:18 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,23 @@
 
 void	filling_archive(char *delim, int fd)
 {
-	char	*temp;
 	char	*buf;
+	char	*no_quotes;
 
+	no_quotes = ft_remove_quotes(delim);
 	while (1)
 	{
-		// write(1, "$>", 2);
 		buf = readline("$> ");
-		if (ft_strncmp(buf, delim, ft_strlen(delim)) == 0)
+		if (ft_strncmp(buf, no_quotes, ft_strlen(no_quotes)) == 0)
 		{
 			ft_putstr_fd("\n", fd);
 			free(buf);
+			free(no_quotes);
 			break ;
 		}
 		if (ft_strchr(buf, '$') && !ft_handle_quote(delim, 0, 1))
-		{
-			temp = expand_var(buf);
-			ft_putstr_fd(temp, fd);
-			free(temp);
-		}
-		else
-			ft_putstr_fd(buf, fd);
+			buf = expand_var(buf);
+		ft_putstr_fd(buf, fd);
 		free(buf);
 	}
 }
@@ -59,4 +55,19 @@ int	heredoc(char **delim, char count)
 	close(fd);
 	free(name);
 	return (fd);
+}
+
+void	capture_heredoc(t_token **token_list)
+{
+	t_token	*temp;
+	char	count;
+
+	temp = *token_list;
+	count = 'A';
+	while (temp)
+	{
+		if (temp->type == HEREDOC)
+			heredoc(&temp->next->data, count++);
+		temp = temp->next;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:13:54 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 23:55:29 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/08 16:38:11 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ int		ft_puterror(char *cmd, char *str);
 void	free_list(t_fds **fds);
 void	dup_and_close(int *std_fd);
 void	save_fds(int *fds, int flag);
+void	capture_heredoc(t_token **token_list);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 16:06:52 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:08:32 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char	*result_var(char *buf, int *i, char *result)
 	char	*var_name;
 	t_envs	*node;
 
-	if(buf[*i + 1] == '?')
+	if (buf[*i + 1] == '?')
 	{
 		*i = *i + 1;
-		return(ft_strjoin(result, ft_itoa(update_status_error(-1)), 1));
+		return (ft_strjoin(result, ft_itoa(update_status_error(-1)), 1));
 	}
 	var_name = ft_strdup("");
 	while ((ft_isalnum(buf[*i + 1]) || buf[*i + 1] == '?') && buf[++*i])
@@ -37,7 +37,7 @@ char	*trim_single_quotes(char *buf)
 
 	quotes = ft_strtrim(buf, "'");
 	free(buf);
-	return(quotes);
+	return (quotes);
 }
 
 char	*expand_var(char *buf)
@@ -47,7 +47,7 @@ char	*expand_var(char *buf)
 	int		i;
 
 	i = 0;
-	if (buf && buf[i] == '\'' )
+	if (buf && buf[i] == '\'')
 		return (trim_single_quotes(buf));
 	quotes = ft_remove_quotes(buf);
 	result = ft_calloc(1, sizeof(char));
