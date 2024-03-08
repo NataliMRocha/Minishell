@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 10:52:55 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/08 10:53:44 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ char	*expand_var(char *buf)
 	char	*result;
 	int		i;
 	char	*quotes;
-	//char	tmp[2];
 
 	i = 0;
 	result = ft_calloc(1, sizeof(char));
-	//tmp[0] = 0;
 	if (buf[i] == '\'' )
 		quotes = ft_strtrim(buf, "'");
 	else
