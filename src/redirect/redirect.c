@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 23:57:49 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/08 09:37:56 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,8 @@ void	handle_redir(t_ast *root)
 	std_fd[1] = dup(STDOUT_FILENO);
 	if (fds_list(NULL, 0) && !*fds_list(NULL, 0))
 		get_fds(root);
-	if (root->left->type == EXEC)
-		if(!handle_fds(root->left))
-			root = ast_holder(root, 1, 1);
+	if (root->left->type == EXEC && !handle_fds(root->left))
+		root = ast_holder(root, 1, 1);
 	save_fds(std_fd, 0);
 	if (root)
 		starting_exec(root->left);

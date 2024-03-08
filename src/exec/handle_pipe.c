@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/03/08 00:43:28 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/08 09:35:27 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	handle_pipe(t_ast *root)
 		starting_exec(root->left);
 	if (!pipe(fd))
 	{
-		if (update_status_error(-1))
+		if (!ast_holder(NULL, 1, 0))
 			root = ast_holder(NULL,1, 0);
 		exec_pipe(intpid, fd, root);
 		close_fds(fd, 0);
