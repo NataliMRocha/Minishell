@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 12:53:36 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:05:50 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	ft_write_types(t_token *list)
 		return ((void)(list->type = REDIR_OUT));
 	if (list->data[0] == '<')
 		return ((void)(list->type = REDIR_IN));
-	if (list->data[0] == '"' && !is_redirect(list->prev->type))
+	if (list->data[0] == '"' && list->prev && !is_redirect(list->prev->type))
 		return ((void)(list->type = DQUOTE));
-	if (list->data[0] == '\'' && !is_redirect(list->prev->type))
+	if (list->data[0] == '\'' && list->prev && !is_redirect(list->prev->type))
 		return ((void)(list->type = QUOTE));
 	if (list->data[0] == '(')
 		return ((void)(list->type = BLOCK));

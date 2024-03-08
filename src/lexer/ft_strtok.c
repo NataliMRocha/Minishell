@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 11:37:01 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:28:28 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,12 @@ int	count_chars(char *res)
 	int	j;
 
 	i = 0;
-	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i])
-		&& res[i] != '"' && res[i] != '\'' && res[i] != '(')
-		i++;
-	if (res[i] == '\'' || res[i] == '"')
+	if (i == 0 && (res[i] == '\'' || res[i] == '"'))
 		return (ft_handle_quote(&res[i], 0, 0));
-	if(ft_handle_block(&res[i], 0))
+	if(i == 0 && ft_handle_block(&res[i], 0))
 		return (ft_handle_block(&res[i], 0));
+	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i]))
+		i++;
 	j = is_symbol(res);
 	if (j > 0)
 		i = j;
