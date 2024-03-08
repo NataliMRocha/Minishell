@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:18 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 11:32:05 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:39:29 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ void	ft_export(char *variable, t_envs **var_envs);
 void	ft_unset(char *key, t_envs **var_envs);
 void	print_env_list(t_envs *envs);
 char	**envs_to_array(void);
-void    creat_error_env(t_envs **envs);
 
 #endif

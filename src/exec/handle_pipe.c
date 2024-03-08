@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/03/08 12:38:41 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:41:37 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ void	exec_pipe(pid_t *intpid, int *fd, t_ast *root)
 void	handle_pipe(t_ast *root)
 {
 	int		fd[2];
-	int		status_code;
+	//int		status_code;
 	pid_t	intpid[2];
 
-	status_code = -1;
+	//status_code = -1;
 	if (root->left->type == REDIR_OUT)
 		starting_exec(root->left);
 	if (!pipe(fd))
@@ -83,7 +83,7 @@ void	handle_pipe(t_ast *root)
 		close_fds(fd, 0);
 		pid_last_exit_status(intpid[0]);
 		pid_last_exit_status(intpid[1]);
-		update_status_error(status_code);
+		//update_status_error(status_code);
 	}
 	else
 		update_status_error(EXIT_FAILURE);
