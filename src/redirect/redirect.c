@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 09:37:56 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 10:35:08 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_redir_in(char *name)
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 	}
-	else if (access(name, W_OK | R_OK))
+	else if (!access(name, F_OK) && access(name, W_OK | R_OK))
 		return (ft_puterror(name, ": Permission denied\n"));
 	else
 		return (ft_puterror(name, ": No such file or directory\n"));

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 09:36:36 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 10:19:22 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,9 @@ void	handle_and_or(t_ast *root)
 
 	starting_exec(root->left);
 	status_code = update_status_error(-1);
-	if (ast_holder(NULL, 1, 0))
-		root = ast_holder(NULL, 1, 0);
-	if ((!status_code) && root && root->type == AND)
+	if ((!status_code) && ast_holder(NULL, 1, 0) && root->type == AND)
 		starting_exec(root->right);
-	else if (status_code && root && root->type == OR)
+	else if (status_code && ast_holder(NULL, 1, 0) && root->type == OR)
 		starting_exec(root->right);
 }
 
