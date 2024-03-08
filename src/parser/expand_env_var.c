@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 14:36:52 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 10:52:55 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,15 @@ char	*expand_var(char *buf)
 	char	*result;
 	int		i;
 	char	*quotes;
-	char	tmp[2];
+	//char	tmp[2];
 
 	i = 0;
 	result = ft_calloc(1, sizeof(char));
-	tmp[0] = 0;
-	if (buf[i] == '\'' || buf[i] == '"')
-		tmp[0] = buf[0];
-	quotes = ft_strtrim(buf, tmp);
+	//tmp[0] = 0;
+	if (buf[i] == '\'' )
+		quotes = ft_strtrim(buf, "'");
+	else
+		quotes = ft_strtrim(buf, "\'");
 	while (buf && i < (int)ft_strlen(quotes) && quotes[i])
 	{
 		if (quotes[i] == '$')
