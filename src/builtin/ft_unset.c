@@ -6,29 +6,33 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:06:17 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 15:24:43 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/09 17:35:57 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_unset(char *key, t_envs **envs)
+int	ft_unset(char **keys)
 {
 	t_envs	*temp;
 	t_envs	*free_node;
+	int		i;
 
-	temp = *envs;
+	temp = *create_envs_table(1);
 	free_node = NULL;
-	while (temp->next)
+	while (temp && temp->next)
 	{
-		if (ft_strncmp(temp->next->key, key, ft_strlen(temp->next->key)) == 0)
+		i = -1;
+		while (keys && keys[++i])
 		{
-			free_node = temp->next;
-			free(temp->next->key);
-			free(temp->next->value);
-			temp->next = temp->next->next;
-			free(free_node);
-			break ;
+			if (ft_strcmp(temp->next->key, keys[i]) == 0)
+			{
+				free_node = temp->next;
+				free(temp->next->key);
+				free(temp->next->value);
+				temp->next = temp->next->next;
+				free(free_node);
+			}
 		}
 		temp = temp->next;
 	}
