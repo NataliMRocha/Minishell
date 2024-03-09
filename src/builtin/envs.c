@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:39:09 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:11:10 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:54:54 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_envs	*new_envs_node(char *key, char *value)
 	return (new_node);
 }
 
-t_envs	**create_envs_table(int is_created)
+t_envs	**create_envs_table(int is_created, int is_free)
 {
 	static t_envs	*envs;
 	t_envs			*head;
@@ -35,6 +35,8 @@ t_envs	**create_envs_table(int is_created)
 	i = -1;
 	if (is_created)
 		return (&envs);
+	if (is_free)
+		free_env_list(envs);
 	while (__environ[++i])
 	{
 		head = envs;
@@ -56,7 +58,7 @@ t_envs	*ft_getenv(char *key)
 {
 	t_envs	*envs;
 
-	envs = *create_envs_table(1);
+	envs = *create_envs_table(1, 0);
 	while (envs)
 	{
 		if (ft_strncmp(envs->key, key, 125) == 0)
@@ -87,7 +89,7 @@ char	**envs_to_array(void)
 
 	if (environ)
 		free_split(environ);
-	envs = *create_envs_table(1);
+	envs = *create_envs_table(1, 0);
 	i = count_envs(envs);
 	environ = ft_calloc(i + 1, sizeof(char *));
 	i = 0;

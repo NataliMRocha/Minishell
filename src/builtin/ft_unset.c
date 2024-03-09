@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:06:17 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 17:35:57 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/09 18:55:11 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_unset(char **keys)
 	t_envs	*free_node;
 	int		i;
 
-	temp = *create_envs_table(1);
+	temp = *create_envs_table(1, 0);
 	free_node = NULL;
 	while (temp && temp->next)
 	{

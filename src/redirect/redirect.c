@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 10:35:08 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:30:17 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,16 @@ int	handle_fds(t_ast *root)
 	return (1);
 }
 
-void	save_fds(int *fds, int flag)
+void	save_fds(int *fds, int close_fds)
 {
 	static int	save[2];
 
-	if (!flag)
+	if (!close_fds)
 	{
 		save[0] = fds[0];
 		save[1] = fds[1];
 	}
-	if (*save && flag)
+	if (*save && close_fds)
 	{
 		close(save[0]);
 		close(save[1]);

@@ -6,50 +6,54 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 17:25:50 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/09 18:55:04 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_envs	*sorted(t_envs *envs)
+char	**sorted(void)
 {
-	t_envs	*tmp;
-	t_envs	*tmp2;
+	char	**vars;
+	char 	*tmp;
+	int		i;
+	int		j;
+
+	vars = envs_to_array();
+	i = 0;
+	while (vars[i])
+	{
+		j = i + 1;
+		while (vars[j])
+		{
+			if (ft_strcmp(vars[i], vars[j]) > 0)
+			{
+				tmp = vars[i];
+				vars[i] = vars[j];
+				vars[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (vars);
+}
+
+void	print_export()
+{
+	char	**arr;
+	int		i;
 	char	*key;
 	char	*value;
 
-	tmp = envs;
-	while (tmp->next)
+	arr = sorted();
+	i = -1;
+	while (arr && arr[++i])
 	{
-		tmp2 = envs;
-		while (tmp2->next)
-		{
-			if (ft_strcmp(tmp2->key, tmp2->next->key) > 0)
-			{
-				key = tmp2->key;
-				value = tmp2->value;
-				tmp2->key = tmp2->next->key;
-				tmp2->value = tmp2->next->value;
-				tmp2->next->key = key;
-				tmp2->next->value = value;
-			}
-			tmp2 = tmp2->next;
-		}
-		tmp = tmp->next;
-	}
-	return (envs);
-}
-
-void	print_export(t_envs *envs)
-{
-	t_envs	*tmp;
-
-	tmp = sorted(envs);
-	while (tmp)
-	{
-		printf("declare -x %s=\"%s\"\n", tmp->key, tmp->value);
-		tmp = tmp->next;
+		key = ft_strcpy_delim(arr[i], '=');
+		value = ft_strchr(arr[i], '=');
+		printf("declare -x %s=\"%s\"\n", key, &value[1]);
+		free(key);
 	}
 }
 
@@ -92,10 +96,10 @@ int	ft_export(char **var)
 	char	*key;
 	int		i;
 
-	temp = *create_envs_table(1);
+	temp = *create_envs_table(1, 0);
 	if (var[0] && !var[1])
 	{
-		print_export(temp);
+		print_export();
 		return (update_status_error(0));
 	}
 	i = 0;

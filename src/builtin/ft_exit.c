@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 15:14:18 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 18:54:21 by etovaz           ###   ########.fr       */
+/*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
+/*   Updated: 2024/03/09 18:54:59 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "../../includes/minishell.h"
 
-# include "parser.h"
-
-t_envs	*new_envs_node(char *key, char *value);
-t_envs	**create_envs_table(int is_created, int is_free);
-t_envs	*ft_getenv(char *key);
-int		ft_export(char **var);
-int		ft_unset(char **keys);
-int		print_env_list(t_envs *envs);
-char	**envs_to_array(void);
-void	ft_exit(int exit_code);
-
-#endif
+void	ft_exit(int exit_code)
+{
+	// TODO: precisa atualizar o status code
+	ast_holder(NULL, 1, 1);
+	free_env_list(*create_envs_table(1, 1));
+	exit(update_status_error(exit_code));
+}

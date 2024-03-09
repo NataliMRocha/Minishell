@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/03/08 18:13:49 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:59:02 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	pipe_fork(int *fd, t_ast *root, int in_out)
 		close_fds(NULL, 1);
 	}
 	root = ast_holder(NULL, 1, 0);
-	free_program(&root, NULL, create_envs_table(1));
+	free_program(&root, NULL, create_envs_table(1, 0));
 	close_fds(NULL, 1);
 	exit(update_status_error(-1));
 }

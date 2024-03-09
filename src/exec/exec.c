@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 15:01:32 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/09 19:00:49 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ char	**expanded_variable(char **cmd_list)
 
 void	exec_error(char *cmd, char **path)
 {
-	t_ast	*root;
-
 	if (path && *path && *path[0] == '0')
 	{
 		ft_putstr_fd("command not found: ", STDERR_FILENO);
@@ -44,9 +42,10 @@ void	exec_error(char *cmd, char **path)
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
 	update_status_error(127);
-	root = ast_holder(NULL, 1, 1);
 	save_fds(NULL, 1);
-	free_program(&root, path, create_envs_table(1));
+	ast_holder(NULL, 1, 1);
+	create_envs_table(1, 1);
+	free(*path);
 	close_fds(NULL, 1);
 }
 
