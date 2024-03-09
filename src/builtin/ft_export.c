@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:11:18 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:24:15 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_export(t_envs *envs)
 int	verify_key(char **key, char *var)
 {
 	*key = ft_strcpy_delim(var, '=');
-	if (key && *key && (*key[0] || *key[0] == '?'))
+	if (key && *key && (*key[0] && *key[0] == '?'))
 	{
 		printf("minishell: export: `%s': not a valid identifier\n", *key);
 		free(*key);
@@ -49,7 +49,7 @@ int	ft_put_new_env(char **key, char *var, t_envs *envs)
 
 	if (verify_key(key, var))
 		return (update_status_error(1));
-	value = ft_remove_quotes(expand_var(ft_strchr(var, '=') + 1));
+	value = ft_remove_quotes(ft_strchr(var, '=') + 1);
 	new_node = ft_getenv(*key);
 	if (new_node)
 	{
@@ -58,7 +58,7 @@ int	ft_put_new_env(char **key, char *var, t_envs *envs)
 	}
 	else
 		envs->next->next = new_envs_node(*key, value);
-	free(key);
+	free(*key);
 	free(value);
 	return (update_status_error(0));
 }
@@ -68,15 +68,15 @@ int	ft_export(char **var)
 	t_envs	*temp;
 	char	*key;
 
+	temp = *create_envs_table(1);
 	if (var[0] && !var[1])
 	{
-		print_export(*create_envs_table(1));
+		print_export(temp);
 		return (update_status_error(0));
 	}
-	temp = *create_envs_table(1);
 	while (temp->next->next)
 		temp = temp->next;
-	if (strchr(var[1], '='))
-		ft_put_new_env(&key, var[1], temp);
-	return (update_status_error(1));
+	if (strchr(var[1], '=') && ft_put_new_env(&key, var[1], temp))
+		return (update_status_error(1));
+	return (update_status_error(0));
 }

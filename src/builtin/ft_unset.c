@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:06:17 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:07:25 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:24:43 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_unset(char *key, t_envs **envs)
+int	ft_unset(char *key, t_envs **envs)
 {
 	t_envs	*temp;
 	t_envs	*free_node;
@@ -32,13 +32,15 @@ void	ft_unset(char *key, t_envs **envs)
 		}
 		temp = temp->next;
 	}
+	return (update_status_error(0));
 }
 
-void	print_env_list(t_envs *envs)
+int	print_env_list(t_envs *envs)
 {
 	while (envs)
 	{
 		printf("%s=%s\n", envs->key, envs->value);
 		envs = envs->next;
 	}
+	return (update_status_error(0));
 }

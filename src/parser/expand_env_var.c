@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:14:30 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/09 15:15:55 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*result_var(char *buf, int *i, char *result)
 	if (buf[*i + 1] == '?')
 	{
 		*i = *i + 1;
-		return (ft_strjoin(result, ft_itoa(update_status_error(-1)), 1));
+		result = ft_strjoin(result, ft_itoa(update_status_error(-1)), 3);
+		return (result);
 	}
 	var_name = ft_strdup("");
 	while ((ft_isalnum(buf[*i + 1]) || buf[*i + 1] == '?') && buf[++*i])
