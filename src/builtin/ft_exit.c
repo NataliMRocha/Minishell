@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/11 17:24:39 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/11 18:11:26 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,16 @@ int	handle_exit_error(char **prompt)
 void	ft_exit(char **prompt, t_ast *root)
 {
 	int		i;
-	char	**args;
 	int		exit_status;
 
-	args = ft_split(*prompt, ' ');
-	ast_holder(root, 1, 1);
 	free_env_list(*create_envs_table(1, 1));
-	exit_status = handle_exit_error(args);
+	exit_status = handle_exit_error(prompt);
 	save_fds(NULL, 1);
+	ast_holder(root, 1, 1);
 	ft_putstr_fd("exit\n", STDERR_FILENO);
 	i = 0;
 	while (i < 3)
 		close(i++);
-	free_split(args);
 	rl_clear_history();
 	exit(update_status_error(exit_status));
 }
