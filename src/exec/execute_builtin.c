@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:15:02 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 17:22:15 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/11 18:47:02 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ int	execute_builtin(t_ast *root)
 		ft_exit(root->cmd_list, root);
 		return(0);
 	}
+	if (!ft_strncmp(root->cmd_list[0], "pwd", 2))
+		return (ft_pwd());
 	return (1);
 }

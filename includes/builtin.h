@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:18 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 17:22:21 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/11 18:47:22 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int		ft_unset(char **keys);
 int		print_env_list(t_envs *envs);
 char	**envs_to_array(void);
 void	ft_exit(char **prompt, t_ast *root);
+int		ft_pwd(void);
 
 #endif
