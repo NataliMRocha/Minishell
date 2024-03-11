@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/02/22 12:45:23 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:14:57 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	is_duplicated_symbol(t_token *tmp)
 		return (0);
 	c1 = tmp->data;
 	c2 = "";
-	if (is_symbol(c1) && (ft_strlen(tmp->data) > 2))
-		return (1);
 	if (tmp->next && is_symbol(tmp->next->data))
 		c2 = tmp->next->data;
 	return (c1[0] == c2[0]);
@@ -36,8 +34,8 @@ int	is_duplicated_symbol(t_token *tmp)
 
 int	check_block_error(t_token *list)
 {
-	return (list->type == BLOCK && !ft_handle_block(list->data, 1))
-		|| (list->type == BLOCK && is_redirect(list->prev));
+	return ((list->type == BLOCK && !ft_handle_block(list->data, 1))
+		|| (list->type == BLOCK && is_redirect(list->prev->type)));
 }
 
 int	check_syntax_error(t_token **list)
@@ -48,19 +46,24 @@ int	check_syntax_error(t_token **list)
 		return (0);
 	tmp = *list;
 	if (tmp->type == PIPE || tmp->type == AND || tmp->type == OR)
-		return (1);
+		return (tmp->type);
 	while (tmp->next)
 	{
 		if (is_redir_followed_by_pipe(tmp))
-			return (1);
+			return (PIPE);
 		if (is_duplicated_symbol(tmp))
-			return (1);
+			return (tmp->type);
 		if (check_block_error(tmp))
+			return (1);
+		if (is_symbol(tmp->data) && is_symbol(tmp->next->data)
+			&& !is_redirect(tmp->next->type))
+			return (tmp->next->type);
+		if (check_quotes_error(tmp))
 			return (1);
 		tmp = tmp->next;
 	}
 	if (tmp->type > 4 && tmp->next == NULL)
-		return (1);
+		return (13);
 	return (0);
 }
 
@@ -73,7 +76,7 @@ int	check_quotes_error(t_token *list)
 	{
 		if (list->data[0] == *"'" || list->data[0] == '"')
 		{
-			i = ft_handle_quote(list->data, list->data[0]);
+			i = ft_handle_quote(list->data, list->data[0], 1);
 			if (i == 0)
 				return (1);
 		}

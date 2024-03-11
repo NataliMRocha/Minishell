@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:26:08 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/02 11:09:08 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:12:40 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 	Ctrl + \: SIGQUIT - é ignorado, não faz nada
 */
 
-void sigint_handler(int sig)
+void	sigint_handler(int sig)
 {
-    printf("\n");
-    rl_on_new_line();
-    rl_replace_line("", 0);
-    rl_redisplay();
-    (void)sig;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	(void)sig;
 }
 
-void setup_signals(void)
+void	setup_signals(void)
 {
-    signal(SIGINT, sigint_handler);
+	signal(SIGINT, sigint_handler);
 }

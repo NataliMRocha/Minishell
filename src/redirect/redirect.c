@@ -3,73 +3,133 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 12:16:32 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:30:17 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-int	handle_fd_error(int *fd, int i, t_token *token_list)
+t_fds	**fds_list(char **name, int type)
 {
-	if (fd[i] < 0)
-	{
-		close_fds(fd, i);
-		printf("minishell: %s: Permission denied\n", token_list->next->data);
-		update_status_error(1);
-		return (1);
-	}
-	return (0);
+	static t_fds	*fds;
+	t_fds			*new;
+
+	if (!name && !type)
+		return (&fds);
+	new = malloc(sizeof(t_fds));
+	new->name = name;
+	new->type = type;
+	new->next = NULL;
+	new->next = fds;
+	fds = new;
+	return (&fds);
 }
 
-void	remove_tokens_after_handle(t_token **token_list, int token_to_remove,
-		t_token_type type_to_remove)
+int	is_redir_in(char *name)
 {
-	t_token	*delete;
+	int	fd;
 
-	while (token_list && *token_list && token_to_remove > 0)
+	if (!access(name, F_OK))
 	{
-		if (*token_list && (*token_list)->type == type_to_remove && (*token_list)->prev
-			&& (*token_list)->next && (*token_list)->next->next)
-		{
-			delete = *token_list;
-			(*token_list)->prev->next = (*token_list)->next->next;
-			(*token_list)->next->next->prev = (*token_list)->prev;
-			delete->next = NULL;
-			delete->prev = NULL;
-			while (token_list && (*token_list)->prev)
-				*token_list = (*token_list)->prev;
-			free_token_list(delete);
-			token_to_remove--;
-		}
-		*token_list = (*token_list)->next;
+		fd = open(name, O_RDONLY);
+		dup2(fd, STDIN_FILENO);
+		close(fd);
+	}
+	else if (!access(name, F_OK) && access(name, W_OK | R_OK))
+		return (ft_puterror(name, ": Permission denied\n"));
+	else
+		return (ft_puterror(name, ": No such file or directory\n"));
+	return (1);
+}
+
+int	is_redir_out(char *name, int type)
+{
+	int	fd;
+
+	fd = -1;
+	if (type == REDIR_OUT)
+		fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
+	else if (type == REDIR_APPEND)
+	{
+		if (access(name, F_OK))
+			fd = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
+		else
+			fd = open(name, O_RDWR | O_APPEND, 0666);
+	}
+	if (fd < 0 && access(name, W_OK | R_OK))
+		return (ft_puterror(name, ": Permission denied\n"));
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
+	return (1);
+}
+
+void	get_fds(t_ast *root)
+{
+	if (root->left && is_redirect(root->left->type))
+	{
+		fds_list(root->right->cmd_list, root->type);
+		get_fds(root->left);
+	}
+	if (root->left->type == EXEC && is_redirect(root->type) && root->right)
+		fds_list(root->right->cmd_list, root->type);
+}
+
+int	handle_fds(t_ast *root)
+{
+	t_fds	**fds;
+	t_fds	*tmp;
+
+	fds = fds_list(NULL, 0);
+	tmp = *fds;
+	while (tmp)
+	{
+		if ((tmp->type == REDIR_IN || tmp->type == HEREDOC)
+			&& !is_redir_in(tmp->name[0]))
+			root = NULL;
+		else if ((tmp->type == REDIR_OUT || tmp->type == REDIR_APPEND)
+			&& !is_redir_out(tmp->name[0], tmp->type))
+			root = NULL;
+		if (!root)
+			break ;
+		tmp = tmp->next;
+	}
+	free_list(fds);
+	if (!root)
+		return (0);
+	return (1);
+}
+
+void	save_fds(int *fds, int close_fds)
+{
+	static int	save[2];
+
+	if (!close_fds)
+	{
+		save[0] = fds[0];
+		save[1] = fds[1];
+	}
+	if (*save && close_fds)
+	{
+		close(save[0]);
+		close(save[1]);
 	}
 }
 
-int	redir_out(t_token *tokens, t_token_type type)
+void	handle_redir(t_ast *root)
 {
-	t_token	*temp;
-	int		fd[1024];
-	int		i;
+	int	std_fd[2];
 
-	i = 0;
-	ft_memset(fd, -1, 1024);
-	temp = tokens;
-	while (temp && temp->next && (type == REDIR_OUT || type == REDIR_APPEND))
-	{
-		if (temp->type == type)
-		{
-			fd[i] = open(temp->next->data, O_WRONLY | O_APPEND | O_CREAT, 0644);
-			if (handle_fd_error(fd, i, temp))
-				break ;
-			i++;
-		}
-		temp = temp->next;
-	}
-	close_fds(fd, i - 1);
-	remove_tokens_after_handle(&tokens, --i, type);
-	return (fd[--i]);
+	std_fd[0] = dup(STDIN_FILENO);
+	std_fd[1] = dup(STDOUT_FILENO);
+	if (fds_list(NULL, 0) && !*fds_list(NULL, 0))
+		get_fds(root);
+	if (root->left->type == EXEC && !handle_fds(root->left))
+		root = ast_holder(root, 1, 1);
+	save_fds(std_fd, 0);
+	if (root)
+		starting_exec(root->left);
+	dup_and_close(std_fd);
 }

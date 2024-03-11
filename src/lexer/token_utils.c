@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 12:43:27 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:11:23 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,34 @@ t_token	*find_last_node(t_token *head)
 	return (head);
 }
 
-void	free_token_list(t_token *list)
+void	free_token_list(t_token **list)
 {
 	t_token	*tmp;
 
-	while (list)
+	while (list && *list)
 	{
-		tmp = list->next;
-		free(list->data);
-		free(list);
-		list = tmp;
+		tmp = (*list)->next;
+		if (list && *list && (*list)->data && *(*list)->data)
+		{
+			free((*list)->data);
+			(*list)->data = NULL;
+		}
+		free(*list);
+		*list = tmp;
 	}
 	list = NULL;
+}
+
+void	print_error(int error)
+{
+	if (error == PIPE)
+		ft_putstr_fd("syntax error near unexpected token `|'\n", 2);
+	else if (error == AND)
+		ft_putstr_fd("syntax error near unexpected token `&&'\n", 2);
+	else if (error == OR)
+		ft_putstr_fd("syntax error near unexpected token `||'\n", 2);
+	else if (error == 1)
+		ft_putstr_fd("Minishell can't deal with open quotes\n", 2);
+	else if (error == 13)
+		ft_putstr_fd("syntax error near unexpected token new line\n", 2);
 }

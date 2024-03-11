@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
+/*   Updated: 2024/03/08 18:12:05 by egeraldo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
@@ -16,9 +27,9 @@ t_token	*search_type_to_split(t_token *tokens)
 	if (temp && temp->type == PIPE)
 		return (temp);
 	temp = find_last_node(tokens);
-	while (temp && !is_redirect(temp))
+	while (temp && !is_redirect(temp->type))
 		temp = temp->prev;
-	if (temp && is_redirect(temp))
+	if (temp && is_redirect(temp->type))
 		return (temp);
 	return (NULL);
 }
@@ -33,30 +44,29 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 	right = token_to_split->next;
 	right->prev = NULL;
 	root->type = token_to_split->type;
-	root->command_list = ft_split(token_to_split->data, 0);
+	root->cmd_list = ft_split(token_to_split->data, 0);
+	root->fd = 0;
 	tokens = token_to_split->prev;
 	if (tokens)
 		tokens->next = NULL;
 	root->left = ast_constructor(tokens);
 	root->right = ast_constructor(right);
-	free_token_list(right);
-	free(token_to_split->data);
-	free(token_to_split);
+	free_token_list(&token_to_split);
 	return (1);
 }
 
 void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 {
 	char	**cmd;
-	t_token *to_split;
+	t_token	*to_split;
 
 	to_split = search_type_to_split(tokens);
 	if (ast_split_node(ast_node, tokens, to_split))
 		return ;
 	else
-	 	cmd = command_constructor(&tokens);
+		cmd = command_constructor(&tokens);
 	ast_node->type = EXEC;
-	ast_node->command_list = cmd;
+	ast_node->cmd_list = cmd;
 }
 
 char	**command_constructor(t_token **tokens)
@@ -65,7 +75,7 @@ char	**command_constructor(t_token **tokens)
 	t_token	*temp;
 	int		i;
 
-	while (tokens && (*tokens)->prev)
+	while (tokens && *tokens && (*tokens)->prev)
 		*tokens = (*tokens)->prev;
 	temp = *tokens;
 	i = 0;

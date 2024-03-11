@@ -6,13 +6,13 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 12:55:51 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:11:45 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_handle_quote(char *str, char quote)
+int	ft_handle_quote(char *str, char quote, int check_close)
 {
 	int	i;
 
@@ -24,7 +24,9 @@ int	ft_handle_quote(char *str, char quote)
 		if (str[i++] == quote)
 			return (i);
 	}
-	return (0);
+	if (check_close == 1)
+		return (0);
+	return (i);
 }
 
 int	ft_handle_block(char *str, int check_close)
@@ -33,7 +35,7 @@ int	ft_handle_block(char *str, int check_close)
 
 	i = 0;
 	if (str && str[i] == '(')
-		while(str && str[i] && str[++i] != ')')
+		while (str && str[i] && str[++i] != ')')
 			;
 	if (str && str[i] != ')' && check_close == 1)
 		return (0);
@@ -53,12 +55,13 @@ int	is_symbol(char *res)
 	j = 0;
 	while (res && res[j] && ft_strchr(symbols, res[j]))
 	{
-		if (res[j] != res[j + 1] && ft_strchr(symbols, res[j])
-			&& ft_strchr(symbols, res[j + 1]))
+		if (res[j] != res[0])
 			i++;
 		j++;
 	}
 	j -= i;
+	if (j > 2)
+		return (2);
 	return (j);
 }
 
@@ -68,13 +71,12 @@ int	count_chars(char *res)
 	int	j;
 
 	i = 0;
-	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i])
-		&& res[i] != '"' && res[i] != '\'' && res[i] != '(')
-		i++;
-	if (ft_handle_quote(&res[i], 0))
-		return (ft_handle_quote(&res[i], 0));
-	if(ft_handle_block(&res[i], 0))
+	if (i == 0 && (res[i] == '\'' || res[i] == '"'))
+		return (ft_handle_quote(&res[i], 0, 0));
+	if (i == 0 && ft_handle_block(&res[i], 0))
 		return (ft_handle_block(&res[i], 0));
+	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i]))
+		i++;
 	j = is_symbol(res);
 	if (j > 0)
 		i = j;

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_char.c                                  :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 10:51:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 16:04:26 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/03/09 15:57:43 by etovaz            #+#    #+#             */
+/*   Updated: 2024/03/09 15:58:04 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin_char(char *str, char c)
+int	ft_strcmp(char *s1, char *s2)
 {
-	char concat[2];
-
-	concat[0] = c;
-	concat[1] = '\0';
-	str = ft_strjoin(str, concat, 1);
-	return (str);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

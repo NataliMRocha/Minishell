@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/28 16:30:31 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:11:27 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	ft_write_types(t_token *list)
 		return ((void)(list->type = REDIR_OUT));
 	if (list->data[0] == '<')
 		return ((void)(list->type = REDIR_IN));
-	if (list->data[0] == '"' && !is_redirect(list->prev))
+	if (list->data[0] == '"' && list->prev && !is_redirect(list->prev->type))
 		return ((void)(list->type = DQUOTE));
-	if (list->data[0] == '\'' && !is_redirect(list->prev))
+	if (list->data[0] == '\'' && list->prev && !is_redirect(list->prev->type))
 		return ((void)(list->type = QUOTE));
 	if (list->data[0] == '(')
 		return ((void)(list->type = BLOCK));
-	if (is_redirect(list->prev) && list->type == WORD)
+	if (list->prev && is_redirect(list->prev->type) && list->type == WORD)
 		return ((void)(list->type = ARCHIVE));
 }
 
@@ -73,6 +73,42 @@ void	append_node(t_token **list, char *content)
 	ft_write_types(node);
 }
 
+t_token	**get_tokens(t_token *tokens)
+{
+	static t_token	*list;
+
+	if (tokens)
+		list = tokens;
+	return (&list);
+}
+
+int	check_syntax_and_quotes(t_token **list, char *readline)
+{
+	int	error;
+
+	error = check_syntax_error(list);
+	if (error)
+	{
+		print_error(error);
+		free(readline);
+		free_token_list(list);
+		*list = NULL;
+		list = NULL;
+		return (update_status_error(2));
+	}
+	error = check_quotes_error(*list);
+	if (error)
+	{
+		print_error(error);
+		free(readline);
+		free_token_list(list);
+		*list = NULL;
+		list = NULL;
+		return (update_status_error(2));
+	}
+	return (0);
+}
+
 int	list_fill(t_token **list, char *readline)
 {
 	char	*token;
@@ -86,13 +122,7 @@ int	list_fill(t_token **list, char *readline)
 		if (token && *token != '\0')
 			append_node(list, token);
 	}
-	if (*list && (check_syntax_error(list) || check_quotes_error(*list)))
-	{
-			printf("Syntax Error\n");
-			free(readline);
-			free_token_list(*list);
-			free(token);
-			return(update_status_error(2));
-	}
+	free(token);
+	get_tokens(*list);
 	return (0);
 }

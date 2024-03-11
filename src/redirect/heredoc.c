@@ -6,36 +6,68 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/02/23 16:55:42 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:05:18 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int    heredoc(char *name, char *delim)
+void	filling_archive(char *delim, int fd)
 {
-    char	*buf;
-    int		fd;
+	char	*buf;
+	char	*no_quotes;
+
+	no_quotes = ft_remove_quotes(delim);
+	while (1)
+	{
+		buf = readline("$> ");
+		if (ft_strncmp(buf, no_quotes, ft_strlen(no_quotes)) == 0)
+		{
+			ft_putstr_fd("\n", fd);
+			free(buf);
+			free(no_quotes);
+			break ;
+		}
+		if (ft_strchr(buf, '$') && !ft_handle_quote(delim, 0, 1))
+			buf = expand_var(buf);
+		ft_putstr_fd(buf, fd);
+		free(buf);
+	}
+}
+
+int	heredoc(char **delim, char count)
+{
+	int		fd;
+	char	*name;
 	char	*temp;
 
-    fd = open(name, O_CREAT | O_RDWR | O_APPEND, 0777);
-    if (fd < 0)
-        return (ft_putendl_fd("heredoc: archive not open", 2));
-    while (1)
-    {
-        write(1, "$>", 2);
-        buf = get_next_line(0);
-        if (ft_strncmp(buf, delim, ft_strlen(delim)) == 0)
-            break ;
-		if (ft_strchr(buf, '$'))
-		{
-			temp = expand_var(buf);
-        	ft_putstr_fd(temp, fd);
-			free(temp);
-		}
-		else
-        	ft_putstr_fd(buf, fd);
-		free(buf);
-    }
-    return (fd);
+	name = ft_strcpy_delim(*delim, 0);
+	temp = ft_strjoin_char(name, count);
+	name = ft_strjoin("/tmp/", temp, 0);
+	free(temp);
+	fd = open(name, O_CREAT | O_RDWR | O_TRUNC, 0666);
+	if (fd < 0)
+		return (ft_putendl_fd("heredoc: archive not open", 2));
+	filling_archive(*delim, fd);
+	free(*delim);
+	*delim = NULL;
+	*delim = strdup(name);
+	close(fd);
+	free(name);
+	return (fd);
+}
+
+void	capture_heredoc(t_token **token_list)
+{
+	t_token	*temp;
+	char	count;
+
+	temp = *token_list;
+	count = 'A';
+	while (temp)
+	{
+		if (temp->type == HEREDOC)
+			heredoc(&temp->next->data, count++);
+		temp = temp->next;
+	}
 }

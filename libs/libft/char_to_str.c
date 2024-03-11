@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_char.c                                  :+:      :+:    :+:   */
+/*   char_to_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 10:51:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 16:04:26 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/03/07 15:34:30 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/03/07 18:08:35 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin_char(char *str, char c)
+char	*char_to_str(char c)
 {
-	char concat[2];
+	char	*str;
 
-	concat[0] = c;
-	concat[1] = '\0';
-	str = ft_strjoin(str, concat, 1);
+	str = ft_calloc(2, sizeof(char));
+	str[0] = c;
+	str[1] = '\0';
 	return (str);
 }

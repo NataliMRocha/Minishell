@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 12:21:16 by egeraldo          #+#    #+#             */
-/*   Updated: 2023/07/25 13:09:27 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/07 14:34:25 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_is_in(char c, const char *set)
 {
-	while (*set)
+	while (c && set && *set)
 	{
 		if (*set++ == c)
 			return (1);
@@ -30,7 +30,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	start = 0;
 	end = ft_strlen(s1) - 1;
-	while (ft_is_in(s1[start], set))
+	while (s1 && s1[start] && ft_is_in(s1[start], set))
 		start++;
 	while (end > start && ft_is_in(s1[end], set))
 		end--;

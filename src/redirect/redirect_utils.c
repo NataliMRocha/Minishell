@@ -1,42 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 17:04:56 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 12:31:53 by egeraldo         ###   ########.fr       */
+/*   Created: 2024/03/06 11:46:31 by egeraldo          #+#    #+#             */
+/*   Updated: 2024/03/08 18:14:01 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	splited_free(char **str, int words_len)
+void	dup_and_close(int *std_fd)
 {
-	while (words_len-- > 0)
-		free(str[words_len]);
-	free(str);
+	if (!std_fd && !*std_fd)
+		return ;
+	dup2(std_fd[1], STDOUT_FILENO);
+	dup2(std_fd[0], STDIN_FILENO);
+	close_fds(std_fd, 0);
 }
 
-void	free_env_list(t_envs *list)
+void	free_list(t_fds **fds)
 {
-	t_envs	*tmp;
+	t_fds	*tmp;
 
-	while (list)
+	if (!fds || !*fds)
+		return ;
+	while (*fds)
 	{
-		tmp = list->next;
-		free(list->key);
-		free(list->value);
-		free(list);
-		list = tmp;
+		tmp = (*fds)->next;
+		free(*fds);
+		*fds = tmp;
 	}
 }
 
-int	is_redirect(int type)
+int	ft_puterror(char *cmd, char *str)
 {
-	if ((type == REDIR_OUT || type == REDIR_APPEND
-			|| type == REDIR_IN || type == HEREDOC))
-		return (1);
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	update_status_error(1);
 	return (0);
 }
