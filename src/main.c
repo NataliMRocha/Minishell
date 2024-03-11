@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 15:02:31 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:40:13 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	main(void)
 	while (1)
 	{
 		get_cmd = ft_readline();
-		if (ft_strncmp(get_cmd, "exit", 4) == 0) // APAGAR
-			ft_exit(&get_cmd);
+/* 		if (ft_strncmp(get_cmd, "exit", 4) == 0) // APAGAR
+			ft_exit(&get_cmd, NULL); */
 		root = parser(get_cmd);
 		if (!root)
 			continue ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:15:02 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 19:04:59 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/11 17:22:15 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,10 @@ int	execute_builtin(t_ast *root)
 		return (ft_unset(root->cmd_list));
 	if (!ft_strncmp(root->cmd_list[0], "env", 3))
 		return (print_env_list(*create_envs_table(1, 0)));
+	if (!ft_strncmp(root->cmd_list[0], "exit", 4))
+	{
+		ft_exit(root->cmd_list, root);
+		return(0);
+	}
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/11 15:45:47 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:24:39 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,22 @@ int	handle_exit_error(char **prompt)
 	return (nb);
 }
 
-void	ft_exit(char **prompt)
+void	ft_exit(char **prompt, t_ast *root)
 {
 	int		i;
 	char	**args;
 	int		exit_status;
 
 	args = ft_split(*prompt, ' ');
-	ast_holder(NULL, 1, 1);
+	ast_holder(root, 1, 1);
 	free_env_list(*create_envs_table(1, 1));
 	exit_status = handle_exit_error(args);
 	save_fds(NULL, 1);
+	ft_putstr_fd("exit\n", STDERR_FILENO);
 	i = 0;
 	while (i < 3)
 		close(i++);
 	free_split(args);
-	free(*prompt);
 	rl_clear_history();
 	exit(update_status_error(exit_status));
 }

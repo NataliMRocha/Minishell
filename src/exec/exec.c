@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 15:08:58 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:16:55 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	exec(t_ast *root)
 
 	i = -1;
 	root->cmd_list = expanded_variable(root->cmd_list);
+	if (!execute_builtin(root))
+		return ;
 	path = verify_path(root);
 	if (root->cmd_list && !*root->cmd_list)
-		return (free(path));
-	if (!execute_builtin(root))
 		return (free(path));
 	i = fork();
 	if (i == 0 && root->type == EXEC)

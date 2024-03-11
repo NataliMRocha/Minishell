@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:18 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 14:45:20 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:22:21 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int		ft_export(char **var);
 int		ft_unset(char **keys);
 int		print_env_list(t_envs *envs);
 char	**envs_to_array(void);
-void	ft_exit(char **prompt);
+void	ft_exit(char **prompt, t_ast *root);
 
 #endif
