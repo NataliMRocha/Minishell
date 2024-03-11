@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 19:00:49 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/11 15:08:58 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	exec(t_ast *root)
 		else
 			exec_error(root->cmd_list[0], &path);
 		free_split(envs);
+		free_program(&root, NULL, create_envs_table(1, 1));
 		exit(update_status_error(127));
 	}
 	pid_last_exit_status(i);

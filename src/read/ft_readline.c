@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:37:28 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:11:51 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:45:49 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_readline(void)
 {
-	char	*buffer;
+	static char	*buffer;
 	char	*prompt;
 
 	prompt = malloc(2);

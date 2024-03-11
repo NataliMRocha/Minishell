@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 18:54:46 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/11 15:02:31 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,25 @@ void	free_program(t_ast **root, char **get_cmd, t_envs **var_envs)
 
 int	main(void)
 {
-	t_token	*token_list;
 	t_ast	*root;
 	char	*get_cmd;
-	t_envs	**var_envs;
 
-	token_list = NULL;
 	// setup_signals();
-	var_envs = create_envs_table(0, 0);
+	create_envs_table(0, 0);
 	root = NULL;
 	while (1)
 	{
 		get_cmd = ft_readline();
-		/* if (ft_strncmp(get_cmd, "exit", 4) == 0) // APAGAR
-			ft_exit(0); */
-		root = parser(token_list, get_cmd);
+		if (ft_strncmp(get_cmd, "exit", 4) == 0) // APAGAR
+			ft_exit(&get_cmd);
+		root = parser(get_cmd);
 		if (!root)
 			continue ;
 		starting_exec(root);
 		root = ast_holder(NULL, 1, 0);
 		free_program(&root, &get_cmd, NULL);
-		token_list = NULL;
 	}
-	free_program(&root, &get_cmd, var_envs);
+	free_program(&root, &get_cmd, create_envs_table(1, 1));
 	close_fds(NULL, 1);
 	return (0);
 }
