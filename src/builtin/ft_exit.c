@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/11 18:11:26 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/11 18:38:32 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_splitlen(char **arr)
 int	handle_exit_error(char **prompt)
 {
 	int	nb;
-	
+
 	nb = ft_atol(prompt[1]);
 	if (ft_splitlen(prompt) > 2)
 	{
@@ -64,7 +64,8 @@ void	ft_exit(char **prompt, t_ast *root)
 	exit_status = handle_exit_error(prompt);
 	save_fds(NULL, 1);
 	ast_holder(root, 1, 1);
-	ft_putstr_fd("exit\n", STDERR_FILENO);
+	if (!exit_status)
+		ft_putstr_fd("exit\n", STDERR_FILENO);
 	i = 0;
 	while (i < 3)
 		close(i++);
