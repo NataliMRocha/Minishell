@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 18:55:04 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:03:50 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,13 @@ int	verify_key(char **key, char *var)
 	return (0);
 }
 
-int	ft_put_new_env(char **key, char *var, t_envs *envs)
+int	ft_put_new_env(char **key, char *var)
 {
 	char	*value;
+	t_envs	*envs;
 	t_envs	*new_node;
 
+	envs = *create_envs_table(1, 0);
 	if (verify_key(key, var))
 		return (update_status_error(1));
 	value = ft_remove_quotes(ft_strchr(var, '=') + 1);
@@ -107,7 +109,7 @@ int	ft_export(char **var)
 	{
 		while (temp->next->next)
 			temp = temp->next;
-		if (strchr(var[i], '=') && ft_put_new_env(&key, var[i], temp))
+		if (strchr(var[i], '=') && ft_put_new_env(&key, var[i]))
 		{
 			update_status_error(1);
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:15:02 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 18:47:02 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:16:26 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int	execute_builtin(t_ast *root)
 	}
 	if (!ft_strncmp(root->cmd_list[0], "pwd", 2))
 		return (ft_pwd());
+	if (!ft_strncmp(root->cmd_list[0], "cd", 2))
+		return (ft_cd(root->cmd_list[1]));
 	return (1);
 }
