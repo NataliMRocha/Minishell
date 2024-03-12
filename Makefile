@@ -29,7 +29,7 @@ SOURCES = main.c
 
 READ_SOURCES = ft_readline.c
 
-LEXER_SOURCES = ft_strtok.c tokens.c token_utils.c
+LEXER_SOURCES = ft_strtok.c tokens.c token_utils.c token_utils2.c
 
 PARSER_SOURCES = check_syntax.c expand_env_var.c parser_utils.c parser.c
 
