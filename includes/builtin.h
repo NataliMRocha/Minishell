@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:18 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 22:28:19 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:31:41 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ char	**envs_to_array(int is_free);
 void	ft_exit(char **prompt, t_ast *root);
 int		ft_pwd(void);
 int		ft_cd(char *path);
+int		ft_echo(char **args);
 
 #endif
