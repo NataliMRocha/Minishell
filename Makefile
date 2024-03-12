@@ -35,7 +35,7 @@ PARSER_SOURCES = check_syntax.c expand_env_var.c parser_utils.c parser.c
 
 EXEC_SOURCES = handle_signals.c exec.c verify_path.c handle_pipe.c execute_builtin.c
 
-BUILTIN_SOURCES = ft_export.c ft_unset.c envs.c ft_exit.c ft_cd.c ft_pwd.c ft_echo.c
+BUILTIN_SOURCES = ft_export.c ft_unset.c envs.c ft_exit.c ft_cd.c ft_pwd.c ft_echo.c handle_block.c
 
 REDIRECT_SOURCES = heredoc.c redirect.c move_redirect.c redirect_utils.c
 

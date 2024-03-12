@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 17:16:55 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/11 20:50:41 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	starting_exec(t_ast *root)
 		handle_pipe(root);
 	else if (is_redirect(root->type))
 		handle_redir(root);
+	else if (root->type == BLOCK)
+		handle_block(root);
 	else if (root->left)
 		starting_exec(root->left);
 	else if (root->right)
