@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:18 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 22:16:35 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:28:19 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_export(char **var);
 int		ft_put_new_env(char **key, char *var);
 int		ft_unset(char **keys);
 int		print_env_list(t_envs *envs);
-char	**envs_to_array(void);
+char	**envs_to_array(int is_free);
 void	ft_exit(char **prompt, t_ast *root);
 int		ft_pwd(void);
 int		ft_cd(char *path);

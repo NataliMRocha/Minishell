@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 22:03:50 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:28:32 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**sorted(void)
 	int		i;
 	int		j;
 
-	vars = envs_to_array();
+	vars = envs_to_array(0);
 	i = 0;
 	while (vars[i])
 	{

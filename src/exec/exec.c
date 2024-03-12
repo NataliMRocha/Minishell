@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 20:50:41 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/11 22:28:43 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	exec(t_ast *root)
 	i = fork();
 	if (i == 0 && root->type == EXEC)
 	{
-		envs = envs_to_array();
+		envs = envs_to_array(0);
 		if (execve(path, root->cmd_list, envs) == 0)
 			;
 		else
