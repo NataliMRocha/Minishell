@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:32:50 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 22:20:30 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/12 11:33:54 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ int	ft_cd(char *path)
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
-		ft_putendl_fd("MSG DE ERRO QLQR", STDERR_FILENO);
+		ft_putendl_fd("No such file or directory", STDERR_FILENO);
 		free(oldpwd);
 		free(pwd);
-		return (1);
+		update_status_error(1);
+		return (0);
 	}
 	getcwd(pwd, 1024);
 	update_envs("OLDPWD", oldpwd);
