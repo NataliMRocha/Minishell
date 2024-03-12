@@ -6,11 +6,21 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 16:20:19 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:30:12 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	ft_isin(char *str, char *set)
+{
+	int	i;
+
+	i = 0;
+	while (ft_strchr(set, str[i]))
+		i++;
+	return (i);
+}
 
 t_ast	*parser(char *get_cmd)
 {
@@ -26,6 +36,7 @@ t_ast	*parser(char *get_cmd)
 		return (NULL);
 	tree = ast_constructor(token_list);
 	ast_holder(tree, 0, 0);
-	// holder_tokens(NULL, 1);
+	if (!ft_isin(get_cmd, "|&"))
+		holder_tokens(NULL, 1);
 	return (tree);
 }
