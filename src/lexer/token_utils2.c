@@ -3,28 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:24:43 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 16:00:58 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:54:09 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+int check_is_directory(t_token **list, char *readline)
+{
+	int	error;
+
+	if (!(*list)->next)
+	{
+		if(((*list)->data[0] == '.' || (*list)->data[0] == '/') && !access((*list)->data, F_OK))
+		{
+			error = update_status_error(126);
+			print_error(error);
+			free(readline);
+			free_token_list(list);
+			return (update_status_error(-1));
+		}
+			
+	}
+	return(0);
+}
+
 int	check_syntax_and_quotes(t_token **list, char *readline)
 {
 	int	error;
 
+	error = check_is_directory(list, readline);
+	if(error)
+		return (update_status_error(-1));
 	error = check_syntax_error(list);
 	if (error)
 	{
 		print_error(error);
 		free(readline);
 		free_token_list(list);
-		*list = NULL;
-		list = NULL;
 		return (update_status_error(2));
+
 	}
 	error = check_quotes_error(*list);
 	if (error)
@@ -32,8 +53,6 @@ int	check_syntax_and_quotes(t_token **list, char *readline)
 		print_error(error);
 		free(readline);
 		free_token_list(list);
-		*list = NULL;
-		list = NULL;
 		return (update_status_error(2));
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/13 09:38:23 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:36:23 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,6 @@ void	print_error(int error)
 		ft_putstr_fd("Minishell can't deal with open quotes\n", 2);
 	else if (error == 13)
 		ft_putstr_fd("syntax error near unexpected token new line\n", 2);
+	else if (error == 126)
+		ft_putstr_fd("Is a directory\n", 2);
 }

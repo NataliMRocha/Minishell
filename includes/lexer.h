@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:15:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 16:01:07 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:14:37 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	free_token_list(t_token **list);
 void	print_error(int error);
 int		check_syntax_and_quotes(t_token **list, char *readline);
 t_token	*holder_tokens(t_token *tokens, int is_free);
+int     check_is_directory(t_token **list, char *readline);
 
 #endif

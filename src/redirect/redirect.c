@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/13 12:32:05 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/13 16:27:32 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	is_redir_in(char *name)
 	}
 	else if (!access(name, F_OK) && access(name, W_OK | R_OK))
 		return (ft_puterror(name, ": Permission denied\n"));
+	else if ((name[0] == '.' || name[0] == '/') && !access(name, F_OK))
+		return (ft_puterror(name, ": Is a directory\n"));
 	else
 		return (ft_puterror(name, ": No such file or directory\n"));
 	return (1);
