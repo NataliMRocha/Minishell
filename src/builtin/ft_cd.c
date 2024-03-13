@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:32:50 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 11:33:54 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:55:34 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ int	ft_cd(char *path)
 	getcwd(pwd, 1024);
 	update_envs("OLDPWD", oldpwd);
 	update_envs("PWD", pwd);
-	return (0);
+	return (update_status_error(0));
 }

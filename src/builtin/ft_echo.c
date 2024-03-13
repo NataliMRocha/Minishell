@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:33:43 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 22:30:51 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/13 17:53:58 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ int	ft_echo(char **args)
 	}
 	if (!n_flag)
 		ft_putstr_fd("\n", STDOUT_FILENO);
-	return (0);
+	return (update_status_error(0));
 }
