@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/03/11 22:29:08 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/13 19:22:28 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	pipe_fork(int *fd, t_ast *root, int in_out)
 	root = ast_holder(NULL, 1, 0);
 	free_program(&root, NULL, create_envs_table(1, 0));
 	close_fds(NULL, 1);
-	envs_to_array(1);
 	exit(update_status_error(-1));
 }
 

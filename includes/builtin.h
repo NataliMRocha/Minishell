@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:18 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 13:23:10 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 19:37:41 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	ft_exit(char **prompt, t_ast *root);
 int		ft_pwd(void);
 int		ft_cd(char *path);
 int		ft_echo(char **args);
+int		ft_splitlen(char **arr);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/13 15:57:18 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:27:41 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ int	count_chars(char *res)
 	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i])
 		&& res[i] != '\'' && res[i] != '"')
 		i++;
-	if (i > 0 && res[i - 1] == '=')
-		i += ft_handle_quote(&res[i], 0, 1);
+	i += ft_handle_quote(&res[i], 0, 1);
 	j = is_symbol(res);
 	if (j > 0)
 		i = j;
