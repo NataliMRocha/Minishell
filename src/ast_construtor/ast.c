@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/13 12:28:27 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/13 13:21:45 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 	right->prev = NULL;
 	root->type = token_to_split->type;
 	root->cmd_list = ft_split(token_to_split->data, 0);
-	root->fd = 0;
 	tmp = token_to_split->prev;
 	if (tmp)
 	{
@@ -60,7 +59,6 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 		root->left = ast_constructor(right);
 		root->right = NULL;
 	}
-	free_token_list(&token_to_split);
 	return (1);
 }
 
@@ -71,7 +69,10 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 
 	to_split = search_type_to_split(tokens);
 	if (ast_split_node(ast_node, tokens, to_split))
+	{
+		free_token_list(&to_split);
 		return ;
+	}
 	else
 		cmd = command_constructor(&tokens);
 	ast_node->type = EXEC;
