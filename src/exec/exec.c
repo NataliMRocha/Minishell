@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 23:01:59 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:13:26 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	exec(t_ast *root)
 
 	i = -1;
 	root->cmd_list = expanded_variable(root->cmd_list);
-	if (!execute_builtin(root))
+	if (!execute_builtin(root) || root->type != EXEC)
 		return ;
 	path = verify_path(root);
 	if (root->cmd_list && !*root->cmd_list)

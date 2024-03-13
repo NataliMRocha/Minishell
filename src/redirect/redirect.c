@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 22:46:00 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:10:14 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	handle_redir(t_ast *root)
 	if (fds_list(NULL, 0) && !*fds_list(NULL, 0))
 		get_fds(root);
 	if (root->left->type == EXEC && !handle_fds(root->left))
-		root = ast_holder(root, 1, 1);
+		root->left->type = ARCHIVE;
 	save_fds(std_fd, 0);
 	if (root)
 		starting_exec(root->left);
