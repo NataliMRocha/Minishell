@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/12 21:22:53 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/13 09:49:50 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 		tokens->next = NULL;
 	root->left = ast_constructor(tokens);
 	root->right = ast_constructor(right);
-	free_token_list(&token_to_split);
-	if (token_to_split && token_to_split->data && !ft_isin(token_to_split->data, "|&"))
+	if (right && right->data && *right->data)
+		free_token_list(&right);
+	if (token_to_split && token_to_split->data && ft_isin(token_to_split->data, "|&"))
 	 	free(token_to_split->data);
 	return (1);
 }
