@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/13 13:52:52 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:34:43 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 	}
 	else
 		cmd = command_constructor(&tokens);
-	ast_node->type = EXEC;
+	if (tokens->type == BLOCK)
+		ast_node->type = BLOCK;
+	else
+		ast_node->type = EXEC;
 	ast_node->cmd_list = cmd;
 }
 

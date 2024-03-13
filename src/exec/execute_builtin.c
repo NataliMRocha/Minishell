@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:15:02 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 16:39:01 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:07:28 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	execute_builtin(t_ast *root)
 		return (ft_pwd());
 	if (!ft_strncmp(cmd, "cd", 2))
 		return (ft_cd(root->cmd_list[1]));
-	if (!ft_strncmp("echo", cmd, ft_strlen(cmd)))
+	if (!ft_strncmp("echo", cmd, ft_strlen("echo")))
 		return (ft_echo(root->cmd_list));
 	if (!ft_strncmp(cmd, "exit", 4))
 	{
