@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/13 13:21:45 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/13 13:52:52 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 	right = token_to_split->next;
 	right->prev = NULL;
 	root->type = token_to_split->type;
-	root->cmd_list = ft_split(token_to_split->data, 0);
 	tmp = token_to_split->prev;
 	if (tmp)
 	{

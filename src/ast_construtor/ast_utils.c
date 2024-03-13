@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:31:54 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 15:07:46 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:02:03 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ast	*ast_holder(t_ast *root, int its_created, int is_free)
 
 	if (root && !its_created)
 		ast_address = root;
-	if (root && is_free)
+	if (ast_address && is_free)
 	{
 		free_ast(ast_address);
 		ast_address = NULL;
