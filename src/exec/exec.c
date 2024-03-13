@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 21:13:26 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:23:23 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	starting_exec(t_ast *root)
 		handle_pipe(root);
 	else if (is_redirect(root->type))
 		handle_redir(root);
-	else if (root->type == BLOCK)
+	else if (root->cmd_list[0][0] == '(')
 		handle_block(root);
 	else if (root->left)
 		starting_exec(root->left);

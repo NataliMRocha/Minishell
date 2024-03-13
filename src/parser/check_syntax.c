@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/03/08 18:14:57 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/12 21:44:54 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	is_duplicated_symbol(t_token *tmp)
 int	check_block_error(t_token *list)
 {
 	return ((list->type == BLOCK && !ft_handle_block(list->data, 1))
-		|| (list->type == BLOCK && is_redirect(list->prev->type)));
+		|| (list->type == BLOCK && list->prev && is_redirect(list->prev->type)));
 }
 
 int	check_syntax_error(t_token **list)
