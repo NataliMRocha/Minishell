@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 21:56:25 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/13 12:04:49 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,6 @@ void	starting_exec(t_ast *root)
 		starting_exec(root->left);
 	else if (root->right)
 		starting_exec(root->right);
-	else if (root)
+	else if (root->type == EXEC)
 		exec(root);
 }

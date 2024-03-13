@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 21:10:14 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/13 12:32:05 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,25 @@ int	handle_fds(t_ast *root)
 
 	fds = fds_list(NULL, 0);
 	tmp = *fds;
+	if (!root)
+		return (0);
 	while (tmp)
 	{
 		if ((tmp->type == REDIR_IN || tmp->type == HEREDOC)
 			&& !is_redir_in(tmp->name[0]))
-			root = NULL;
+			{
+				free_list(fds);
+				return(0);
+			}
 		else if ((tmp->type == REDIR_OUT || tmp->type == REDIR_APPEND)
 			&& !is_redir_out(tmp->name[0], tmp->type))
-			root = NULL;
-		if (!root)
-			break ;
+			{
+				free_list(fds);
+				return(0);
+			}
 		tmp = tmp->next;
 	}
 	free_list(fds);
-	if (!root)
-		return (0);
 	return (1);
 }
 
@@ -126,10 +130,12 @@ void	handle_redir(t_ast *root)
 	std_fd[1] = dup(STDOUT_FILENO);
 	if (fds_list(NULL, 0) && !*fds_list(NULL, 0))
 		get_fds(root);
-	if (root->left->type == EXEC && !handle_fds(root->left))
-		root->left->type = ARCHIVE;
+	if (!handle_fds(root->left))
+	{
+		dup_and_close(std_fd);
+		return ;
+	}
 	save_fds(std_fd, 0);
-	if (root)
-		starting_exec(root->left);
+	starting_exec(root->left);
 	dup_and_close(std_fd);
 }

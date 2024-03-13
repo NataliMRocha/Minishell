@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 16:05:33 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 12:20:22 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	list_fill(t_token **list, char *readline)
 		if (token && *token != '\0')
 			append_node(list, token);
 	}
-	free(token);
 	holder_tokens(*list, 0);
+	free(token);
 	return (0);
 }

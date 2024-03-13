@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/13 09:49:50 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 12:28:27 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ t_token	*search_type_to_split(t_token *tokens)
 int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 {
 	t_token	*right;
+	t_token	*tmp;
 
 	right = NULL;
+	tmp = tokens;
 	if (!root || !tokens || !token_to_split)
 		return (0);
 	right = token_to_split->next;
@@ -46,15 +48,19 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 	root->type = token_to_split->type;
 	root->cmd_list = ft_split(token_to_split->data, 0);
 	root->fd = 0;
-	tokens = token_to_split->prev;
-	if (tokens)
-		tokens->next = NULL;
-	root->left = ast_constructor(tokens);
-	root->right = ast_constructor(right);
-	if (right && right->data && *right->data)
-		free_token_list(&right);
-	if (token_to_split && token_to_split->data && ft_isin(token_to_split->data, "|&"))
-	 	free(token_to_split->data);
+	tmp = token_to_split->prev;
+	if (tmp)
+	{
+		tmp->next = NULL;
+		root->left = ast_constructor(tmp);
+		root->right = ast_constructor(right);
+	}
+	else
+	{
+		root->left = ast_constructor(right);
+		root->right = NULL;
+	}
+	free_token_list(&token_to_split);
 	return (1);
 }
 
