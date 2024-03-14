@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 18:23:23 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 20:28:44 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	confirm_path(t_ast *root, char **path)
 	*path = verify_path(root);
 	if (access_path(root->cmd_list[0]) || (root->cmd_list && !*root->cmd_list))
 	{
-		free(path);
+		free(*path);
 		return (1);
 	}
 	return (0);
