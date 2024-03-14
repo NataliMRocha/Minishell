@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 11:22:43 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 15:51:57 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_ast	*parser(char *get_cmd)
 	token_list = NULL;
 	if ((get_cmd && !*get_cmd) || list_fill(&token_list, get_cmd) != 0)
 		return (NULL);
+	move_redirect(&token_list);
 	capture_heredoc(&token_list);
 	if (check_syntax_and_quotes(&token_list, get_cmd))
 		return (NULL);

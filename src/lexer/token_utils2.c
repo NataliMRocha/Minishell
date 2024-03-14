@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:24:43 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 15:19:14 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 16:47:21 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int check_is_directory(t_token **list, char *readline)
 
 	if (!(*list)->next)
 	{
+		(*list)->data = expand_var((*list)->data);
 		stat((*list)->data, &statbuf);
-		if(S_ISDIR(statbuf.st_mode))
+		if(ft_strchr((*list)->data, '/') && S_ISDIR(statbuf.st_mode))
 		{
 			error = update_status_error(126);
 			ft_putstr_fd("minishell: ", STDERR_FILENO);

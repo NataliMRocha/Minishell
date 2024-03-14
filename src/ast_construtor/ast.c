@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/14 11:21:29 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 15:51:26 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ t_ast	*ast_constructor(t_token *tokens)
 	t_ast	*root;
 
 	root = ft_calloc(1, sizeof(t_ast));
-	move_redirect(&tokens);
 	try_split_else_exec(root, tokens);
 	return (root);
 }

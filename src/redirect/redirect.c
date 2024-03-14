@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 12:23:09 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 15:44:26 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,24 @@ int	is_redir_out(char *name, int type)
 
 void	get_fds(t_ast *root)
 {
+	char	*name;
 	if (root->left && is_redirect(root->left->type))
 	{
+		name = ft_remove_quotes(root->right->cmd_list[0]);
+		free(root->right->cmd_list[0]);
+		root->right->cmd_list[0] = ft_strdup(name);
 		fds_list(root->right->cmd_list, root->type);
 		get_fds(root->left);
+		free(name);
 	}
 	if (root->left->type == EXEC && is_redirect(root->type) && root->right)
+	{
+		name = ft_remove_quotes(root->right->cmd_list[0]);
+		free(root->right->cmd_list[0]);
+		root->right->cmd_list[0] = ft_strdup(name);
 		fds_list(root->right->cmd_list, root->type);
+		free(name);
+	}
 }
 
 int	handle_fds(void)

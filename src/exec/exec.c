@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 12:10:53 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 16:44:07 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,25 @@ void	exec_error(char *cmd, char **path)
 	close_fds(NULL, 1);
 }
 
+int	access_path(char *path)
+{
+	if (ft_strchr(path, '/') && access(path, F_OK))
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		return (update_status_error(127));
+	}
+	else if(ft_strchr(path, '/') && access(path, F_OK | X_OK))
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
+		return (update_status_error(126));
+	}
+	return (0);
+}
+
 void	exec(t_ast *root)
 {
 	char	*path;
@@ -60,7 +79,7 @@ void	exec(t_ast *root)
 	if (!execute_builtin(root) || root->type != EXEC)
 		return ;
 	path = verify_path(root);
-	if (root->cmd_list && !*root->cmd_list)
+	if (access_path(root->cmd_list[0]) || (root->cmd_list && !*root->cmd_list))
 		return (free(path));
 	i = fork();
 	if (i == 0 && root->type == EXEC)
@@ -76,18 +95,6 @@ void	exec(t_ast *root)
 	}
 	pid_last_exit_status(i);
 	free(path);
-}
-
-void	handle_and_or(t_ast *root)
-{
-	int	status_code;
-
-	starting_exec(root->left);
-	status_code = update_status_error(-1);
-	if ((!status_code) && ast_holder(NULL, 1, 0) && root->type == AND)
-		starting_exec(root->right);
-	else if (status_code && ast_holder(NULL, 1, 0) && root->type == OR)
-		starting_exec(root->right);
 }
 
 void	starting_exec(t_ast *root)
