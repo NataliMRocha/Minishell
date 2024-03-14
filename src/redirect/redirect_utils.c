@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:46:31 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:14:01 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/14 09:10:48 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	free_list(t_fds **fds)
 
 int	ft_puterror(char *cmd, char *str)
 {
+	ft_putstr_fd("minishell:", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	update_status_error(1);
