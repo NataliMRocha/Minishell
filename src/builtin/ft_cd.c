@@ -6,7 +6,7 @@
 /*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:32:50 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/13 17:55:34 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/14 07:57:36 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_cd(char *path)
 	char	*oldpwd;
 	char	*pwd;
 
+	if (path == NULL)
+		return (update_status_error(0));
 	oldpwd = ft_calloc(1024, sizeof(char));
 	pwd = ft_calloc(1024, sizeof(char));
 	getcwd(oldpwd, 1024);
