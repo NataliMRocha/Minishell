@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 17:25:16 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:12:03 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int		check_syntax_error(t_token **list);
 int		check_quotes_error(t_token *list);
 char	*expand_var(char *buf);
+char	**expanded_variable(char **cmd_list);
 void	splited_free(char **s, int w);
 void	free_env_list(t_envs *list);
 int		check_builtin(t_token **token_list);

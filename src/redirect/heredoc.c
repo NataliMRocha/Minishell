@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 17:05:18 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/14 17:58:47 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	filling_archive(char *delim, int fd)
 	no_quotes = ft_remove_quotes(delim);
 	while (1)
 	{
+		on_heredoc(1);
 		buf = readline("$> ");
+		on_heredoc(0);
 		if (ft_strncmp(buf, no_quotes, ft_strlen(no_quotes)) == 0)
 		{
 			ft_putstr_fd("\n", fd);

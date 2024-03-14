@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 15:15:55 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 18:11:36 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,25 @@ char	*expand_var(char *buf)
 	free(buf);
 	free(quotes);
 	return (result);
+}
+
+char	**expanded_variable(char **cmd_list)
+{
+	char	**expanded;
+	int		i;
+	int		j;
+
+	i = -1;
+	expanded = NULL;
+	while (cmd_list && cmd_list[++i])
+		cmd_list[i] = expand_var(cmd_list[i]);
+	expanded = ft_calloc(i + 1, sizeof(char *));
+	i = -1;
+	j = 0;
+	while (cmd_list[++i])
+		if (*cmd_list[i])
+			expanded[j++] = ft_strdup(cmd_list[i]);
+	free_split(cmd_list);
+	cmd_list = NULL;
+	return (expanded);
 }

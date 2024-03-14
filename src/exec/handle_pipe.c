@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:23:18 by natali            #+#    #+#             */
-/*   Updated: 2024/03/13 19:22:28 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 17:56:56 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	close_fds(int *fd, int std_fds)
 
 void	pipe_fork(int *fd, t_ast *root, int in_out)
 {
+	is_fork(1);
 	if (root && in_out == 0 && root->left->type != REDIR_OUT)
 		dup2(fd[1], STDOUT_FILENO);
 	else if (root && in_out == 1)

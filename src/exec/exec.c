@@ -6,32 +6,11 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 16:44:07 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 18:23:23 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-char	**expanded_variable(char **cmd_list)
-{
-	char	**expanded;
-	int		i;
-	int		j;
-
-	i = -1;
-	expanded = NULL;
-	while (cmd_list && cmd_list[++i])
-		cmd_list[i] = expand_var(cmd_list[i]);
-	expanded = ft_calloc(i + 1, sizeof(char *));
-	i = -1;
-	j = 0;
-	while (cmd_list[++i])
-		if (*cmd_list[i])
-			expanded[j++] = ft_strdup(cmd_list[i]);
-	free_split(cmd_list);
-	cmd_list = NULL;
-	return (expanded);
-}
 
 void	exec_error(char *cmd, char **path)
 {
@@ -58,7 +37,7 @@ int	access_path(char *path)
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		return (update_status_error(127));
 	}
-	else if(ft_strchr(path, '/') && access(path, F_OK | X_OK))
+	else if (ft_strchr(path, '/') && access(path, F_OK | X_OK))
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(path, STDERR_FILENO);
@@ -68,33 +47,35 @@ int	access_path(char *path)
 	return (0);
 }
 
+int	confirm_path(t_ast *root, char **path)
+{
+	if (!execute_builtin(root) || root->type != EXEC)
+		return (1);
+	*path = verify_path(root);
+	if (access_path(root->cmd_list[0]) || (root->cmd_list && !*root->cmd_list))
+	{
+		free(path);
+		return (1);
+	}
+	return (0);
+}
+
 void	exec(t_ast *root)
 {
 	char	*path;
-	pid_t	i;
-	char	**envs;
+	pid_t	pid;
 
-	i = -1;
+	g_last_signal = 0;
 	root->cmd_list = expanded_variable(root->cmd_list);
-	if (!execute_builtin(root) || root->type != EXEC)
+	if (confirm_path(root, &path))
 		return ;
-	path = verify_path(root);
-	if (access_path(root->cmd_list[0]) || (root->cmd_list && !*root->cmd_list))
-		return (free(path));
-	i = fork();
-	if (i == 0 && root->type == EXEC)
-	{
-		envs = envs_to_array();
-		if (execve(path, root->cmd_list, envs) == 0)
-			;
-		else
-			exec_error(root->cmd_list[0], &path);
-		free_split(envs);
-		free_program(NULL, NULL, create_envs_table(1, 1));
-		exit(update_status_error(127));
-	}
-	pid_last_exit_status(i);
+	pid = fork();
+	if (pid == 0 && root->type == EXEC)
+		handle_fork(pid, root, path);
+	pid_last_exit_status(pid);
 	free(path);
+	if (g_last_signal == SIGINT)
+		update_status_error(130);
 }
 
 void	starting_exec(t_ast *root)
