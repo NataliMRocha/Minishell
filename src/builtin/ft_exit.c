@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/14 14:23:04 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 15:25:05 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int	handle_exit_error(char **prompt)
 	int		nb;
 	char	*tmp;
 
+	nb = ft_atol(prompt[1]);
 	if (prompt[1] && (prompt[1][0] == '+' || prompt[1][0] == '-'))
 		tmp = &prompt[1][1];
 	else
 		tmp = prompt[1];
-	nb = ft_atol(tmp);
 	if (ft_splitlen(prompt) > 2)
 	{
 		ft_putstr_fd("exit\n", STDERR_FILENO);
