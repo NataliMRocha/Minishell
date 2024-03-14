@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:18 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 12:10:31 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 13:52:24 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		print_env_list(t_envs *envs);
 char	**envs_to_array(void);
 void	ft_exit(char **prompt, t_ast *root);
 int		ft_pwd(void);
-int		ft_cd(char *path);
+int		ft_cd(char **path);
 int		ft_echo(char **args);
 int		ft_splitlen(char **arr);
 

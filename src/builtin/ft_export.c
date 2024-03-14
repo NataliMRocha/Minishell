@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 12:10:38 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 13:10:27 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,18 @@ int	verify_key(char **key, char *var)
 	is_alnum = 0;
 	while (key && key[0] && key[0][i] && (key[0][i] == '_' || ft_isalnum(key[0][i])))
 		i++;
-	if (key[0][i])
+	if (key[0][i] || (!ft_isalpha(key[0][0]) && key[0][0] != '_'))
 		is_alnum = 1;
 	if (is_alnum)
 	{
 		printf("minishell: export: `%s': not a valid identifier\n", var);
 		free(*key);
-		return (1);
+		return (update_status_error(1));
 	}
-	return (0);
+	return (update_status_error(0));
 }
+
+// _AA SE ELE FOR ALFABETICO OU UNDERLINE
 
 int	ft_put_new_env(char **key, char *var, t_envs *envs)
 {
@@ -123,7 +125,7 @@ int	ft_export(char **var)
 	{
 		while (temp->next->next)
 			temp = temp->next;
-		if (ft_put_new_env(&key, var[i], temp) && ft_strchr(var[i], '='))
+		if (ft_put_new_env(&key, var[i], temp))
 		{
 			update_status_error(1);
 			return (0);

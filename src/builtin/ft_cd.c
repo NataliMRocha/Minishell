@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:32:50 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 09:06:50 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/14 14:11:13 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	update_envs(char *pwd_name, char *path)
 	free_split(env);
 }
 
-int print_cd_error(char *path, char *oldpwd, char *pwd)
+int	print_cd_error(char *path, char *oldpwd, char *pwd)
 {
 	ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 	ft_putstr_fd(path, STDERR_FILENO);
@@ -37,24 +37,45 @@ int print_cd_error(char *path, char *oldpwd, char *pwd)
 	return (0);
 }
 
-int	ft_cd(char *path)
+int	cd_error(char **path)
 {
-	char	*oldpwd;
-	char	*pwd;
+	if (path && *path && ft_splitlen(path) > 2)
+	{
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+		return (update_status_error(1));
+	}
+	return (0);
+}
+
+int	check_home(char *path)
+{
 	t_envs	*tmp;
 
+	tmp = NULL;
 	if (path == NULL || path[0] == '~')
 	{
 		tmp = ft_getenv("HOME");
-		if(!tmp)
+		if (!tmp)
 		{
-			ft_putstr_fd("minishell: cd: HOME not set", 2);
-			update_status_error(1);
-			return(0);
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+			return (update_status_error(1));
 		}
 		chdir(tmp->value);
-		return (update_status_error(0));
+		update_status_error(0);
+		return (1);
 	}
+	return (0);
+}
+
+int	ft_cd(char **cmd)
+{
+	char	*oldpwd;
+	char	*pwd;
+	char	*path;
+
+	path = cmd[1];
+	if (check_home(path) || cd_error(cmd))
+		return (0);
 	oldpwd = ft_calloc(1024, sizeof(char));
 	pwd = ft_calloc(1024, sizeof(char));
 	getcwd(oldpwd, 1024);
