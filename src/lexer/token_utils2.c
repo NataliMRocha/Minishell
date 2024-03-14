@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:24:43 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/13 16:54:09 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/14 15:19:14 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,22 @@
 int check_is_directory(t_token **list, char *readline)
 {
 	int	error;
+	struct stat statbuf;
 
 	if (!(*list)->next)
 	{
-		if(((*list)->data[0] == '.' || (*list)->data[0] == '/') && !access((*list)->data, F_OK))
+		stat((*list)->data, &statbuf);
+		if(S_ISDIR(statbuf.st_mode))
 		{
 			error = update_status_error(126);
+			ft_putstr_fd("minishell: ", STDERR_FILENO);
+			ft_putstr_fd((*list)->data, STDERR_FILENO);
+			ft_putstr_fd(" : ", STDERR_FILENO);
 			print_error(error);
 			free(readline);
 			free_token_list(list);
 			return (update_status_error(-1));
 		}
-			
 	}
 	return(0);
 }
