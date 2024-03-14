@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 11:15:35 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 12:23:09 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	get_fds(t_ast *root)
 		fds_list(root->right->cmd_list, root->type);
 }
 
-int	handle_fds(t_ast *root)
+int	handle_fds(void)
 {
 	t_fds	**fds;
 	t_fds	*tmp;
@@ -96,7 +96,7 @@ int	handle_fds(t_ast *root)
 		else if ((tmp->type == REDIR_OUT || tmp->type == REDIR_APPEND)
 			&& !is_redir_out(tmp->name[0], tmp->type))
 			control = 0;
-		if (!root)
+		if (!control)
 			break ;
 		tmp = tmp->next;
 	}
@@ -130,7 +130,7 @@ void	handle_redir(t_ast *root)
 	std_fd[1] = dup(STDOUT_FILENO);
 	if (fds_list(NULL, 0) && !*fds_list(NULL, 0))
 		get_fds(root);
-	if (!handle_fds(root->left))
+	if (root->left->type == EXEC && !handle_fds())
 	{
 		dup_and_close(std_fd);
 		return ;

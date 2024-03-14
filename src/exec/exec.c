@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/13 15:35:05 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:10:53 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	exec(t_ast *root)
 	i = fork();
 	if (i == 0 && root->type == EXEC)
 	{
-		envs = envs_to_array(0);
+		envs = envs_to_array();
 		if (execve(path, root->cmd_list, envs) == 0)
 			;
 		else

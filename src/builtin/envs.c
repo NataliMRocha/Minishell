@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:39:09 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 22:27:42 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 12:10:17 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,12 @@ int	count_envs(t_envs *envs)
 	return (i);
 }
 
-char	**envs_to_array(int is_free)
+char	**envs_to_array(void)
 {
 	t_envs		*envs;
 	int			i;
-	static char	**environ;
+	char	**environ;
 
-	if (environ)
-		free_split(environ);
-	if (is_free)
-		return (NULL);
 	envs = *create_envs_table(1, 0);
 	i = count_envs(envs);
 	environ = ft_calloc(i + 1, sizeof(char *));

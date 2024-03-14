@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 15:00:25 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:10:38 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**sorted(void)
 	int		i;
 	int		j;
 
-	vars = envs_to_array(0);
+	vars = envs_to_array();
 	i = 0;
 	while (vars[i])
 	{
