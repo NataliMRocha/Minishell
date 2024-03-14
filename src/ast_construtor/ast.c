@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/13 15:34:43 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/14 11:21:29 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,9 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 	root->type = token_to_split->type;
 	tmp = token_to_split->prev;
 	if (tmp)
-	{
 		tmp->next = NULL;
-		root->left = ast_constructor(tmp);
-		root->right = ast_constructor(right);
-	}
-	else
-	{
-		root->left = ast_constructor(right);
-		root->right = NULL;
-	}
+	root->left = ast_constructor(tmp);
+	root->right = ast_constructor(right);
 	return (1);
 }
 
@@ -74,7 +67,7 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 	}
 	else
 		cmd = command_constructor(&tokens);
-	if (tokens->type == BLOCK)
+	if (tokens && tokens->type == BLOCK)
 		ast_node->type = BLOCK;
 	else
 		ast_node->type = EXEC;

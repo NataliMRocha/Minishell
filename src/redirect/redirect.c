@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/13 16:27:32 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:15:35 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,28 +83,26 @@ int	handle_fds(t_ast *root)
 {
 	t_fds	**fds;
 	t_fds	*tmp;
+	int		control;
 
+	control = 1;
 	fds = fds_list(NULL, 0);
 	tmp = *fds;
-	if (!root)
-		return (0);
 	while (tmp)
 	{
 		if ((tmp->type == REDIR_IN || tmp->type == HEREDOC)
 			&& !is_redir_in(tmp->name[0]))
-			{
-				free_list(fds);
-				return(0);
-			}
+			control = 0;
 		else if ((tmp->type == REDIR_OUT || tmp->type == REDIR_APPEND)
 			&& !is_redir_out(tmp->name[0], tmp->type))
-			{
-				free_list(fds);
-				return(0);
-			}
+			control = 0;
+		if (!root)
+			break ;
 		tmp = tmp->next;
 	}
 	free_list(fds);
+	if (!control)
+		return (0);
 	return (1);
 }
 
