@@ -6,22 +6,23 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:24:43 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 16:47:21 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 17:12:05 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int check_is_directory(t_token **list, char *readline)
+int	check_is_directory(t_token **list, char *readline)
 {
-	int	error;
-	struct stat statbuf;
+	int			error;
+	struct stat	statbuf;
 
+	statbuf = (struct stat){0};
 	if (!(*list)->next)
 	{
 		(*list)->data = expand_var((*list)->data);
 		stat((*list)->data, &statbuf);
-		if(ft_strchr((*list)->data, '/') && S_ISDIR(statbuf.st_mode))
+		if (ft_strchr((*list)->data, '/') && S_ISDIR(statbuf.st_mode))
 		{
 			error = update_status_error(126);
 			ft_putstr_fd("minishell: ", STDERR_FILENO);
@@ -33,7 +34,7 @@ int check_is_directory(t_token **list, char *readline)
 			return (update_status_error(-1));
 		}
 	}
-	return(0);
+	return (0);
 }
 
 int	check_syntax_and_quotes(t_token **list, char *readline)
@@ -41,7 +42,7 @@ int	check_syntax_and_quotes(t_token **list, char *readline)
 	int	error;
 
 	error = check_is_directory(list, readline);
-	if(error)
+	if (error)
 		return (update_status_error(-1));
 	error = check_syntax_error(list);
 	if (error)
@@ -50,7 +51,6 @@ int	check_syntax_and_quotes(t_token **list, char *readline)
 		free(readline);
 		free_token_list(list);
 		return (update_status_error(2));
-
 	}
 	error = check_quotes_error(*list);
 	if (error)

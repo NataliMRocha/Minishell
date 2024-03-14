@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 15:44:26 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 17:09:04 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	is_redir_out(char *name, int type)
 		else
 			fd = open(name, O_RDWR | O_APPEND, 0666);
 	}
+	if (fd < 0 && access(name, F_OK))
+		return (ft_puterror(name, ": No such file or directory\n"));
 	if (fd < 0 && access(name, W_OK | R_OK))
 		return (ft_puterror(name, ": Permission denied\n"));
 	dup2(fd, STDOUT_FILENO);
@@ -71,6 +73,7 @@ int	is_redir_out(char *name, int type)
 void	get_fds(t_ast *root)
 {
 	char	*name;
+
 	if (root->left && is_redirect(root->left->type))
 	{
 		name = ft_remove_quotes(root->right->cmd_list[0]);

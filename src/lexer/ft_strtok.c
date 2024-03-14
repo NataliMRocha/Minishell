@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 12:51:55 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 17:04:31 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,6 @@ int	count_chars(char *res)
 	int	j;
 
 	i = 0;
-	if (i == 0 && (res[i] == '\'' || res[i] == '"'))
-		return (ft_handle_quote(&res[i], 0, 0));
-	if (i == 0 && ft_handle_block(&res[i], 0))
-		return (ft_handle_block(&res[i], 0));
 	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i])
 		&& res[i] != '\'' && res[i] != '"')
 		i++;
@@ -82,6 +78,10 @@ int	count_chars(char *res)
 	if (res && res[i] && res[i] != ' ')
 		while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i]))
 			i++;
+	if (i == 0 && (res[i] == '\'' || res[i] == '"'))
+		return (ft_handle_quote(&res[i], 0, 0));
+	if (i == 0 && ft_handle_block(&res[i], 0))
+		return (ft_handle_block(&res[i], 0));
 	j = is_symbol(res);
 	if (j > 0)
 		i = j;
