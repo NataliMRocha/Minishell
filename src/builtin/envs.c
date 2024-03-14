@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:39:09 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 18:54:54 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 12:10:17 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,8 @@ char	**envs_to_array(void)
 {
 	t_envs		*envs;
 	int			i;
-	static char	**environ;
+	char	**environ;
 
-	if (environ)
-		free_split(environ);
 	envs = *create_envs_table(1, 0);
 	i = count_envs(envs);
 	environ = ft_calloc(i + 1, sizeof(char *));

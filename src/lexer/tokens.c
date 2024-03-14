@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:41:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:11:27 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 12:20:22 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,42 +73,6 @@ void	append_node(t_token **list, char *content)
 	ft_write_types(node);
 }
 
-t_token	**get_tokens(t_token *tokens)
-{
-	static t_token	*list;
-
-	if (tokens)
-		list = tokens;
-	return (&list);
-}
-
-int	check_syntax_and_quotes(t_token **list, char *readline)
-{
-	int	error;
-
-	error = check_syntax_error(list);
-	if (error)
-	{
-		print_error(error);
-		free(readline);
-		free_token_list(list);
-		*list = NULL;
-		list = NULL;
-		return (update_status_error(2));
-	}
-	error = check_quotes_error(*list);
-	if (error)
-	{
-		print_error(error);
-		free(readline);
-		free_token_list(list);
-		*list = NULL;
-		list = NULL;
-		return (update_status_error(2));
-	}
-	return (0);
-}
-
 int	list_fill(t_token **list, char *readline)
 {
 	char	*token;
@@ -122,7 +86,7 @@ int	list_fill(t_token **list, char *readline)
 		if (token && *token != '\0')
 			append_node(list, token);
 	}
+	holder_tokens(*list, 0);
 	free(token);
-	get_tokens(*list);
 	return (0);
 }

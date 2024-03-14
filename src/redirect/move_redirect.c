@@ -25,6 +25,12 @@ void	move_redirect_right(t_token **arch, t_token **word)
 	(*word)->type = type;
 }
 
+int	is_move(t_token *temp)
+{
+	return (temp->next->type == WORD || temp->next->type == QUOTE
+		|| temp->next->type == DQUOTE);
+}
+
 void	move_redirect(t_token **tokens)
 {
 	t_token	*temp;
@@ -32,8 +38,7 @@ void	move_redirect(t_token **tokens)
 	temp = *tokens;
 	while (temp && temp->next)
 	{
-		if (temp && temp->next && temp->type == ARCHIVE
-			&& temp->next->type == WORD)
+		if (temp && temp->next && temp->type == ARCHIVE && is_move(temp))
 		{
 			while (temp && (temp->type == ARCHIVE || is_redirect(temp->type)))
 			{

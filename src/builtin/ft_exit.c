@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/11 18:38:32 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 15:25:05 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,32 @@ int	ft_splitlen(char **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i])
+	while (arr && arr[i])
 		i++;
 	return (i);
 }
 
 int	handle_exit_error(char **prompt)
 {
-	int	nb;
+	int		nb;
+	char	*tmp;
 
 	nb = ft_atol(prompt[1]);
+	if (prompt[1] && (prompt[1][0] == '+' || prompt[1][0] == '-'))
+		tmp = &prompt[1][1];
+	else
+		tmp = prompt[1];
 	if (ft_splitlen(prompt) > 2)
 	{
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 		return (1);
 	}
-	if ((prompt && prompt[1]) && (!ft_isnum(prompt[1])
-		|| ft_strlen(prompt[1]) != ft_intlen(nb)))
+	if ((prompt && tmp) && ft_strlen(tmp) != ft_intlen(nb))
 	{
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
-		ft_putstr_fd(prompt[1], STDERR_FILENO);
+		ft_putstr_fd(tmp, STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 		return (2);
 	}
@@ -57,8 +61,8 @@ int	handle_exit_error(char **prompt)
 
 void	ft_exit(char **prompt, t_ast *root)
 {
-	int		i;
-	int		exit_status;
+	int	i;
+	int	exit_status;
 
 	free_env_list(*create_envs_table(1, 1));
 	exit_status = handle_exit_error(prompt);

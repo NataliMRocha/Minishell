@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 21:22:38 by codespace         #+#    #+#             */
-/*   Updated: 2024/03/09 17:43:21 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 16:37:16 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*verify_path(t_ast *root)
 
 	if (root->cmd_list && !*root->cmd_list)
 		return (ft_strdup("1"));
-	if (strchr(root->cmd_list[0], '/') && access(root->cmd_list[0], F_OK) == 0)
+	if (ft_strchr(root->cmd_list[0], '/') && !access(root->cmd_list[0], F_OK))
 		return (ft_strdup(root->cmd_list[0]));
 	paths = ft_getenv("PATH");
 	if (!paths)

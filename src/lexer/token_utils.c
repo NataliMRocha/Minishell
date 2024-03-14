@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:11:23 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:36:23 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,17 @@ void	free_token_list(t_token **list)
 
 	while (list && *list)
 	{
-		tmp = (*list)->next;
+		if (list && (*list)->next && (*list)->next->data)
+			tmp = (*list)->next;
+		else
+			tmp = NULL;
 		if (list && *list && (*list)->data && *(*list)->data)
 		{
 			free((*list)->data);
 			(*list)->data = NULL;
 		}
 		free(*list);
+		*list = NULL;
 		*list = tmp;
 	}
 	list = NULL;
@@ -83,4 +87,6 @@ void	print_error(int error)
 		ft_putstr_fd("Minishell can't deal with open quotes\n", 2);
 	else if (error == 13)
 		ft_putstr_fd("syntax error near unexpected token new line\n", 2);
+	else if (error == 126)
+		ft_putstr_fd("Is a directory\n", 2);
 }

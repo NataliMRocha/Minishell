@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 18:55:04 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 13:10:27 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,31 @@ void	print_export()
 		printf("declare -x %s=\"%s\"\n", key, &value[1]);
 		free(key);
 	}
+	free_split(arr);
 }
 
 int	verify_key(char **key, char *var)
 {
-	*key = ft_strcpy_delim(var, '=');
-	if ((key && *key && (*key[0] != '_' && !ft_isalpha(*key[0]))) || !*key[0])
+	int	i;
+	int	is_alnum;
+
+	key[0] = ft_strcpy_delim(var, '=');
+	i = 0;
+	is_alnum = 0;
+	while (key && key[0] && key[0][i] && (key[0][i] == '_' || ft_isalnum(key[0][i])))
+		i++;
+	if (key[0][i] || (!ft_isalpha(key[0][0]) && key[0][0] != '_'))
+		is_alnum = 1;
+	if (is_alnum)
 	{
 		printf("minishell: export: `%s': not a valid identifier\n", var);
 		free(*key);
-		return (1);
+		return (update_status_error(1));
 	}
-	return (0);
+	return (update_status_error(0));
 }
+
+// _AA SE ELE FOR ALFABETICO OU UNDERLINE
 
 int	ft_put_new_env(char **key, char *var, t_envs *envs)
 {
@@ -76,7 +88,13 @@ int	ft_put_new_env(char **key, char *var, t_envs *envs)
 
 	if (verify_key(key, var))
 		return (update_status_error(1));
-	value = ft_remove_quotes(ft_strchr(var, '=') + 1);
+	if (ft_strchr(var, '='))
+		value = ft_remove_quotes(ft_strchr(var, '=') + 1);
+	else
+	{
+		free(*key);
+	 	return (update_status_error(0));
+	}
 	new_node = ft_getenv(*key);
 	if (new_node)
 	{
@@ -107,7 +125,7 @@ int	ft_export(char **var)
 	{
 		while (temp->next->next)
 			temp = temp->next;
-		if (strchr(var[i], '=') && ft_put_new_env(&key, var[i], temp))
+		if (ft_put_new_env(&key, var[i], temp))
 		{
 			update_status_error(1);
 			return (0);

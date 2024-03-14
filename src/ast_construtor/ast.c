@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/08 18:12:05 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:51:26 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,20 @@ t_token	*search_type_to_split(t_token *tokens)
 int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 {
 	t_token	*right;
+	t_token	*tmp;
 
 	right = NULL;
+	tmp = tokens;
 	if (!root || !tokens || !token_to_split)
 		return (0);
 	right = token_to_split->next;
 	right->prev = NULL;
 	root->type = token_to_split->type;
-	root->cmd_list = ft_split(token_to_split->data, 0);
-	root->fd = 0;
-	tokens = token_to_split->prev;
-	if (tokens)
-		tokens->next = NULL;
-	root->left = ast_constructor(tokens);
+	tmp = token_to_split->prev;
+	if (tmp)
+		tmp->next = NULL;
+	root->left = ast_constructor(tmp);
 	root->right = ast_constructor(right);
-	free_token_list(&token_to_split);
 	return (1);
 }
 
@@ -62,10 +61,16 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 
 	to_split = search_type_to_split(tokens);
 	if (ast_split_node(ast_node, tokens, to_split))
+	{
+		free_token_list(&to_split);
 		return ;
+	}
 	else
 		cmd = command_constructor(&tokens);
-	ast_node->type = EXEC;
+	if (tokens && tokens->type == BLOCK)
+		ast_node->type = BLOCK;
+	else
+		ast_node->type = EXEC;
 	ast_node->cmd_list = cmd;
 }
 
@@ -99,7 +104,6 @@ t_ast	*ast_constructor(t_token *tokens)
 	t_ast	*root;
 
 	root = ft_calloc(1, sizeof(t_ast));
-	move_redirect(&tokens);
 	try_split_else_exec(root, tokens);
 	return (root);
 }

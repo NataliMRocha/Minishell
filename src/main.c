@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/11 17:42:15 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:54:55 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	free_program(t_ast **root, char **get_cmd, t_envs **var_envs)
 		free(*get_cmd);
 	if (root && *root)
 	{
-		free_ast(*root, 0);
+		free_ast(*root);
 		*root = NULL;
 	}
 	if (var_envs && *var_envs)

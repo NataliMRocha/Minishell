@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:11:45 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/14 17:04:31 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_handle_quote(char *str, char quote, int check_close)
 	i = 0;
 	if (str && str[i] && (str[i] == '"' || str[i] == *"'"))
 		quote = str[i++];
-	while (str && str[i])
+	while (quote && str && str[i])
 	{
 		if (str[i++] == quote)
 			return (i);
@@ -71,12 +71,17 @@ int	count_chars(char *res)
 	int	j;
 
 	i = 0;
+	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i])
+		&& res[i] != '\'' && res[i] != '"')
+		i++;
+	i += ft_handle_quote(&res[i], 0, 0);
+	if (res && res[i] && res[i] != ' ')
+		while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i]))
+			i++;
 	if (i == 0 && (res[i] == '\'' || res[i] == '"'))
 		return (ft_handle_quote(&res[i], 0, 0));
 	if (i == 0 && ft_handle_block(&res[i], 0))
 		return (ft_handle_block(&res[i], 0));
-	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i]))
-		i++;
 	j = is_symbol(res);
 	if (j > 0)
 		i = j;

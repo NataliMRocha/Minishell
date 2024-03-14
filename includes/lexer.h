@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:15:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 11:36:21 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:14:37 by natali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void	append_node(t_token **list, char *content);
 int		list_fill(t_token **list, char *readline);
 void	ft_write_types(t_token *list);
 void	free_token_list(t_token **list);
-t_token	**get_tokens(t_token *tokens);
-void    print_error(int error);
-int     check_syntax_and_quotes(t_token **list, char *readline);
+void	print_error(int error);
+int		check_syntax_and_quotes(t_token **list, char *readline);
+t_token	*holder_tokens(t_token *tokens, int is_free);
+int     check_is_directory(t_token **list, char *readline);
 
 #endif

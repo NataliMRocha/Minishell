@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/09 18:30:17 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/14 17:09:04 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	is_redir_in(char *name)
 	}
 	else if (!access(name, F_OK) && access(name, W_OK | R_OK))
 		return (ft_puterror(name, ": Permission denied\n"));
+	else if ((name[0] == '.' || name[0] == '/') && !access(name, F_OK))
+		return (ft_puterror(name, ": Is a directory\n"));
 	else
 		return (ft_puterror(name, ": No such file or directory\n"));
 	return (1);
@@ -59,6 +61,8 @@ int	is_redir_out(char *name, int type)
 		else
 			fd = open(name, O_RDWR | O_APPEND, 0666);
 	}
+	if (fd < 0 && access(name, F_OK))
+		return (ft_puterror(name, ": No such file or directory\n"));
 	if (fd < 0 && access(name, W_OK | R_OK))
 		return (ft_puterror(name, ": Permission denied\n"));
 	dup2(fd, STDOUT_FILENO);
@@ -68,36 +72,50 @@ int	is_redir_out(char *name, int type)
 
 void	get_fds(t_ast *root)
 {
+	char	*name;
+
 	if (root->left && is_redirect(root->left->type))
 	{
+		name = ft_remove_quotes(root->right->cmd_list[0]);
+		free(root->right->cmd_list[0]);
+		root->right->cmd_list[0] = ft_strdup(name);
 		fds_list(root->right->cmd_list, root->type);
 		get_fds(root->left);
+		free(name);
 	}
 	if (root->left->type == EXEC && is_redirect(root->type) && root->right)
+	{
+		name = ft_remove_quotes(root->right->cmd_list[0]);
+		free(root->right->cmd_list[0]);
+		root->right->cmd_list[0] = ft_strdup(name);
 		fds_list(root->right->cmd_list, root->type);
+		free(name);
+	}
 }
 
-int	handle_fds(t_ast *root)
+int	handle_fds(void)
 {
 	t_fds	**fds;
 	t_fds	*tmp;
+	int		control;
 
+	control = 1;
 	fds = fds_list(NULL, 0);
 	tmp = *fds;
 	while (tmp)
 	{
 		if ((tmp->type == REDIR_IN || tmp->type == HEREDOC)
 			&& !is_redir_in(tmp->name[0]))
-			root = NULL;
+			control = 0;
 		else if ((tmp->type == REDIR_OUT || tmp->type == REDIR_APPEND)
 			&& !is_redir_out(tmp->name[0], tmp->type))
-			root = NULL;
-		if (!root)
+			control = 0;
+		if (!control)
 			break ;
 		tmp = tmp->next;
 	}
 	free_list(fds);
-	if (!root)
+	if (!control)
 		return (0);
 	return (1);
 }
@@ -126,10 +144,12 @@ void	handle_redir(t_ast *root)
 	std_fd[1] = dup(STDOUT_FILENO);
 	if (fds_list(NULL, 0) && !*fds_list(NULL, 0))
 		get_fds(root);
-	if (root->left->type == EXEC && !handle_fds(root->left))
-		root = ast_holder(root, 1, 1);
+	if (root->left->type == EXEC && !handle_fds())
+	{
+		dup_and_close(std_fd);
+		return ;
+	}
 	save_fds(std_fd, 0);
-	if (root)
-		starting_exec(root->left);
+	starting_exec(root->left);
 	dup_and_close(std_fd);
 }
