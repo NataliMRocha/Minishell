@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/15 11:00:54 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:55:58 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 	if (!root || !tokens || !token_to_split)
 		return (0);
 	right = token_to_split->next;
-	right->prev = NULL;
+	if (right)
+		right->prev = NULL;
 	root->type = token_to_split->type;
 	tmp = token_to_split->prev;
 	if (tmp)
@@ -62,7 +63,8 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 	to_split = search_type_to_split(tokens);
 	if (ast_split_node(ast_node, tokens, to_split))
 	{
-		free_token_list(&to_split);
+		if (ast_node->type == AND)
+			free_token_list(&to_split);
 		return ;
 	}
 	else
