@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/15 15:55:58 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:06:38 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 	to_split = search_type_to_split(tokens);
 	if (ast_split_node(ast_node, tokens, to_split))
 	{
-		if (ast_node->type == AND)
+		if (ast_node->type != HEREDOC)
 			free_token_list(&to_split);
 		return ;
 	}
