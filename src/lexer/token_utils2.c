@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:24:43 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 17:12:05 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/15 10:39:25 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	block_checker(char *str)
+{
+	int	is_corret;
+	int	i;
+
+	i = 0;
+	is_corret = 0;
+	if (str && str[i++] == '(')
+		while (str && str[i] && str[i] != ')')
+			if(ft_isalnum(str[i++]))
+				is_corret = 2;
+	if (i == 1 && str[i] == ')')
+		is_corret = 2;
+	return (is_corret);
+}
 
 int	check_is_directory(t_token **list, char *readline)
 {
@@ -41,6 +57,8 @@ int	check_syntax_and_quotes(t_token **list, char *readline)
 {
 	int	error;
 
+	if (list == NULL || *list == NULL)
+		return (0);
 	error = check_is_directory(list, readline);
 	if (error)
 		return (update_status_error(-1));

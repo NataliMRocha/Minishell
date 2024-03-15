@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 20:39:29 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/15 10:36:29 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	heredoc(char **delim, char count)
 	char	*temp;
 	const int	std_in = dup(STDIN_FILENO);
 
+	if (!delim || !*delim)
+		return (0);
 	name = ft_strcpy_delim(*delim, 0);
 	temp = ft_strjoin_char(name, count);
 	name = ft_strjoin("/tmp/", temp, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:15:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/13 17:14:37 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/15 10:10:43 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 int		ft_handle_quote(char *str, char quote, int check_close);
 int		ft_handle_block(char *str, int check_close);
+int		block_checker(char *str);
 int		is_symbol(char *res);
 char	*ft_strtok(char *str, int call);
 char	*free_static(char *res, int i, int j);

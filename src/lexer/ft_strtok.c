@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 17:04:31 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/15 10:13:07 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,17 @@ int	ft_handle_quote(char *str, char quote, int check_close)
 int	ft_handle_block(char *str, int check_close)
 {
 	int	i;
+	int check_block;
 
 	i = 0;
-	if (str && str[i] == '(')
-		while (str && str[i] && str[++i] != ')')
-			;
-	if (str && str[i] != ')' && check_close == 1)
-		return (0);
+	check_block = 0;
+	if (str && str[i++] == '(')
+		while (str && str[i] && str[i] != ')')
+			i++;
+	if	(i > 0)
+		check_block = block_checker(str);
+	if ((str && str[i] != ')' && check_close == 1) || !check_block)
+		return(update_status_error(2));
 	if (str && str[i] == ')')
 		i++;
 	return (i);
