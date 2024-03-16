@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/15 17:06:38 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:24:06 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 		cmd = command_constructor(&tokens);
 	if (tokens && tokens->type == WORD)
 		ast_node->type = EXEC;
+	else
+		ast_node->type = tokens->type;
 	ast_node->cmd_list = cmd;
 }
 
