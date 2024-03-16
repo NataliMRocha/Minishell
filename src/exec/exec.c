@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: natali <natali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 20:28:44 by natali           ###   ########.fr       */
+/*   Updated: 2024/03/16 14:19:06 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,40 @@ int	confirm_path(t_ast *root, char **path)
 	return (0);
 }
 
+char **handle_expand(t_ast *root)
+{
+	char	**tmp;
+	char	**split;
+	int		i;
+	int		j;
+
+	tmp = ft_split(root->cmd_list[0], ' ');
+	i = ft_splitlen(tmp) + ft_splitlen(root->cmd_list);
+	split = ft_calloc(i, sizeof(char *));
+	i = -1;
+	while (tmp && tmp[++i])
+		split[i] = ft_strdup(tmp[i]);
+	j = 0;
+	while (root && root->cmd_list && root->cmd_list[++j])
+		split[i++] = ft_strdup(root->cmd_list[j]);
+	split[i] = NULL;
+	free_split(root->cmd_list);
+	free_split(tmp);
+	root->cmd_list = NULL;
+	return (split);
+}
+
 void	exec(t_ast *root)
 {
 	char	*path;
 	pid_t	pid;
+	int		has_quote;
 
 	g_last_signal = 0;
+	has_quote = ft_strchr(root->cmd_list[0], '\'') || ft_strchr(root->cmd_list[0], '"');
 	root->cmd_list = expanded_variable(root->cmd_list);
+	if (!has_quote)
+		root->cmd_list = handle_expand(root);
 	if (confirm_path(root, &path))
 		return ;
 	pid = fork();
