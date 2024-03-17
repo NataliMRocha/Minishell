@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/16 14:19:06 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:29:15 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	exec(t_ast *root)
 	g_last_signal = 0;
 	has_quote = ft_strchr(root->cmd_list[0], '\'') || ft_strchr(root->cmd_list[0], '"');
 	root->cmd_list = expanded_variable(root->cmd_list);
-	if (!has_quote)
+	if (!has_quote && root)
 		root->cmd_list = handle_expand(root);
 	if (confirm_path(root, &path))
 		return ;
@@ -121,6 +121,6 @@ void	starting_exec(t_ast *root)
 		starting_exec(root->left);
 	else if (root->right)
 		starting_exec(root->right);
-	else if (root)
+	else if (root && root->type == EXEC)
 		exec(root);
 }

@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:26:08 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 17:52:27 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:13:47 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ int	is_fork(int status)
 
 	if (status == 1)
 		on_fork = status;
-	rl_clear_history();
 	return (on_fork);
 }
 
 void	signals_initializer(void)
 {
 	if (signal(SIGINT, sigint_handler) == SIG_ERR
-		|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		|| signal(SIGQUIT, SIG_IGN) == SIG_ERR
+		|| signal(SIGTSTP, SIG_IGN) == SIG_ERR)
 	{
 		ft_putendl_fd("fail to set signals", 2);
 		exit (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 18:06:39 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/17 13:17:11 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	main(void)
 		sigquit_case();
 		g_last_signal = 0;
 		get_cmd = ft_readline();
+		if (!get_cmd)
+			ft_exit(NULL, NULL);
 		root = parser(get_cmd);
 		if (!root)
 			continue ;
