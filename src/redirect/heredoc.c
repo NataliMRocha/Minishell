@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/15 10:36:29 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/17 13:56:16 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	filling_archive(char *delim, int fd, int std_in)
 	no_quotes = ft_remove_quotes(delim);
 	on_heredoc(1);
 	buf = readline("$> ");
-	on_heredoc(0);
 	if (g_last_signal == SIGINT)
 	{
 		dup2(std_in, STDIN_FILENO);
@@ -46,12 +45,13 @@ int	filling_archive(char *delim, int fd, int std_in)
 			free(buf);
 		return(0);
 	}
-	if (ft_strchr(buf, '$') && !ft_handle_quote(delim, 0, 1))
+	if (ft_strchr(buf, '$') && !ft_strcmp(delim, no_quotes))
 		buf = expand_var(buf);
-	ft_putstr_fd(buf, fd);
+	ft_putendl_fd(buf, fd);
 	free(buf);
 	free(no_quotes);
 	buf = NULL;
+	on_heredoc(0);
 	return(1);
 }
 
