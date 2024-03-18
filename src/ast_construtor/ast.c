@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/18 13:43:40 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:35:54 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 	{
 		if (to_split && ft_isin(to_split->data, "><|&"))
 		{
+			ast_node->type = to_split->type;
 			free(to_split->data);
 			free(to_split);
 		}
@@ -76,10 +77,10 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 	}
 	else
 		cmd = command_constructor(&tokens);
-	if (type == WORD)
+	if (type >= 0 && type <= 2)
 		ast_node->type = EXEC;
-	else if (tokens && ast_node)
-		ast_node->type = tokens->type;
+	else if (ast_node && type > 0)
+		ast_node->type = type;
 	ast_node->cmd_list = cmd;
 }
 

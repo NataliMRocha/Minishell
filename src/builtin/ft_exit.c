@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/17 13:25:30 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:23:33 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ int	handle_exit_error(char **prompt)
 		tmp = &prompt[1][1];
 	else
 		tmp = prompt[1];
-	if (ft_splitlen(prompt) > 2)
-	{
-		ft_putstr_fd("exit\nminishell: exit: too many arguments\n",
-			STDERR_FILENO);
-		return (1);
-	}
 	if ((prompt && tmp) && ft_strlen(tmp) != ft_intlen(nb))
 	{
-		ft_putstr_fd("exit\nminishell: exit: ", STDERR_FILENO);
+		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(tmp, STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 		return (2);
+	}
+	if (ft_splitlen(prompt) > 2)
+	{
+		ft_putstr_fd("minishell: exit: too many arguments\n",
+			STDERR_FILENO);
+		return (1);
 	}
 	return (nb);
 }
