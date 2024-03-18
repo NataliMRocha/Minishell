@@ -1,0 +1,12 @@
+.gitignore
+**test*
+README.md
+minishell
+**bin/
+.vscode
+funcoes permitidas
+libft.a
+a.out
+redir/
+**output/
+val.log
