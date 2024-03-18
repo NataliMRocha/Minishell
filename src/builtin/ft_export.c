@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 13:10:27 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 11:48:32 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int	verify_key(char **key, char *var)
 	}
 	return (update_status_error(0));
 }
-
-// _AA SE ELE FOR ALFABETICO OU UNDERLINE
 
 int	ft_put_new_env(char **key, char *var, t_envs *envs)
 {
