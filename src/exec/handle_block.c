@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:50:57 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/16 20:33:19 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:10:12 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*remove_bracket(char *block)
 {
 	if (block[0] == '(' && block[ft_strlen(block) - 1] == ')')
-		return(ft_strcpy_delim(&block[1], ')'));
+		return (ft_strcpy_delim(&block[1], ')'));
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:39:09 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 12:10:17 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:33:47 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	count_envs(t_envs *envs)
 
 char	**envs_to_array(void)
 {
-	t_envs		*envs;
-	int			i;
+	t_envs	*envs;
+	int		i;
 	char	**environ;
 
 	envs = *create_envs_table(1, 0);

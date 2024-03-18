@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 18:12:03 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:41:19 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "structs.h"
 
+char	*ft_readline(void);
 int		check_syntax_error(t_token **list);
 int		check_quotes_error(t_token *list);
 char	*expand_var(char *buf);
@@ -25,5 +26,8 @@ int		check_builtin(t_token **token_list);
 t_ast	*parser(char *get_cmd);
 int		is_redirect(int type);
 int		ft_isin(char *str, char *set);
+int		is_redir_after_symbol(t_token *list);
+int		check_block_error(t_token *list);
+int		is_redir_followed_by_pipe(t_token *tmp);
 
 #endif

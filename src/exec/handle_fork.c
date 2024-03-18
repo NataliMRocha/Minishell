@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 18:15:06 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/18 10:56:17 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:57:20 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	exec_error(char *cmd, char **path)
 {
 	if (path && *path && *path[0] == '0')
 	{
-		ft_putstr_fd("command not found: ", STDERR_FILENO);
 		ft_putstr_fd(cmd, STDERR_FILENO);
+		ft_putstr_fd(": command not found", STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
 	update_status_error(127);

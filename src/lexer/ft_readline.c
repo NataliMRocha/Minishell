@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:37:28 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/16 20:35:49 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:09:55 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_readline(void)
 {
 	static char	*buffer;
-	char	*prompt;
+	char		*prompt;
 
 	prompt = malloc(2);
 	prompt[0] = '\0';

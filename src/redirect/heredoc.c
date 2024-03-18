@@ -6,18 +6,18 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 14:50:19 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:34:03 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void close_heredoc(int std_in, int fd, int in_filling)
+void	close_heredoc(int std_in, int fd, int in_filling)
 {
 	if (g_last_signal != SIGINT && in_filling)
 		ft_putstr_fd("warning: here-document delimited by end-of-file\n", 2);
 	close(fd);
-	close (std_in);
+	close(std_in);
 }
 
 void	handle_buf(char *buf, int std_in)
@@ -43,7 +43,8 @@ void	filling_archive(char *delim, int fd, int std_in)
 	{
 		buf = readline("$> ");
 		handle_buf(buf, std_in);
-		if (!buf || (buf && ft_strncmp(buf, no_quotes, ft_strlen(no_quotes)) == 0))
+		if (!buf || (buf && ft_strncmp(buf, no_quotes,
+					ft_strlen(no_quotes)) == 0))
 		{
 			ft_putstr_fd("\n", fd);
 			free(no_quotes);
@@ -62,9 +63,9 @@ void	filling_archive(char *delim, int fd, int std_in)
 
 int	heredoc(char **delim, char count)
 {
-	int		fd;
-	char	*name;
-	char	*temp;
+	int			fd;
+	char		*name;
+	char		*temp;
 	const int	std_in = dup(STDIN_FILENO);
 
 	name = ft_strcpy_delim(*delim, 0);

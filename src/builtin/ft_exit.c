@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/18 15:23:33 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:33:22 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ size_t	ft_intlen(int n)
 	int	len;
 
 	len = 1;
-	while (n /= 10)
+	while (n)
+	{
 		len++;
+		n /= 10;
+	}
 	return (len);
 }
 
@@ -53,8 +56,7 @@ int	handle_exit_error(char **prompt)
 	}
 	if (ft_splitlen(prompt) > 2)
 	{
-		ft_putstr_fd("minishell: exit: too many arguments\n",
-			STDERR_FILENO);
+		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 		return (1);
 	}
 	return (nb);

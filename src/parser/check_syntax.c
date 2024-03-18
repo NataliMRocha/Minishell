@@ -6,18 +6,11 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/03/16 14:39:21 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:40:14 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	is_redir_followed_by_pipe(t_token *tmp)
-{
-	return (tmp && tmp->next && ((tmp->type == REDIR_IN
-				&& tmp->next->type == PIPE) || (tmp->type == REDIR_OUT
-				&& tmp->next->type == PIPE)));
-}
 
 int	is_duplicated_symbol(t_token *tmp)
 {
@@ -33,13 +26,6 @@ int	is_duplicated_symbol(t_token *tmp)
 	if (tmp->next && is_symbol(tmp->next->data))
 		c2 = tmp->next->data;
 	return (c1[0] == c2[0]);
-}
-
-int	check_block_error(t_token *list)
-{
-	return (list && ((list->type == BLOCK && block_checker(list->data))
-			|| (list->type == BLOCK && list->prev
-				&& is_redirect(list->prev->type))));
 }
 
 int	check_syntax_error(t_token **list)
@@ -59,9 +45,7 @@ int	check_syntax_error(t_token **list)
 			return (tmp->type);
 		if (check_block_error(tmp))
 			return (2);
-		if (tmp && (tmp->data && is_symbol(tmp->data) && (tmp->next
-					&& is_symbol(tmp->next->data))
-				&& !is_redirect(tmp->next->type)))
+		if (is_redir_after_symbol(tmp))
 			return (tmp->next->type);
 		if (check_quotes_error(tmp))
 			return (1);

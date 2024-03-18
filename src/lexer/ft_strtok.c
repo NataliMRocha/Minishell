@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/16 15:07:15 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:09:38 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int	count_chars(char *res)
 	if (res && res[i] && res[i] != ' ')
 		while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i]))
 			i++;
-	if (res && res[i] && !is_symbol(&res[i]) && i == 0 && (res[i] == '\'' || res[i] == '"'))
+	if (res && res[i] && !is_symbol(&res[i]) && i == 0 && (res[i] == '\''
+			|| res[i] == '"'))
 		return (ft_handle_quote(&res[i], 0, 0));
 	j = is_symbol(res);
 	if (j > 0)

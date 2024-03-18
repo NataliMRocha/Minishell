@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/15 10:48:20 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:42:09 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void	print_error(int error)
 	else if (error == 2)
 		ft_putstr_fd("Minishell: syntax error near unexpected token `)'\n", 2);
 	else if (error == 13 || error == 7 || error == 6)
-		ft_putstr_fd("Minishell: syntax error near unexpected token `newline'\n", 2);
+		ft_putstr_fd("Minishell: syntax error near unexpected token `newline'\n",
+			2);
 	else if (error == 126)
 		ft_putstr_fd("Minishell: Is a directory\n", 2);
 }

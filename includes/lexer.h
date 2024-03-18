@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:15:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/15 10:10:43 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:45:21 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENS_H
-# define TOKENS_H
+#ifndef LEXER_H
+# define LEXER_H
 
 # include "structs.h"
 
@@ -31,6 +31,6 @@ void	free_token_list(t_token **list);
 void	print_error(int error);
 int		check_syntax_and_quotes(t_token **list, char *readline);
 t_token	*holder_tokens(t_token *tokens, int is_free);
-int     check_is_directory(t_token **list, char *readline);
+int		check_is_directory(t_token **list, char *readline);
 
 #endif

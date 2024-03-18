@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/17 13:49:45 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:36:26 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*expand_var(char *buf)
 	i = 0;
 	if (buf && buf[i] == '\'')
 		return (trim_single_quotes(buf));
-	if(!on_heredoc(-1))
+	if (!on_heredoc(-1))
 		quotes = ft_remove_quotes(buf);
 	else
 		quotes = ft_strdup(buf);

@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 10:59:37 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:13:01 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ void	exec(t_ast *root)
 	int		has_quote;
 
 	g_last_signal = 0;
-	has_quote = ft_strchr(root->cmd_list[0], '\'')
-			|| ft_strchr(root->cmd_list[0], '"');
+	has_quote = 0;
+	if (ft_strchr(root->cmd_list[0], '\'') || ft_strchr(root->cmd_list[0], '"'))
+		has_quote = 1;
 	root->cmd_list = expanded_variable(root->cmd_list);
 	if (!has_quote && root)
 		root->cmd_list = handle_expand(root);
