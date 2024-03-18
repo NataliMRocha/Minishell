@@ -6,17 +6,19 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 11:37:28 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:09:55 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 17:12:57 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_readline(void)
+char	*ft_readline(int get_buffer)
 {
 	static char	*buffer;
 	char		*prompt;
 
+	if (get_buffer)
+		return (buffer);
 	prompt = malloc(2);
 	prompt[0] = '\0';
 	prompt = ft_strjoin(prompt, "\001\x1b[32m\002", 1);
