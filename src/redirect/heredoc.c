@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:34:03 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 17:43:51 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	filling_archive(char *delim, int fd, int std_in)
 		if (!buf || (buf && ft_strncmp(buf, no_quotes,
 					ft_strlen(no_quotes)) == 0))
 		{
-			ft_putstr_fd("\n", fd);
 			free(no_quotes);
 			if (buf)
 				on_heredoc(0);
@@ -56,7 +55,7 @@ void	filling_archive(char *delim, int fd, int std_in)
 		}
 		if (buf && ft_strchr(buf, '$') && !ft_handle_quote(delim, 0, 1))
 			buf = expand_var(buf);
-		ft_putstr_fd(buf, fd);
+		ft_putendl_fd(buf, fd);
 		free(buf);
 	}
 }
