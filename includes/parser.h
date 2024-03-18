@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:14:48 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:41:19 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 17:13:21 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "structs.h"
 
-char	*ft_readline(void);
+char	*ft_readline(int get_buffer);
 int		check_syntax_error(t_token **list);
 int		check_quotes_error(t_token *list);
 char	*expand_var(char *buf);
