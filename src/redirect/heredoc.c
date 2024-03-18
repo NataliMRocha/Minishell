@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 18:08:31 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 18:17:48 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	heredoc(char **delim, char count)
 	char		*temp;
 	const int	std_in = dup(STDIN_FILENO);
 
+	if (!delim)
+		return (0);
 	name = ft_strcpy_delim(ft_remove_quotes(*delim), 0);
 	temp = ft_strjoin_char(name, count);
 	name = ft_strjoin("/tmp/", temp, 0);
