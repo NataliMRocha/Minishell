@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/18 09:40:51 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:43:40 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,24 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 {
 	char	**cmd;
 	t_token	*to_split;
+	int		type;
 
 	to_split = search_type_to_split(tokens);
+	type = -1;
+	if (tokens)
+		type = tokens->type;
 	if (ast_split_node(ast_node, tokens, to_split))
 	{
-		if (ast_node && ast_node->type != HEREDOC)
-			free_token_list(&to_split);
-		else if (to_split && to_split->type == HEREDOC)
-			free_token_list(&to_split);
+		if (to_split && ft_isin(to_split->data, "><|&"))
+		{
+			free(to_split->data);
+			free(to_split);
+		}
 		return ;
 	}
 	else
 		cmd = command_constructor(&tokens);
-	if (tokens && tokens->type == WORD)
+	if (type == WORD)
 		ast_node->type = EXEC;
 	else if (tokens && ast_node)
 		ast_node->type = tokens->type;
@@ -100,6 +105,7 @@ char	**command_constructor(t_token **tokens)
 		i++;
 	}
 	cmd[i] = NULL;
+	free_token_list(tokens);
 	return (cmd);
 }
 
