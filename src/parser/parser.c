@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 09:33:58 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:37:59 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,5 @@ t_ast	*parser(char *get_cmd)
 		return (NULL);
 	root = ast_constructor(token_list);
 	ast_holder(root, 0, 0);
-	if (root->type < 6 || root->type > 9)
-		token_list = holder_tokens(NULL, 1);
 	return (root);
 }

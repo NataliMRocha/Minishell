@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/17 13:17:11 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 11:09:13 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ void	free_program(t_ast **root, char **get_cmd, t_envs **var_envs)
 	if (get_cmd && *get_cmd)
 		free(*get_cmd);
 	if (root && *root)
-	{
-		free_ast(*root);
-		*root = NULL;
-	}
+		ast_holder(NULL, 1, 1);
 	if (var_envs && *var_envs)
 		free_env_list(*var_envs);
 }
@@ -71,7 +68,5 @@ int	main(void)
 		root = ast_holder(NULL, 1, 0);
 		free_program(&root, &get_cmd, NULL);
 	}
-	free_program(&root, &get_cmd, create_envs_table(1, 1));
-	close_fds(NULL, 1);
 	return (0);
 }

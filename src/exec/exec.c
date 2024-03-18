@@ -6,27 +6,11 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/17 13:29:15 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 10:59:37 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	exec_error(char *cmd, char **path)
-{
-	if (path && *path && *path[0] == '0')
-	{
-		ft_putstr_fd("command not found: ", STDERR_FILENO);
-		ft_putstr_fd(cmd, STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
-	}
-	update_status_error(127);
-	save_fds(NULL, 1);
-	ast_holder(NULL, 1, 1);
-	create_envs_table(1, 1);
-	free(*path);
-	close_fds(NULL, 1);
-}
 
 int	access_path(char *path)
 {
@@ -60,7 +44,7 @@ int	confirm_path(t_ast *root, char **path)
 	return (0);
 }
 
-char **handle_expand(t_ast *root)
+char	**handle_expand(t_ast *root)
 {
 	char	**tmp;
 	char	**split;
@@ -90,7 +74,8 @@ void	exec(t_ast *root)
 	int		has_quote;
 
 	g_last_signal = 0;
-	has_quote = ft_strchr(root->cmd_list[0], '\'') || ft_strchr(root->cmd_list[0], '"');
+	has_quote = ft_strchr(root->cmd_list[0], '\'')
+			|| ft_strchr(root->cmd_list[0], '"');
 	root->cmd_list = expanded_variable(root->cmd_list);
 	if (!has_quote && root)
 		root->cmd_list = handle_expand(root);
