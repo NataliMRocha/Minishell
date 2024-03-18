@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:24:43 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:09:27 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 17:30:49 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ int	block_checker(char *str)
 	if (str && str[i++] == '(')
 	{
 		while (str && str[i] && str[i] != ')')
-		{
-			if (!ft_isalnum(str[i]) && str[i] != ')' && str[i] != ' ')
-				is_corret = 2;
 			i++;
-		}
 	}
 	if (i == 1 && str[i] == ')')
 		is_corret = 2;

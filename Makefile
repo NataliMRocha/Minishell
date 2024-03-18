@@ -16,7 +16,7 @@ COLOR_LIMITER = "\033[0m"
 # Paths for libraries
 BIN_PATH = ./bin/
 SOURCES_PATH = ./src/
-SIGNAL_SOURCES_PATH = ./src/read/
+SIGNAL_SOURCES_PATH = ./src/signal/
 LEXER_SOURCES_PATH = ./src/lexer/
 PARSER_SOURCES_PATH = ./src/parser/
 EXEC_SOURCES_PATH = ./src/exec/

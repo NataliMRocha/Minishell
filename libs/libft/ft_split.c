@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 18:37:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2023/07/25 18:14:15 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:06:46 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static size_t	ft_count_words(const char *str, char sep)
 
 	index = 0;
 	words = 0;
-	while (str[index] != '\0')
+	while (str && str[index] != '\0')
 	{
 		while (str[index] == sep)
 			index++;
