@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:17:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 13:10:27 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:32:24 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	**sorted(void)
 {
 	char	**vars;
-	char 	*tmp;
+	char	*tmp;
 	int		i;
 	int		j;
 
@@ -39,7 +39,7 @@ char	**sorted(void)
 	return (vars);
 }
 
-void	print_export()
+void	print_export(void)
 {
 	char	**arr;
 	int		i;
@@ -66,7 +66,8 @@ int	verify_key(char **key, char *var)
 	key[0] = ft_strcpy_delim(var, '=');
 	i = 0;
 	is_alnum = 0;
-	while (key && key[0] && key[0][i] && (key[0][i] == '_' || ft_isalnum(key[0][i])))
+	while (key && key[0] && key[0][i] && (key[0][i] == '_'
+			|| ft_isalnum(key[0][i])))
 		i++;
 	if (key[0][i] || (!ft_isalpha(key[0][0]) && key[0][0] != '_'))
 		is_alnum = 1;
@@ -78,8 +79,6 @@ int	verify_key(char **key, char *var)
 	}
 	return (update_status_error(0));
 }
-
-// _AA SE ELE FOR ALFABETICO OU UNDERLINE
 
 int	ft_put_new_env(char **key, char *var, t_envs *envs)
 {
@@ -93,7 +92,7 @@ int	ft_put_new_env(char **key, char *var, t_envs *envs)
 	else
 	{
 		free(*key);
-	 	return (update_status_error(0));
+		return (update_status_error(0));
 	}
 	new_node = ft_getenv(*key);
 	if (new_node)

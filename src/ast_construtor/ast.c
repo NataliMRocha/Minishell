@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:56:56 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/14 15:51:26 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:35:54 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	ast_split_node(t_ast *root, t_token *tokens, t_token *token_to_split)
 	if (!root || !tokens || !token_to_split)
 		return (0);
 	right = token_to_split->next;
-	right->prev = NULL;
+	if (right)
+		right->prev = NULL;
 	root->type = token_to_split->type;
 	tmp = token_to_split->prev;
 	if (tmp)
@@ -58,19 +59,28 @@ void	try_split_else_exec(t_ast *ast_node, t_token *tokens)
 {
 	char	**cmd;
 	t_token	*to_split;
+	int		type;
 
 	to_split = search_type_to_split(tokens);
+	type = -1;
+	if (tokens)
+		type = tokens->type;
 	if (ast_split_node(ast_node, tokens, to_split))
 	{
-		free_token_list(&to_split);
+		if (to_split && ft_isin(to_split->data, "><|&"))
+		{
+			ast_node->type = to_split->type;
+			free(to_split->data);
+			free(to_split);
+		}
 		return ;
 	}
 	else
 		cmd = command_constructor(&tokens);
-	if (tokens && tokens->type == BLOCK)
-		ast_node->type = BLOCK;
-	else
+	if (type >= 0 && type <= 2)
 		ast_node->type = EXEC;
+	else if (ast_node && type > 0)
+		ast_node->type = type;
 	ast_node->cmd_list = cmd;
 }
 
@@ -96,6 +106,7 @@ char	**command_constructor(t_token **tokens)
 		i++;
 	}
 	cmd[i] = NULL;
+	free_token_list(tokens);
 	return (cmd);
 }
 

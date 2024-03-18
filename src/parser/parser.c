@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:45:05 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 15:51:57 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:37:59 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	ft_isin(char *str, char *set)
 
 t_ast	*parser(char *get_cmd)
 {
-	t_ast	*tree;
+	t_ast	*root;
 	t_token	*token_list;
 
-	tree = NULL;
+	root = NULL;
 	token_list = NULL;
 	if ((get_cmd && !*get_cmd) || list_fill(&token_list, get_cmd) != 0)
 		return (NULL);
@@ -35,9 +35,7 @@ t_ast	*parser(char *get_cmd)
 	capture_heredoc(&token_list);
 	if (check_syntax_and_quotes(&token_list, get_cmd))
 		return (NULL);
-	tree = ast_constructor(token_list);
-	ast_holder(tree, 0, 0);
-	if (!ft_isin(get_cmd, "><|&"))
-		holder_tokens(NULL, 1);
-	return (tree);
+	root = ast_constructor(token_list);
+	ast_holder(root, 0, 0);
+	return (root);
 }

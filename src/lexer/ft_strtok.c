@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:29:26 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 17:04:31 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:09:38 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ int	ft_handle_block(char *str, int check_close)
 
 	i = 0;
 	if (str && str[i] == '(')
-		while (str && str[i] && str[++i] != ')')
-			;
-	if (str && str[i] != ')' && check_close == 1)
-		return (0);
+	{
+		i++;
+		while (str && str[i] && str[i] != ')')
+			i++;
+	}
+	if ((str && str[i] != ')' && check_close == 1))
+		return (update_status_error(2));
 	if (str && str[i] == ')')
 		i++;
 	return (i);
@@ -71,6 +74,9 @@ int	count_chars(char *res)
 	int	j;
 
 	i = 0;
+	if (res && res[i] && !is_symbol(&res[i]) && i == 0
+		&& ft_handle_block(&res[i], 0))
+		return (ft_handle_block(&res[i], 0));
 	while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i])
 		&& res[i] != '\'' && res[i] != '"')
 		i++;
@@ -78,10 +84,9 @@ int	count_chars(char *res)
 	if (res && res[i] && res[i] != ' ')
 		while (res && res[i] && !is_space(res[i]) && !is_symbol(&res[i]))
 			i++;
-	if (i == 0 && (res[i] == '\'' || res[i] == '"'))
+	if (res && res[i] && !is_symbol(&res[i]) && i == 0 && (res[i] == '\''
+			|| res[i] == '"'))
 		return (ft_handle_quote(&res[i], 0, 0));
-	if (i == 0 && ft_handle_block(&res[i], 0))
-		return (ft_handle_block(&res[i], 0));
 	j = is_symbol(res);
 	if (j > 0)
 		i = j;

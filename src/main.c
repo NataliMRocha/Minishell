@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:28:13 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/12 15:54:55 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/18 11:09:13 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+volatile int	g_last_signal;
 
 void	pid_last_exit_status(pid_t pid)
 {
@@ -38,10 +40,7 @@ void	free_program(t_ast **root, char **get_cmd, t_envs **var_envs)
 	if (get_cmd && *get_cmd)
 		free(*get_cmd);
 	if (root && *root)
-	{
-		free_ast(*root);
-		*root = NULL;
-	}
+		ast_holder(NULL, 1, 1);
 	if (var_envs && *var_envs)
 		free_env_list(*var_envs);
 }
@@ -51,12 +50,17 @@ int	main(void)
 	t_ast	*root;
 	char	*get_cmd;
 
-	// setup_signals();
+	signals_initializer();
+	term_properties(0);
 	create_envs_table(0, 0);
 	root = NULL;
 	while (1)
 	{
+		sigquit_case();
+		g_last_signal = 0;
 		get_cmd = ft_readline();
+		if (!get_cmd)
+			ft_exit(NULL, NULL);
 		root = parser(get_cmd);
 		if (!root)
 			continue ;
@@ -64,7 +68,5 @@ int	main(void)
 		root = ast_holder(NULL, 1, 0);
 		free_program(&root, &get_cmd, NULL);
 	}
-	free_program(&root, &get_cmd, create_envs_table(1, 1));
-	close_fds(NULL, 1);
 	return (0);
 }

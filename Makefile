@@ -16,7 +16,7 @@ COLOR_LIMITER = "\033[0m"
 # Paths for libraries
 BIN_PATH = ./bin/
 SOURCES_PATH = ./src/
-READ_SOURCES_PATH = ./src/read/
+SIGNAL_SOURCES_PATH = ./src/read/
 LEXER_SOURCES_PATH = ./src/lexer/
 PARSER_SOURCES_PATH = ./src/parser/
 EXEC_SOURCES_PATH = ./src/exec/
@@ -27,13 +27,13 @@ INCLUDES_PATH = ./includes/
 
 SOURCES = main.c
 
-READ_SOURCES = ft_readline.c
+SIGNAL_SOURCES = handle_signals.c signal_utils.c
 
-LEXER_SOURCES = ft_strtok.c tokens.c token_utils.c token_utils2.c
+LEXER_SOURCES = ft_strtok.c tokens.c token_utils.c token_utils2.c ft_readline.c
 
-PARSER_SOURCES = check_syntax.c expand_env_var.c parser_utils.c parser.c
+PARSER_SOURCES = check_syntax.c check_syntax_utils.c expand_env_var.c parser_utils.c parser.c
 
-EXEC_SOURCES = handle_signals.c exec.c verify_path.c handle_pipe.c execute_builtin.c handle_and_or.c
+EXEC_SOURCES = exec.c verify_path.c handle_pipe.c execute_builtin.c handle_and_or.c handle_fork.c
 
 BUILTIN_SOURCES = ft_export.c ft_unset.c envs.c ft_exit.c ft_cd.c ft_pwd.c ft_echo.c handle_block.c
 
@@ -43,7 +43,7 @@ AST_SOURCES = ast.c ast_utils.c
 
 OBJECTS += $(addprefix $(BIN_PATH), $(SOURCES:%.c=%.o))
 
-OBJECTS += $(addprefix $(BIN_PATH), $(READ_SOURCES:%.c=%.o))
+OBJECTS += $(addprefix $(BIN_PATH), $(SIGNAL_SOURCES:%.c=%.o))
 
 OBJECTS += $(addprefix $(BIN_PATH), $(LEXER_SOURCES:%.c=%.o))
 
@@ -69,7 +69,7 @@ $(BIN_PATH)%.o: $(SOURCES_PATH)%.c
 	@echo $(BLUE)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
 
-$(BIN_PATH)%.o: $(READ_SOURCES_PATH)%.c
+$(BIN_PATH)%.o: $(SIGNAL_SOURCES_PATH)%.c
 	@echo $(BLUE)[Compiling minishell]$(COLOR_LIMITER) $(WHITE)$(notdir $(<))$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES_PATH)
 
@@ -102,7 +102,7 @@ $(NAME): $(OBJECTS)
 	@echo $(CYAN)"| MINISHELL executable was created successfully!! |"$(COLOR_LIMITER)
 	@echo $(CYAN)"--------------------------------------------------"$(COLOR_LIMITER)
 	@$(CC) $(CFLAGS) -o $(NAME) \
-	$(READ_OBJECTS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXEC_OBJECTS) $(BUILTIN_OBJECTS) \
+	$(SIGNAL_OBJECTS) $(LEXER_OBJECTS) $(PARSER_OBJECTS) $(EXEC_OBJECTS) $(BUILTIN_OBJECTS) \
 	$(OBJECTS) -L $(LIB_PATH) -lft -lreadline
 	@echo " "
 

@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char *ft_remove_quotes(char *str)
+char	*ft_remove_quotes(char *str)
 {
 	int		i;
 	char	*new_str;
@@ -20,12 +20,12 @@ char *ft_remove_quotes(char *str)
 
 	new_str = ft_strdup("");
 	i = 0;
-	while(str && str[i])
+	while (str && str[i])
 	{
-		if(str[i] == '\'' || str[i] == '\"')
+		if (str[i] == '\'' || str[i] == '\"')
 		{
 			quote = str[i];
-			while(str[i] && str[++i] != quote)
+			while (str[i] && str[++i] != quote)
 				new_str = ft_strjoin_char(new_str, str[i]);
 			i++;
 		}

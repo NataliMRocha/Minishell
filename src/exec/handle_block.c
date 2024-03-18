@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:50:57 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/12 21:48:18 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:10:12 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*remove_bracket(char *block)
 {
 	if (block[0] == '(' && block[ft_strlen(block) - 1] == ')')
-		return(ft_strcpy_delim(&block[1], ')'));
+		return (ft_strcpy_delim(&block[1], ')'));
 	return (NULL);
 }
 
@@ -27,6 +27,7 @@ void	handle_block(t_ast *root)
 	pid = fork();
 	if (pid == 0)
 	{
+		is_fork(1);
 		sub_prompt = remove_bracket(root->cmd_list[0]);
 		root = ast_holder(root, 1, 1);
 		root = parser(sub_prompt);

@@ -6,27 +6,11 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/14 17:09:04 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:34:57 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-t_fds	**fds_list(char **name, int type)
-{
-	static t_fds	*fds;
-	t_fds			*new;
-
-	if (!name && !type)
-		return (&fds);
-	new = malloc(sizeof(t_fds));
-	new->name = name;
-	new->type = type;
-	new->next = NULL;
-	new->next = fds;
-	fds = new;
-	return (&fds);
-}
 
 int	is_redir_in(char *name)
 {
@@ -74,7 +58,7 @@ void	get_fds(t_ast *root)
 {
 	char	*name;
 
-	if (root->left && is_redirect(root->left->type))
+	if (root->left)
 	{
 		name = ft_remove_quotes(root->right->cmd_list[0]);
 		free(root->right->cmd_list[0]);
@@ -83,7 +67,8 @@ void	get_fds(t_ast *root)
 		get_fds(root->left);
 		free(name);
 	}
-	if (root->left->type == EXEC && is_redirect(root->type) && root->right)
+	if (root->left && root->left->type == EXEC && is_redirect(root->type)
+		&& root->right)
 	{
 		name = ft_remove_quotes(root->right->cmd_list[0]);
 		free(root->right->cmd_list[0]);
@@ -120,22 +105,6 @@ int	handle_fds(void)
 	return (1);
 }
 
-void	save_fds(int *fds, int close_fds)
-{
-	static int	save[2];
-
-	if (!close_fds)
-	{
-		save[0] = fds[0];
-		save[1] = fds[1];
-	}
-	if (*save && close_fds)
-	{
-		close(save[0]);
-		close(save[1]);
-	}
-}
-
 void	handle_redir(t_ast *root)
 {
 	int	std_fd[2];
@@ -144,7 +113,7 @@ void	handle_redir(t_ast *root)
 	std_fd[1] = dup(STDOUT_FILENO);
 	if (fds_list(NULL, 0) && !*fds_list(NULL, 0))
 		get_fds(root);
-	if (root->left->type == EXEC && !handle_fds())
+	if ((root->left->type == EXEC || root->left->type == WORD) && !handle_fds())
 	{
 		dup_and_close(std_fd);
 		return ;

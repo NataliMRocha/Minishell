@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:51:03 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/07 16:04:26 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:08:50 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strjoin_char(char *str, char c)
 {
-	char concat[2];
+	char	concat[2];
 
 	concat[0] = c;
 	concat[1] = '\0';
