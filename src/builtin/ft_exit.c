@@ -6,13 +6,13 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/19 15:33:49 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:08:16 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-size_t	ft_intlen(int n)
+size_t	ft_intlen(long long n)
 {
 	int	len;
 
@@ -37,7 +37,7 @@ int	ft_splitlen(char **arr)
 	return (i);
 }
 
-int	print_exit_error(char *tmp, char **prompt, int nb)
+int	print_exit_error(char *tmp, char **prompt, long long nb)
 {
 	if ((tmp && ft_strlen(tmp) != ft_intlen(nb)) || (tmp && !ft_isnum(tmp)))
 	{
@@ -57,15 +57,17 @@ int	print_exit_error(char *tmp, char **prompt, int nb)
 	return (0);
 }
 
-int	handle_exit_error(char **prompt)
+long long	handle_exit_error(char **prompt)
 {
-	int		nb;
-	char	*tmp;
-	int		error_control;
+	long long	nb;
+	char		*tmp;
+	int			error_control;
 
 	if (!prompt)
 		return (0);
 	nb = ft_atol(prompt[1]);
+	if (nb < 0)
+		nb = -nb;
 	if (prompt[1] && (prompt[1][0] == '+' || prompt[1][0] == '-'))
 		tmp = &prompt[1][1];
 	else
@@ -78,8 +80,8 @@ int	handle_exit_error(char **prompt)
 
 void	ft_exit(char **prompt, t_ast *root)
 {
-	int	i;
-	int	exit_status;
+	int			i;
+	long long	exit_status;
 
 	exit_status = handle_exit_error(prompt);
 	if (!prompt && !root)
