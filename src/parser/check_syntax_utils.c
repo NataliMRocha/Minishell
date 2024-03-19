@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:40:33 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/18 16:41:58 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/19 12:56:50 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	is_redir_followed_by_pipe(t_token *tmp)
 
 int	check_block_error(t_token *list)
 {
-	return (list && ((list->type == BLOCK && block_checker(list->data))
-			|| (list->type == BLOCK && list->prev
-				&& is_redirect(list->prev->type))));
+	return (list && ((list->type == BLOCK && block_checker(list))));
 }
 
 int	is_redir_after_symbol(t_token *list)

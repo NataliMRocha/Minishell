@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:00 by natali            #+#    #+#             */
-/*   Updated: 2024/03/18 20:28:58 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/19 12:58:23 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_syntax_error(t_token **list)
 		if (is_duplicated_symbol(tmp))
 			return (tmp->type);
 		if (check_block_error(tmp))
-			return (2);
+			return (block_checker(tmp));
 		if (is_redir_after_symbol(tmp))
 			return (tmp->next->type);
 		if (check_quotes_error(tmp))
