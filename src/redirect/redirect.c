@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:34:57 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:48:43 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	is_redir_in(char *name)
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 	}
-	else if (!access(name, F_OK) && access(name, W_OK | R_OK))
-		return (ft_puterror(name, ": Permission denied\n"));
-	else if ((name[0] == '.' || name[0] == '/') && !access(name, F_OK))
+	if (is_directory(name))
 		return (ft_puterror(name, ": Is a directory\n"));
+	else if (fd < 0 && access(name, W_OK | R_OK))
+		return (ft_puterror(name, ": Permission denied\n"));
 	else
 		return (ft_puterror(name, ": No such file or directory\n"));
 	return (1);

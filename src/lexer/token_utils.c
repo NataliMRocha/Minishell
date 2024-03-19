@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:18:49 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:42:09 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 18:36:27 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*free_static(char *res, int i, int j)
 	if (res && res[0] == '\0')
 		return (NULL);
 	temp = ft_strdup(&res[i + j]);
-	if ((temp && temp[0] == '\0') || ft_strncmp(res, temp, 125) == 0)
+	if ((temp && temp[0] == '\0') || ft_strncmp(res, temp, ft_strlen(res)) == 0)
 	{
 		free(temp);
 		temp = NULL;
