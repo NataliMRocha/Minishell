@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/19 10:47:16 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:56:26 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	ft_exit(char **prompt, t_ast *root)
 	int	exit_status;
 
 	exit_status = handle_exit_error(prompt);
+	if (!prompt && !root)
+		ft_putstr_fd("\n", 2);
 	if (exit_status != -1)
 	{
 		free_env_list(*create_envs_table(1, 1));
