@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/18 17:35:36 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/19 13:59:48 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 size_t	ft_intlen(int n)
 {
 	int	len;
+
 	if (n < 0)
 		n = -n;
-
 	len = 1;
 	while (n > 9)
 	{
@@ -37,6 +37,25 @@ int	ft_splitlen(char **arr)
 	return (i);
 }
 
+int	print_error_exit(char *tmp, int flag)
+{
+	if (flag == 2)
+	{
+		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+		ft_putstr_fd(tmp, STDERR_FILENO);
+		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		update_status_error(2);
+		return (1);
+	}
+	if (flag == 1)
+	{
+		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+		update_status_error(1);
+		return (0);
+	}
+	return (2);
+}
+
 int	handle_exit_error(char **prompt)
 {
 	int		nb;
@@ -49,35 +68,37 @@ int	handle_exit_error(char **prompt)
 		tmp = &prompt[1][1];
 	else
 		tmp = prompt[1];
-	if ((prompt && tmp) && ft_strlen(tmp) != ft_intlen(nb))
-	{
-		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
-		ft_putstr_fd(tmp, STDERR_FILENO);
-		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		return (2);
-	}
+	if ((prompt && tmp) && ft_splitlen(prompt) == 2
+		&& (ft_strlen(tmp) != ft_intlen(nb) || (ft_strlen(tmp) == 1
+				&& !ft_isdigit(ft_atoi(tmp)))))
+		return (print_error_exit(tmp, 2));
 	if (ft_splitlen(prompt) > 2)
 	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
-		return (1);
+		if (ft_isdigit(prompt[1][0]))
+			return (print_error_exit(tmp, 1));
+		else
+			return (print_error_exit(tmp, 2));
 	}
-	return (nb);
+	update_status_error(nb);
+	return (1);
 }
 
 void	ft_exit(char **prompt, t_ast *root)
 {
 	int	i;
-	int	exit_status;
 
-	free_env_list(*create_envs_table(1, 1));
-	exit_status = handle_exit_error(prompt);
-	save_fds(NULL, 1);
-	ast_holder(root, 1, 1);
-	if (!exit_status && !on_heredoc(-1))
-		ft_putstr_fd("exit\n", STDERR_FILENO);
-	i = 0;
-	while (i < 3)
-		close(i++);
-	rl_clear_history();
-	exit(update_status_error(exit_status));
+	if (handle_exit_error(prompt))
+	{
+		free_env_list(*create_envs_table(1, 1));
+		save_fds(NULL, 1);
+		ast_holder(root, 1, 1);
+		if (!on_heredoc(-1))
+			ft_putstr_fd("exit\n", STDERR_FILENO);
+		i = 0;
+		while (i < 3)
+			close(i++);
+		rl_clear_history();
+		exit(update_status_error(-1));
+	}
+	return ;
 }

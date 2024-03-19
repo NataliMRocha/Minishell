@@ -50,3 +50,21 @@ void	move_redirect(t_token **tokens)
 		temp = temp->next;
 	}
 }
+
+int	is_directory(char *name)
+{
+	struct stat	statbuf;
+	char		*tmp;
+
+	statbuf = (struct stat){0};
+	tmp = ft_strdup(name);
+	tmp = expand_var(tmp);
+	stat(tmp, &statbuf);
+	if (S_ISDIR(statbuf.st_mode))
+	{
+		free(tmp);
+		return (update_status_error(1));
+	}
+	free(tmp);
+	return (0);
+}

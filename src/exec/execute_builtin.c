@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:15:02 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:13:14 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 18:46:34 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	execute_builtin(t_ast *root)
 		return (ft_export(root->cmd_list));
 	if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
 		return (ft_unset(root->cmd_list));
-	if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
+	if (!ft_strncmp(cmd, "env", ft_strlen(cmd)) && root->cmd_list[1] == NULL)
 		return (print_env_list(*create_envs_table(1, 0)));
 	if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
 		return (ft_pwd());
