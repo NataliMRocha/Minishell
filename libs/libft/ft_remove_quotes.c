@@ -18,8 +18,8 @@ char	*ft_remove_quotes(char *str)
 	char	*new_str;
 	char	quote;
 
-	if (ft_strlen(str) < 2)
-		return (ft_strdup(str));
+	if (ft_strlen(str) < 3)
+		return (ft_strdup(" "));
 	new_str = ft_strdup("");
 	i = 0;
 	while (str && str[i])

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:24:43 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/19 12:53:48 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:30:13 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 int	block_checker(t_token *tokens)
 {
 	char	*str;
-	int		closed_block;
 
 	str = tokens->data;
-	closed_block = str[0] == '(' && str[ft_strlen(str) - 1] == ')';
-	if (closed_block && tokens->prev && (tokens->prev->type >= 5 && tokens->prev->type <= 11))
+	if (tokens->prev && (tokens->prev->type >= 5 && tokens->prev->type <= 11))
 		return (0);
-	if (closed_block && tokens->next && (tokens->next->type >= 5 && tokens->next->type <= 11))
+	if (tokens->next && (tokens->next->type >= 5 && tokens->next->type <= 11))
 		return (0);
-	if (!closed_block)
+	if (!(str[0] == '(' && str[ft_strlen(str) - 1] == ')'))
 		return (2);
 	return (-2);
 }

@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/19 11:41:02 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:41:43 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ char	*trim_single_quotes(char *buf)
 		free(buf);
 		return (quotes);
 	}
-	return (buf);
+	free(buf);
+	return (ft_strdup(" "));
 }
 
 char	*expand_var(char *buf)
