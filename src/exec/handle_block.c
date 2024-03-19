@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:50:57 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/19 11:25:07 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:13:11 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	handle_block(t_ast *root)
 		free(sub_prompt);
 		starting_exec(root);
 		root = ast_holder(root, 1, 1);
+		close_fds(NULL, 1);
 		free_program(&root, NULL, create_envs_table(1, 1));
 		exit(update_status_error(-1));
 	}
