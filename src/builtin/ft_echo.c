@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:33:43 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:33:55 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:28:25 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,18 @@ int	ft_echo(char **args)
 
 	i = 1;
 	n_flag = 0;
-	if (args[i] && !ft_strncmp(args[i], "-n", 3))
+	if (args[i] && !ft_strncmp(args[i], "-n", 1))
 	{
 		n_flag = 1;
 		i++;
 	}
 	while (args[i])
 	{
+		if (args[i] && !ft_strncmp(args[i], "-n", 1))
+		{
+			i++;
+			continue ;
+		}
 		ft_putstr_fd(args[i], STDOUT_FILENO);
 		if (args[i + 1])
 			ft_putstr_fd(" ", STDOUT_FILENO);

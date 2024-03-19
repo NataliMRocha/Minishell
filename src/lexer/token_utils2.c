@@ -3,32 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:24:43 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 17:30:49 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/19 13:30:13 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	block_checker(char *str)
+int	block_checker(t_token *tokens)
 {
-	int	is_corret;
-	int	i;
+	char	*str;
 
-	i = 0;
-	is_corret = 0;
-	if (str && str[i++] == '(')
-	{
-		while (str && str[i] && str[i] != ')')
-			i++;
-	}
-	if (i == 1 && str[i] == ')')
-		is_corret = 2;
-	if (ft_handle_block(str, 1) == 2)
-		is_corret = 2;
-	return (is_corret);
+	str = tokens->data;
+	if (tokens->prev && (tokens->prev->type >= 5 && tokens->prev->type <= 11))
+		return (0);
+	if (tokens->next && (tokens->next->type >= 5 && tokens->next->type <= 11))
+		return (0);
+	if (!(str[0] == '(' && str[ft_strlen(str) - 1] == ')'))
+		return (2);
+	return (-2);
 }
 
 int	check_is_directory(t_token **list, char *readline)

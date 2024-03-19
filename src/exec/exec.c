@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:08:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 17:21:54 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 20:29:08 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	confirm_path(t_ast *root, char **path)
 	if (root->cmd_list && !*root->cmd_list)
 	{
 		update_status_error(0);
-		return(1);
+		return (1);
 	}
 	*path = verify_path(root);
 	if (access_path(root->cmd_list[0]) || (root->cmd_list && !*root->cmd_list))

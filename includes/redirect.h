@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:13:54 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:44:54 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 21:48:26 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	save_fds(int *fds, int close_fds);
 void	capture_heredoc(t_token **token_list);
 t_fds	**fds_list(char **name, int type);
 void	save_fds(int *fds, int close_fds);
+int		is_directory(char *name);
 
 #endif

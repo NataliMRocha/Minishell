@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:47:24 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 18:27:55 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/19 13:44:42 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	heredoc(char **delim, char count)
 	const int	std_in = dup(STDIN_FILENO);
 
 	if (!delim)
-		return (0);
+		return (close(std_in));
 	name = ft_remove_quotes(*delim);
 	temp = ft_strjoin_char(name, count);
 	name = ft_strjoin("/tmp/", temp, 0);

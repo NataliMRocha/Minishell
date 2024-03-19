@@ -6,7 +6,7 @@
 /*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 17:39:09 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:33:47 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/18 18:34:29 by etovaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_envs	*ft_getenv(char *key)
 	envs = *create_envs_table(1, 0);
 	while (envs)
 	{
-		if (ft_strncmp(envs->key, key, 125) == 0)
+		if (ft_strncmp(envs->key, key, ft_strlen(key)) == 0)
 			return (envs);
 		envs = envs->next;
 	}

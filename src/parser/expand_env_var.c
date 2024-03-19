@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 16:36:26 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/19 13:49:53 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,15 @@ char	*trim_single_quotes(char *buf)
 {
 	char	*quotes;
 
-	quotes = ft_strtrim(buf, "'");
+	quotes = NULL;
+	if ((ft_strchr(buf, '"') || ft_strchr(buf, '\'')) && ft_strlen(buf) > 2)
+	{
+		quotes = ft_strtrim(buf, "'");
+		free(buf);
+		return (quotes);
+	}
 	free(buf);
-	return (quotes);
+	return (ft_strdup(" "));
 }
 
 char	*expand_var(char *buf)
