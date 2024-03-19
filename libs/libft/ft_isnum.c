@@ -12,9 +12,9 @@
 
 int	ft_isnum(char *str)
 {
-	if (*str == '-' || *str == '+')
+	if (str && (*str == '-' || *str == '+'))
 		str++;
-	while (*str)
+	while (str && *str)
 	{
 		if ((*str < '0' || *str > '9'))
 			return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:01:00 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/18 21:48:43 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/19 10:56:07 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,15 @@ int	is_redir_in(char *name)
 	int	fd;
 
 	if (!access(name, F_OK))
-	{
 		fd = open(name, O_RDONLY);
-		dup2(fd, STDIN_FILENO);
-		close(fd);
-	}
+	else
+		return (ft_puterror(name, ": No such file or directory\n"));
 	if (is_directory(name))
 		return (ft_puterror(name, ": Is a directory\n"));
 	else if (fd < 0 && access(name, W_OK | R_OK))
 		return (ft_puterror(name, ": Permission denied\n"));
-	else
-		return (ft_puterror(name, ": No such file or directory\n"));
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 	return (1);
 }
 

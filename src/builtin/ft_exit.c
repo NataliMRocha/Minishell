@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:31 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/19 10:33:11 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:47:16 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,9 @@ int	ft_splitlen(char **arr)
 	return (i);
 }
 
-int	handle_exit_error(char **prompt)
+int	print_exit_error(char *tmp, char **prompt, int nb)
 {
-	int		nb;
-	char	*tmp;
-
-	if (!prompt)
-		return (0);
-	nb = ft_atol(prompt[1]);
-	if (prompt[1] && (prompt[1][0] == '+' || prompt[1][0] == '-'))
-		tmp = &prompt[1][1];
-	else
-		tmp = prompt[1];
-	if ((prompt && tmp && ft_strlen(tmp) != ft_intlen(nb)) || (tmp && !ft_isnum(tmp)))
+	if ((tmp && ft_strlen(tmp) != ft_intlen(nb)) || (tmp && !ft_isnum(tmp)))
 	{
 		ft_putstr_fd("exit\nminishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(tmp, STDERR_FILENO);
@@ -59,10 +49,30 @@ int	handle_exit_error(char **prompt)
 	}
 	if (ft_splitlen(prompt) > 2)
 	{
-		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", STDERR_FILENO);
+		ft_putstr_fd("exit\nminishell: exit: too many arguments\n",
+			STDERR_FILENO);
 		update_status_error(1);
 		return (-1);
 	}
+	return (0);
+}
+
+int	handle_exit_error(char **prompt)
+{
+	int		nb;
+	char	*tmp;
+	int		error_control;
+
+	if (!prompt)
+		return (0);
+	nb = ft_atol(prompt[1]);
+	if (prompt[1] && (prompt[1][0] == '+' || prompt[1][0] == '-'))
+		tmp = &prompt[1][1];
+	else
+		tmp = prompt[1];
+	error_control = print_exit_error(tmp, prompt, nb);
+	if (error_control)
+		return (error_control);
 	return (nb);
 }
 
@@ -77,12 +87,14 @@ void	ft_exit(char **prompt, t_ast *root)
 		free_env_list(*create_envs_table(1, 1));
 		save_fds(NULL, 1);
 		ast_holder(root, 1, 1);
-		if (exit_status > 0 && !on_heredoc(-1))
+		if (exit_status >= 0 && !on_heredoc(-1))
 			ft_putstr_fd("exit\n", STDERR_FILENO);
 		i = 0;
 		while (i < 3)
 			close(i++);
 		rl_clear_history();
+		if (exit_status < 0)
+			exit_status = -exit_status;
 		exit(update_status_error(exit_status));
 	}
 	return ;

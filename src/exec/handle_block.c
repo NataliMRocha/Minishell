@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_block.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etovaz <etovaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:50:57 by etovaz            #+#    #+#             */
-/*   Updated: 2024/03/18 16:10:12 by etovaz           ###   ########.fr       */
+/*   Updated: 2024/03/19 11:25:07 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,16 @@
 
 char	*remove_bracket(char *block)
 {
+	char	*sub_prompt;
+	int		str_len;
+
+	str_len = ft_strlen(block) - 1;
+	sub_prompt = ft_calloc(str_len, sizeof(char));
 	if (block[0] == '(' && block[ft_strlen(block) - 1] == ')')
-		return (ft_strcpy_delim(&block[1], ')'));
+	{
+		ft_strlcpy(sub_prompt, &block[1], str_len);
+		return (sub_prompt);
+	}
 	return (NULL);
 }
 
