@@ -1,5 +1,6 @@
-NAME = minishell
-CFLAGS = -g3 -Wall -Werror -Wextra
+NAME := minishell
+CFLAGS := -Wall -Werror -Wextra
+BONUS_NAME := minishell_bonus
 
 # Paths for libraries
 LIB_PATH = ./libs/libft
@@ -57,8 +58,14 @@ OBJECTS += $(addprefix $(BIN_PATH), $(REDIRECT_SOURCES:%.c=%.o))
 
 OBJECTS += $(addprefix $(BIN_PATH), $(AST_SOURCES:%.c=%.o))
 
+ifdef WITH_BONUS
+		NAME = $(BONUS_NAME)
+endif
 
 all: libft $(BIN_PATH) $(NAME)
+
+bonus:
+	@$(MAKE) WITH_BONUS=TRUE --no-print-directory
 
 libft:
 ifeq ($(wildcard $(LIB_PATH)/$(LIB_NAME)),)
@@ -128,4 +135,4 @@ endif
 re: fclean
 	@make --no-print-directory
 
-.PHONY: all clean fclean re libft bonus
+.PHONY: all clean fclean re libft
