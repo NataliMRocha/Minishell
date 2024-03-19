@@ -6,7 +6,7 @@
 /*   By: egeraldo <egeraldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:33:12 by egeraldo          #+#    #+#             */
-/*   Updated: 2024/03/19 13:41:43 by egeraldo         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:49:53 by egeraldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*trim_single_quotes(char *buf)
 	char	*quotes;
 
 	quotes = NULL;
-	if (ft_strlen(buf) > 2)
+	if ((ft_strchr(buf, '"') || ft_strchr(buf, '\'')) && ft_strlen(buf) > 2)
 	{
 		quotes = ft_strtrim(buf, "'");
 		free(buf);
