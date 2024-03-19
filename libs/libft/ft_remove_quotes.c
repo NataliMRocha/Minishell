@@ -18,7 +18,7 @@ char	*ft_remove_quotes(char *str)
 	char	*new_str;
 	char	quote;
 
-	if (ft_strlen(str))
+	if (ft_strlen(str) < 2)
 		return (ft_strdup(str));
 	new_str = ft_strdup("");
 	i = 0;
@@ -29,7 +29,6 @@ char	*ft_remove_quotes(char *str)
 			quote = str[i];
 			while (str[i] && str[++i] != quote)
 				new_str = ft_strjoin_char(new_str, str[i]);
-			i++;
 		}
 		else
 			new_str = ft_strjoin_char(new_str, str[i++]);
